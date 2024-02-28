@@ -17,14 +17,14 @@ export default function ALink ( { children, className, content, style, ...props 
     return (
         content ?
             <Link { ...props } >
-                <a className={ className } style={ style } onClick={ preventDefault } dangerouslySetInnerHTML={ parseContent( content ) }>
+                <div className={ className } style={ style } onClick={ preventDefault } dangerouslySetInnerHTML={ parseContent( content ) }>
                     { children }
-                </a>
+                </div>
             </Link> :
             <Link { ...props } >
-                <a className={ className } style={ style } onClick={ preventDefault }>
+                <div className={ className } style={ style } onClick={ preventDefault }>
                     { children }
-                </a>
+                </div>
             </Link>
     )
 }
