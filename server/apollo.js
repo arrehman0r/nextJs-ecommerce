@@ -1,6 +1,6 @@
 import { withApollo } from "next-apollo";
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
-const API_URI = `${process.env.NEXT_PUBLIC_SERVER_URL}/graphql`;
+const API_URI = `https://riode-strapi-server.herokuapp.com/graphql`;
 
 const apolloClient = new ApolloClient({
     link: new HttpLink({

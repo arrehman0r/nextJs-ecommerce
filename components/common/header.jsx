@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-
 import ALink from '~/components/features/custom-link';
-
 import CartMenu from '~/components/common/partials/cart-menu';
 import MainMenu from '~/components/common/partials/main-menu';
 import SearchBox from '~/components/common/partials/search-box';
 import LoginModal from '~/components/features/modals/login-modal';
-
+import logo from './../../public/images/brand/partyShopeLogo.png'
 import { headerBorderRemoveList } from '~/utils/data/menu'
+import Image from 'next/image';
+import { Phone, WishList } from '../SVG';
+
 
 export default function Header( props ) {
     const router = useRouter();
@@ -30,10 +31,10 @@ export default function Header( props ) {
             <div className="header-top">
                 <div className="container">
                     <div className="header-left">
-                        <p className="welcome-msg">Welcome to Riode store message or remove it!</p>
+                        <p className="welcome-msg">Welcome to One Step Party Shop!</p>
                     </div>
                     <div className="header-right">
-                        <div className="dropdown">
+                        {/* <div className="dropdown">
                             <ALink href="#">USD</ALink>
                             <ul className="dropdown-box">
                                 <li><ALink href="#">USD</ALink></li>
@@ -51,11 +52,12 @@ export default function Header( props ) {
                                     <ALink href="#">FRH</ALink>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
 
-                        <span className="divider"></span>
+                        {/* <span className="divider"></span> */}
                         <ALink href="/pages/contact-us" className="contact d-lg-show"><i className="d-icon-map"></i>Contact</ALink>
-                        <ALink href="#" className="help d-lg-show"><i className="d-icon-info"></i> Need Help</ALink>
+                        <ALink href="#" className="help d-lg-show"><i className="d-icon-info"></i> Need... Help</ALink>
+                       
                         <LoginModal />
                     </div>
                 </div>
@@ -69,7 +71,7 @@ export default function Header( props ) {
                         </ALink>
 
                         <ALink href="/" className="logo">
-                            <img src='./images/logo.png' alt="logo" width="153" height="44" />
+                            <Image src={logo} alt="logo" width="153" height="44" />
                         </ALink>
 
                         <SearchBox />
@@ -77,8 +79,9 @@ export default function Header( props ) {
 
                     <div className="header-right">
                         <ALink href="tel:#" className="icon-box icon-box-side">
-                            <div className="icon-box-icon mr-0 mr-lg-2">
-                                <i className="d-icon-phone"></i>
+                            <div className="icon-box-icon mr-0 ">
+                                {/* <i className="d-icon-phone"></i> */}
+                                <Phone/>
                             </div>
                             <div className="icon-box-content d-lg-show">
                                 <h4 className="icon-box-title">Call Us Now:</h4>
@@ -87,7 +90,7 @@ export default function Header( props ) {
                         </ALink>
                         <span className="divider"></span>
                         <ALink href="/pages/wishlist" className="wishlist">
-                            <i className="d-icon-heart"></i>
+                            <i className="d-icon-heart"></i><WishList/>
                         </ALink>
                         <span className="divider"></span>
 

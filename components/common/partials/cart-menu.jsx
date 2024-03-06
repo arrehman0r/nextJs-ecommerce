@@ -3,10 +3,11 @@ import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 
 import ALink from '~/components/features/custom-link';
-
+import '@fortawesome/fontawesome-free/css/all.css';
 import { cartActions } from '~/store/cart';
 
 import { getTotalPrice, getCartCount, toDecimal } from '~/utils';
+import { ShoppinCart } from '~/components/SVG';
 
 function CartMenu( props ) {
     const { cartList, removeFromCart } = props;
@@ -37,12 +38,14 @@ function CartMenu( props ) {
                     <span className="cart-name">Shopping Cart:</span>
                     <span className="cart-price">${ toDecimal( getTotalPrice( cartList ) ) }</span>
                 </div>
+                <ShoppinCart/>
                 <i className="d-icon-bag"><span className="cart-count">{ getCartCount( cartList ) }</span></i>
             </a>
             <div className="cart-overlay" onClick={ hideCartMenu }></div>
             <div className="dropdown-box">
                 <div className="cart-header">
                     <h4 className="cart-title">Shopping Cart</h4>
+                  
                     <ALink href="#" className="btn btn-dark btn-link btn-icon-right btn-close" onClick={ hideCartMenu }>close<i
                         className="d-icon-arrow-right"></i><span className="sr-only">Cart</span></ALink>
                 </div>

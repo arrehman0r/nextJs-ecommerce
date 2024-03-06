@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Reveal from "react-awesome-reveal";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import ALink from '~/components/features/custom-link';
+import getAllProducts from '~/server/axios';
 
 import { fadeIn } from '~/utils/data/keyframes';
 
 function CategorySection () {
+    useEffect(() => {
+        const fetchProducts = async () => {
+          try {
+            const data = await getAllProducts(); // Calling getAllProducts function
+            console.log("Data of wordperfer ===", data);
+          } catch (error) {
+            console.error('Error fetching products:', error);
+          }
+        };
+    
+        fetchProducts();
+      }, []);
+    
     return (
         <Reveal keyframes={ fadeIn } delay={ 300 } duration={ 1200 } triggerOnce>
             <section className="pt-10 mt-7">
