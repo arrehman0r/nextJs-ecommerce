@@ -43,21 +43,23 @@ function ProductTwo( props ) {
     return (
         <div className={ `product text-left ${ adClass }` }>
             <figure className="product-media">
-                <ALink href={ `/product/default/${ product.slug }` }>
+                <ALink href={ `/product/default/${ product.id }` }
+                 
+                >
                     <LazyLoadImage
                         alt="product"
-                        src={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ 0 ].url }
+                        src={  product.images[ 0 ].src }
                         threshold={ 500 }
                         effect="opacity"
                         width="300"
                         height="338"
-                    />
+                    /> 
 
                     {
-                        product.pictures.length >= 2 ?
+                        product.images.length >= 2 ?
                             <LazyLoadImage
                                 alt="product"
-                                src={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ 1 ].url }
+                                src={ product.images[ 1 ].src }
                                 threshold={ 500 }
                                 width="300"
                                 height="338"
@@ -73,7 +75,7 @@ function ProductTwo( props ) {
                     { product.is_top ? <label className="product-label label-top">Top</label> : '' }
                     {
                         product.discount > 0 ?
-                            product.variants.length === 0 ?
+                            product.variations.length === 0 ?
                                 <label className="product-label label-sale">{ product.discount }% OFF</label>
                                 : <label className="product-label label-sale">Sale</label>
                             : ''
@@ -82,7 +84,7 @@ function ProductTwo( props ) {
 
                 <div className="product-action-vertical">
                     {
-                        product.variants.length > 0 ?
+                        product.variations.length > 0 ?
                             <ALink href={ `/product/default/${ product.slug }` } className="btn-product-icon btn-cart" title="Go to product">
                                 <i className="d-icon-arrow-right"></i>
                             </ALink> :
@@ -125,7 +127,7 @@ function ProductTwo( props ) {
                 <div className="product-price">
                     {
                         product.price[ 0 ] !== product.price[ 1 ] ?
-                            product.variants.length === 0 || ( product.variants.length > 0 && !product.variants[ 0 ].price ) ?
+                            product.variations.length === 0 || ( product.variations.length > 0 && !product.variations[ 0 ].price ) ?
                                 <>
                                     <ins className="new-price">${ toDecimal( product.price[ 0 ] ) }</ins>
                                     <del className="old-price">${ toDecimal( product.price[ 1 ] ) }</del>

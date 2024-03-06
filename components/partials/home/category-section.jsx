@@ -18,6 +18,7 @@ function CategorySection({ categories }) {
             {console.log("cast===", categories)}
             {categories?.map((category) => (
               <div className="col-xs-6 col-lg-3 mb-4" key={category?.id}>
+                {console.log("selexcted id ", category?.id)}
                 <div className="category category-default1 category-absolute banner-radius overlay-zoom">
                   <ALink
                     href={{

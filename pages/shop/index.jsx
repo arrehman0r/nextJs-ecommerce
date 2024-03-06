@@ -41,6 +41,7 @@ function Shop({ categoryProducts }) {
             <h1 className="d-none">Riode React eCommerce Template - Shop Page</h1>
 
             <ShopBanner />
+           
 {console.log("so these are categories product", categoryProducts)}
             <div className="page-content mb-10 pb-3">
                 <div className="container">
@@ -48,7 +49,7 @@ function Shop({ categoryProducts }) {
                         <SidebarFilterOne />
 
                         <div className="col-lg-9 main-content">
-                        <ProductListOne categoryProducts={categoryProducts} />
+                        <ProductListOne products={categoryProducts} />
                         </div>
                     </div>
                 </div>
@@ -57,4 +58,4 @@ function Shop({ categoryProducts }) {
     )
 }
 
-export default React.memo( Shop );
+export default  Shop ;
