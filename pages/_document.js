@@ -23,24 +23,24 @@ export default class MyDocument extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href="vendor/riode-fonts/riode-fonts.css"
+            href="https://d-themes.com/react/riode/demo-1/vendor/riode-fonts/riode-fonts.css"
           />
           <link
             rel="stylesheet"
             type="text/css"
-            href="vendor/fontawesome-free/css/all.min.css"
+            href="https://d-themes.com/react/riode/demo-1/vendor/fontawesome-free/css/all.min.css"
           />
           <link
             rel="stylesheet"
             type="text/css"
-            href="vendor/owl-carousel/owl.carousel.min.css"
+            href="https://d-themes.com/react/riode/demo-1/vendor/owl-carousel/owl.carousel.min.css"
           />
         </Head>
 
         <body>
           <Main />
 
-          <script src="./js/jquery.min.js"></script>
+          <script src="https://d-themes.com/react/riode/demo-1/js/jquery.min.js"></script>
 
           <NextScript />
         </body>
