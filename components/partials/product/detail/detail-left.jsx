@@ -32,30 +32,30 @@ function DetailLeft( props ) {
                     product.data.price[ 0 ] !== product.data.price[ 1 ] ?
                         product.data.variants.length === 0 || ( product.data.variants.length > 0 && !product.data.variants[ 0 ].price ) ?
                             <>
-                                <ins className="new-price">${ toDecimal( product.data.price[ 0 ] ) }</ins>
-                                <del className="old-price">${ toDecimal( product.data.price[ 1 ] ) }</del>
+                                <ins className="new-price">${ toDecimal( product.price ) }</ins>
+                                <del className="old-price">${ toDecimal( product.sale_price) }</del>
                             </>
                             :
-                            < del className="new-price">${ toDecimal( product.data.price[ 0 ] ) } – ${ toDecimal( product.data.price[ 1 ] ) }</del>
-                        : <ins className="new-price">${ toDecimal( product.data.price[ 0 ] ) }</ins>
+                            < del className="new-price">${ toDecimal( product.price) } – ${ toDecimal( product.sale_price ) }</del>
+                        : <ins className="new-price">${ toDecimal( product.data.price ) }</ins>
                 }
             </div>
 
             {
-                product.data.price[ 0 ] !== product.data.price[ 1 ] && product.data.variants.length === 0 ?
+                product.data.price[ 0 ] !== product.sale_price && product.variants.length === 0 ?
                     <Countdown type={ 2 } /> : ''
             }
 
             <div className="ratings-container">
                 <div className="ratings-full">
-                    <span className="ratings" style={ { width: 20 * product.data.ratings + '%' } }></span>
-                    <span className="tooltiptext tooltip-top">{ toDecimal( product.data.ratings ) }</span>
+                    <span className="ratings" style={ { width: 20 * product.ratings + '%' } }></span>
+                    <span className="tooltiptext tooltip-top">{ toDecimal( product.ratings ) }</span>
                 </div>
 
-                <ALink href="#" className="rating-reviews">( { product.data.reviews } reviews )</ALink>
+                <ALink href="#" className="rating-reviews">( { product.reviews } reviews )</ALink>
             </div>
 
-            <p className="product-short-desc">{ product.data.short_description }</p>
+            <p className="product-short-desc">{product.short_description }</p>
         </div >
     )
 }

@@ -13,16 +13,16 @@ function DescOne( props ) {
 
     let colors = [], sizes = [];
 
-    if ( product.variants.length > 0 ) {
-        if ( product.variants[ 0 ].size )
-            product.variants.forEach( item => {
+    if ( product.variations.length > 0 ) {
+        if ( product.variations[ 0 ].size )
+            product.variations.forEach( item => {
                 if ( sizes.findIndex( size => size.name === item.size.name ) === -1 ) {
                     sizes.push( { name: item.size.name, value: item.size.size } );
                 }
             } );
 
-        if ( product.variants[ 0 ].color ) {
-            product.variants.forEach( item => {
+        if ( product.variations[ 0 ].color ) {
+            product.variations.forEach( item => {
                 if ( colors.findIndex( color => color.name === item.color.name ) === -1 )
                     colors.push( { name: item.color.name, value: item.color.color } );
             } );
@@ -52,7 +52,7 @@ function DescOne( props ) {
                     <span className="nav-link">Description</span>
                 </Tab>
                 {
-                    product && product.brands.length > 0 || colors.length > 0 || sizes.length > 0 ?
+                    product  || colors.length > 0 || sizes.length > 0 ?
                         <Tab className="nav-item">
                             <span className="nav-link">Additional information</span>
                         </Tab> : ''
@@ -151,7 +151,7 @@ function DescOne( props ) {
                 </TabPanel>
 
                 {
-                    product && product.brands.length > 0 || colors.length > 0 || sizes.length > 0 ?
+                    product  || colors.length > 0 || sizes.length > 0 ?
                         <TabPanel className="tab-pane product-tab-additional">
                             <ul className="list-none">
                                 {
@@ -168,7 +168,7 @@ function DescOne( props ) {
                                         </li> : ""
                                 }
 
-                                {
+                                {/* {
                                     product.brands.length > 0 ?
                                         <li><label>Brands:</label>
                                             <p>
@@ -180,7 +180,7 @@ function DescOne( props ) {
                                                 ) ) }
                                             </p>
                                         </li> : ""
-                                }
+                                } */}
 
                                 {
                                     colors.length > 0 ?

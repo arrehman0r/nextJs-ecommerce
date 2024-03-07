@@ -15,24 +15,39 @@ import DescOne from '~/components/partials/product/desc/desc-one';
 import RelatedProducts from '~/components/partials/product/related-products';
 
 import { mainSlider17 } from '~/utils/data/carousel';
+import { getProduct } from '~/server/axiosApi';
 
-function ProductDefault () {
-    const slug = useRouter().query.slug;
-    const { data, loading, error } = useQuery( GET_PRODUCT, { variables: { slug } } );
-    const [ loaded, setLoadingState ] = useState( false );
-    const product = data && data.product.data;
-    const related = data && data.product.related;
+export async function getServerSideProps({ params }) {
+    const productId = params.slug;
 
-    useEffect( () => {
-        if ( !loading && product )
-            imagesLoaded( 'main' ).on( 'done', function () {
-                setLoadingState( true );
-            } ).on( 'progress', function () {
-                setLoadingState( false );
-            } );
-        if ( loading )
-            setLoadingState( false )
-    }, [ loading, product ] )
+    try {
+        const product = await getProduct(productId);
+
+        return {
+            props: {
+                product
+            }
+        };
+    } catch (error) {
+        console.error('Error fetching product:', error);
+        return {
+            props: {
+                product: null // You might want to handle the case where product fetching fails
+            }
+        };
+    }
+}
+
+function ProductDefault ({product}) {
+    const [loaded, setLoadingState] = useState(true);
+
+    useEffect(() => {
+        if (product) {
+          
+                    setLoadingState(false);
+               
+        }
+    }, [product]);
 
     return (
         <main className="main mt-6 single-product">
@@ -42,9 +57,8 @@ function ProductDefault () {
 
             <h1 className="d-none">Riode React eCommerce Template - Product Default</h1>
 
-            {
-                product !== undefined ?
-                    <div className={ `page-content mb-10 pb-6 ${ loaded ? '' : 'd-none' }` } >
+            {product? (
+                <div className={`page-content mb-10 pb-6 ${loaded ? 'd-none' : ''}`}>
                         <div className="container vertical">
                             <div className="product product-single row mb-7">
                                 <div className="col-md-6 sticky-sidebar-wrapper">
@@ -52,19 +66,19 @@ function ProductDefault () {
                                 </div>
 
                                 <div className="col-md-6">
-                                    <DetailOne data={ data } />
+                                    <DetailOne product={ product } />
                                 </div>
                             </div>
-
+{console.log("this is single product",product)}
                             <DescOne product={ product } />
 
-                            <RelatedProducts products={ related } />
+                            <RelatedProducts products={ product } />
                         </div>
-                    </div> : ''
-            }
-            {
-                loaded && !loading ? ''
-                    :
+                    </div>  ) : (
+                ''
+            )}
+             {loaded? (
+
                     <div className="skeleton-body container mb-10">
                         <div className="row mb-7">
                             <div className="col-md-6 pg-vertical">
@@ -76,9 +90,9 @@ function ProductDefault () {
                             </div>
                         </div>
 
-                        <div className="skel-pro-tabs"></div>
+                         <div className="skel-pro-tabs"></div>
 
-                        <section className="pt-3 mt-4">
+                        {/* <section className="pt-3 mt-4">
                             <h2 className="title justify-content-center">Related Products</h2>
 
                             <OwlCarousel adClass="owl-carousel owl-theme owl-nav-full" options={ mainSlider17 }>
@@ -88,11 +102,15 @@ function ProductDefault () {
                                     )
                                 }
                             </OwlCarousel>
-                        </section>
+                        </section> */}
                     </div>
-            }
+          
+          ) : (
+            ''
+        )}
         </main>
     )
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( ProductDefault );
+// export default withApollo( { ssr: typeof window === 'undefined' } )( ProductDefault );
+export default  ProductDefault;

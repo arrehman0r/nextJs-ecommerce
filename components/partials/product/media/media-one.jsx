@@ -16,7 +16,7 @@ export default function MediaOne ( props ) {
     const [ isOpen, setOpenState ] = useState( false );
     const [ mediaRef, setMediaRef ] = useState( null );
 
-    let lgImages = product.large_pictures ? product.large_pictures : product.pictures;
+    let lgImages = product.images || [];
 
     useEffect( () => {
         setIndex( 0 );
@@ -68,7 +68,7 @@ export default function MediaOne ( props ) {
                     }
 
                     {
-                        product.is_top ?
+                        product.featured ?
                             <label className="product-label label-top">top</label> : ""
                     }
 
@@ -78,7 +78,7 @@ export default function MediaOne ( props ) {
                     }
 
                     {
-                        product.discount ?
+                        product.on_sale ?
                             <label className="product-label label-sale">sale</label> : ""
                     }
                 </div>
@@ -93,9 +93,9 @@ export default function MediaOne ( props ) {
                         lgImages.map( ( image, index ) =>
                             <div key={ image + '-' + index }>
                                 <Magnifier
-                                    imageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + image.url }
+                                    imageSrc={ image.src }
                                     imageAlt="magnifier"
-                                    largeImageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + image.url }
+                                    largeImageSrc={ image.src }
                                     dragToMove={ false }
                                     mouseActivation="hover"
                                     cursorStyleActive="crosshair"

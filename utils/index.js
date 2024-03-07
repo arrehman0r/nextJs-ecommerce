@@ -310,14 +310,6 @@ export const getCartCount = cartItems => {
 /**
  * utils to show number to n places of decimals
  */
-export const toDecimal = (price, fixedCount = 2) => {
-    // Check if price is a valid number
-    if (typeof price !== 'number') {
-        // Handle the case where price is not a number
-        console.error('Price is not a valid number:', price);
-        return ''; // Or you can return some default value, depending on your requirements
-    }
-
-    // Use Number.toLocaleString to format the number
-    return price.toLocaleString(undefined, { minimumFractionDigits: fixedCount, maximumFractionDigits: fixedCount });
+export const toDecimal = ( price, fixedCount = 2 ) => {
+    return price?.toLocaleString( undefined, { minimumFractionDigits: fixedCount, maximumFractionDigits: fixedCount } );
 }

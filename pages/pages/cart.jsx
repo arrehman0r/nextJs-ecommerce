@@ -67,15 +67,15 @@ function Cart ( props ) {
                                                         <tr key={ 'cart' + item.name }>
                                                             <td className="product-thumbnail">
                                                                 <figure>
-                                                                    <ALink href={ '/product/default/' + item.slug }>
-                                                                        <img src={ process.env.NEXT_PUBLIC_ASSET_URI + item.pictures[ 0 ].url } width="100" height="100"
+                                                                    <ALink href={ '/product/default/' + item.id }>
+                                                                        <img src={ item.images[ 0 ].src } width="100" height="100"
                                                                             alt="product" />
                                                                     </ALink>
                                                                 </figure>
                                                             </td>
                                                             <td className="product-name">
                                                                 <div className="product-name-section">
-                                                                    <ALink href={ '/product/default/' + item.slug }>Converse Training Shoes</ALink>
+                                                                    <ALink href={ '/product/default/' + item.id }>Converse Training Shoes</ALink>
                                                                 </div>
                                                             </td>
                                                             <td className="product-subtotal">

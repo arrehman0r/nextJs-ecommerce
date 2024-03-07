@@ -16,7 +16,7 @@ export default function CartPopup ( props ) {
                     <figure className="product-media pure-media">
                         <ALink href={ `/product/default/${ product.slug }` }>
                             <img
-                                src={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ 0 ].url }
+                                src={ product.images[ 0 ].src }
                                 alt="product"
                                 width="90"
                                 height="90"

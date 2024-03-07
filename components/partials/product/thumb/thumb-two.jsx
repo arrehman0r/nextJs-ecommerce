@@ -6,7 +6,7 @@ import { mainSlider15 } from '~/utils/data/carousel';
 
 function ThumbTwo ( props ) {
     const { product, index = 0 } = props;
-    let thumbs = product.pictures;
+    let thumbs = product.images;
     const [ thumbRef, setThumbRef ] = useState( null );
 
     useEffect( () => {
