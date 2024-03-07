@@ -29,7 +29,7 @@ function DetailLeft( props ) {
 
             <div className="product-price">
                 {
-                    product.data.price[ 0 ] !== product.data.price[ 1 ] ?
+                    product.data.regular_price !== product.data.sale_price ?
                         product.data.variants.length === 0 || ( product.data.variants.length > 0 && !product.data.variants[ 0 ].price ) ?
                             <>
                                 <ins className="new-price">${ toDecimal( product.price ) }</ins>
@@ -42,7 +42,7 @@ function DetailLeft( props ) {
             </div>
 
             {
-                product.data.price[ 0 ] !== product.sale_price && product.variants.length === 0 ?
+                product.data.regular_price !== product.sale_price && product.variants.length === 0 ?
                     <Countdown type={ 2 } /> : ''
             }
 

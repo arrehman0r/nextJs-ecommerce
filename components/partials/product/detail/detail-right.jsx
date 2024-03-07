@@ -95,17 +95,17 @@ function DetailRight( props ) {
                 tmpName += curColor !== 'null' ? '-' + curColor : '';
                 tmpName += curSize !== 'null' ? '-' + curSize : '';
 
-                if ( product.data.price[ 0 ] === product.data.price[ 1 ] ) {
-                    tmpPrice = product.data.price[ 0 ];
+                if ( product.data.regular_price === product.data.sale_price ) {
+                    tmpPrice = product.data.regular_price;
                 } else if ( !product.data.variants[ 0 ].price && product.data.discount > 0 ) {
-                    tmpPrice = product.data.price[ 0 ];
+                    tmpPrice = product.data.regular_price;
                 } else {
                     tmpPrice = product.data.variants[ curIndex ].sale_price ? product.data.variants[ curIndex ].sale_price : product.data.variants[ curIndex ].price;
                 }
 
                 addToCart( { ...product.data, name: tmpName, qty: quantity, price: tmpPrice } );
             } else {
-                addToCart( { ...product.data, qty: quantity, price: product.data.price[ 0 ] } );
+                addToCart( { ...product.data, qty: quantity, price: product.data.regular_price } );
             }
         }
     }

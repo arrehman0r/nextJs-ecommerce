@@ -58,7 +58,7 @@ function ProductFour( props ) {
 
     const addToCartHandler = ( e ) => {
         e.preventDefault();
-        addToCart( { ...product, qty: 1, price: product.price[ 0 ] } );
+        addToCart( { ...product, qty: 1, price: product.regular_price } );
     }
 
     const mouseOverHandler = ( e ) => {
@@ -134,15 +134,15 @@ function ProductFour( props ) {
 
                 <div className="product-price">
                     {
-                        product.price[ 0 ] !== product.price[ 1 ] ?
+                        product.regular_price !== product.sale_price ?
                             product.variants.length === 0 || ( product.variants.length > 0 && !product.variants[ 0 ].price ) ?
                                 <>
-                                    <ins className="new-price">${ toDecimal( product.price[ 0 ] ) }</ins>
-                                    <del className="old-price">${ toDecimal( product.price[ 1 ] ) }</del>
+                                    <ins className="new-price">${ toDecimal( product.regular_price ) }</ins>
+                                    <del className="old-price">${ toDecimal( product.sale_price ) }</del>
                                 </>
                                 :
-                                < del className="new-price">${ toDecimal( product.price[ 0 ] ) } – ${ toDecimal( product.price[ 1 ] ) }</del>
-                            : <ins className="new-price">${ toDecimal( product.price[ 0 ] ) }</ins>
+                                < del className="new-price">${ toDecimal( product.regular_price ) } – ${ toDecimal( product.sale_price ) }</del>
+                            : <ins className="new-price">${ toDecimal( product.regular_price ) }</ins>
                     }
                 </div>
             </div>

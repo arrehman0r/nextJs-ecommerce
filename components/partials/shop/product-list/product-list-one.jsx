@@ -82,7 +82,7 @@ function ProductListOne( props ) {
                 gridType === 'grid' ?
                     <div className={ `row product-wrapper ${ gridClasses[ itemsPerRow ] }` }>
                         { products && products.map( item =>
-                            <div className="product-wrap" key={ 'shop-' + item.slug }>
+                            <div className="product-wrap" key={ 'shop-' + item.id }>
                                 <ProductTwo product={ item } adClass="" />
                             </div>
                         ) }
@@ -90,7 +90,7 @@ function ProductListOne( props ) {
                     :
                     <div className="product-lists product-wrapper">
                         { products && products.map( item =>
-                            <ProductEight product={ item } key={ 'shop-list-' + item.slug } />
+                            <ProductEight product={ item } key={ 'shop-list-' + item.id } />
                         ) }
                     </div>
             }
