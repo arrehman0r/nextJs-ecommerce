@@ -13,7 +13,7 @@ function PostTwo ( props ) {
                     isLazy ?
                         <ALink href={ `/blog/single/${ post.slug }` }>
                             <LazyLoadImage
-                                src={ process.env.NEXT_PUBLIC_ASSET_URI + post.small_picture[ 0 ].url }
+                                src={   post.small_picture[ 0 ].url }
                                 alt="post image"
                                 width={ post.small_picture[ 0 ].width }
                                 height={ post.small_picture[ 0 ].height }
@@ -24,7 +24,7 @@ function PostTwo ( props ) {
                         :
                         <ALink href={ `/blog/single/${ post.slug }` }>
                             <img
-                                src={ process.env.NEXT_PUBLIC_ASSET_URI + post.small_picture[ 0 ].url }
+                                src={   post.small_picture[ 0 ].url }
                                 alt="post image"
                                 width={ post.small_picture[ 0 ].width }
                                 height={ post.small_picture[ 0 ].height }

@@ -61,7 +61,7 @@ function PostSingle() {
                                                 <figure className="post-media">
                                                     <ALink href="#">
                                                         <LazyLoadImage
-                                                            src={ process.env.NEXT_PUBLIC_ASSET_URI + post.large_picture[ 0 ].url }
+                                                            src={   post.large_picture[ 0 ].url }
                                                             alt="post image"
                                                             width="900"
                                                             height={ 500 }
@@ -73,7 +73,7 @@ function PostSingle() {
                                                             <>
                                                                 <span className="video-play" onClick={ videoHandler }></span>
                                                                 <video width="380">
-                                                                    <source src={ process.env.NEXT_PUBLIC_ASSET_URI + post.video.url } type="video/mp4" />
+                                                                    <source src={   post.video.url } type="video/mp4" />
                                                                 </video>
                                                             </>
                                                             : ''
@@ -84,7 +84,7 @@ function PostSingle() {
                                                         {
                                                             post.picture.map( ( item, index ) =>
                                                                 <img
-                                                                    src={ process.env.NEXT_PUBLIC_ASSET_URI + item.url }
+                                                                    src={   item.url }
                                                                     alt="post gallery"
                                                                     key={ item.title + '-' + index }
                                                                     width={ item.width }

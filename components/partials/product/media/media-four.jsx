@@ -12,7 +12,7 @@ export default function MediaFour( props ) {
     const [ isOpen, setOpenState ] = useState( false );
     const [ index, setIndex ] = useState( 0 );
 
-    let lgImages = product.large_pictures ? product.large_pictures : product.pictures;
+    let lgImages = product.large_pictures ? product.large_pictures : product.images;
 
     const changeOpenState = openState => {
         setOpenState( openState );
@@ -55,9 +55,9 @@ export default function MediaFour( props ) {
                     lgImages.map( ( image, index ) =>
                         <div key={ image + '-' + index }>
                             <Magnifier
-                                imageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + image.url }
+                                imageSrc={   image.url }
                                 imageAlt="magnifier"
-                                largeImageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + image.url }
+                                largeImageSrc={   image.url }
                                 dragToMove={ false }
                                 mouseActivation="hover"
                                 cursorStyleActive="crosshair"

@@ -109,7 +109,7 @@ function SearchForm() {
                 <div className="live-search-list bg-white scrollable">
                     { search.length > 2 && data && data.products.data.map( ( product, index ) => (
                         <ALink href={ `/product/default/${ product.slug }` } className="autocomplete-suggestion" key={ `search-result-${ index }` }>
-                            <LazyLoadImage effect="opacity" src={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ 0 ].url } width={ 40 } height={ 40 } alt="product" />
+                            <LazyLoadImage effect="opacity" src={    product.images[ 0 ].src } width={ 40 } height={ 40 } alt="product" />
                             <div className="search-name" dangerouslySetInnerHTML={ removeXSSAttacks( matchEmphasize( product.name ) ) }></div>
                             <span className="search-price">
                                 {

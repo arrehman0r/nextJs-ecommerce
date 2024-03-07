@@ -93,9 +93,9 @@ function Quickview( props ) {
                                     product && product.data && product.data.large_pictures.map( ( item, index ) =>
                                         <Magnifier
                                             key={ 'quickview-image-' + index }
-                                            imageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + item.url }
+                                            imageSrc={   item.url }
                                             imageAlt="magnifier"
-                                            largeImageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + item.url }
+                                            largeImageSrc={   item.url }
                                             dragToMove={ false }
                                             mouseActivation="hover"
                                             cursorStyleActive="crosshair"

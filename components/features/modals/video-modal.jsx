@@ -62,7 +62,7 @@ function VideoModal ( props ) {
             overlayClassName="video-modal-overlay"
             className="row video-modal" id="video-modal"
         >
-            <video src={ process.env.NEXT_PUBLIC_ASSET_URI + singleSlug } autoPlay={ true } loop={ true } controls={ true } className="p-0"></video>
+            <video src={   singleSlug } autoPlay={ true } loop={ true } controls={ true } className="p-0"></video>
 
             <button title="Close (Esc)" type="button" className="mfp-close" onClick={ closeModal } ><span>×</span></button>
         </Modal >

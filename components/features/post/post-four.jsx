@@ -22,7 +22,7 @@ function PostFour ( props ) {
                                     {
                                         isOriginal ?
                                             <LazyLoadImage
-                                                src={ process.env.NEXT_PUBLIC_ASSET_URI + post.large_picture[ 0 ].url }
+                                                src={   post.large_picture[ 0 ].url }
                                                 alt="post image"
                                                 width={ 380 }
                                                 height={ 230 }
@@ -31,7 +31,7 @@ function PostFour ( props ) {
                                             />
                                             :
                                             <LazyLoadImage
-                                                src={ process.env.NEXT_PUBLIC_ASSET_URI + post.picture[ 0 ].url }
+                                                src={   post.picture[ 0 ].url }
                                                 alt="post image"
                                                 width={ post.picture[ 0 ].width }
                                                 height={ post.picture[ 0 ].height }
@@ -44,13 +44,13 @@ function PostFour ( props ) {
                                 <ALink href={ `/blog/single/${ post.slug }` }>
                                     {
                                         isOriginal ? <img
-                                            src={ process.env.NEXT_PUBLIC_ASSET_URI + post.large_picture[ 0 ].url }
+                                            src={   post.large_picture[ 0 ].url }
                                             alt="post image"
                                             width={ 380 }
                                             height={ 230 }
                                         /> :
                                             <img
-                                                src={ process.env.NEXT_PUBLIC_ASSET_URI + post.picture[ 0 ].url }
+                                                src={   post.picture[ 0 ].url }
                                                 alt="post image"
                                                 width={ post.picture[ 0 ].width }
                                                 height={ post.picture[ 0 ].height }
@@ -63,7 +63,7 @@ function PostFour ( props ) {
                                 <>
                                     <span className="video-play" onClick={ videoHandler }></span>
                                     <video width="380">
-                                        <source src={ process.env.NEXT_PUBLIC_ASSET_URI + post.video.url } type="video/mp4" />
+                                        <source src={   post.video.url } type="video/mp4" />
                                     </video>
                                 </>
                                 : ''
@@ -80,7 +80,7 @@ function PostFour ( props ) {
                                     {
                                         post.picture.map( ( item, index ) =>
                                             <LazyLoadImage
-                                                src={ process.env.NEXT_PUBLIC_ASSET_URI + item.url }
+                                                src={   item.url }
                                                 alt="post gallery"
                                                 key={ item.title + '-' + index }
                                                 width={ item.width }
@@ -95,7 +95,7 @@ function PostFour ( props ) {
                                     {
                                         post.picture.map( ( item, index ) =>
                                             <img
-                                                src={ process.env.NEXT_PUBLIC_ASSET_URI + item.url }
+                                                src={   item.url }
                                                 alt="post gallery"
                                                 key={ item.title + '-' + index }
                                                 width={ item.width }

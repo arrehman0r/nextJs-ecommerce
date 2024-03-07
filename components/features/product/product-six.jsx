@@ -46,7 +46,7 @@ function ProductSix( props ) {
                 <ALink href={ `/product/default/${ product.slug }` }>
                     <LazyLoadImage
                         alt="product"
-                        src={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ 0 ].url }
+                        src={    product.images[ 0 ].src }
                         threshold={ 500 }
                         effect="opacity"
                         width="300"
@@ -54,10 +54,10 @@ function ProductSix( props ) {
                     />
 
                     {
-                        product.pictures.length >= 2 ?
+                        product.images.length >= 2 ?
                             <LazyLoadImage
                                 alt="product"
-                                src={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ 1 ].url }
+                                src={   product.images[ 1 ].url }
                                 threshold={ 500 }
                                 width="300"
                                 height="338"

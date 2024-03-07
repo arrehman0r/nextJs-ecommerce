@@ -14,7 +14,7 @@ export default function ProductNav ( props ) {
                         <ALink href={ { pathname: router.pathname, query: { slug: product.prev.slug } } } scroll={ false }>
                             <i className="d-icon-arrow-left"></i> Prev
                                     <span className="product-nav-popup">
-                                <img src={ process.env.NEXT_PUBLIC_ASSET_URI + product.prev.pictures[ 0 ].url }
+                                <img src={   product.prev.images[ 0 ].url }
                                     alt="product thumbnail" width="110" height="123" />
                                 <span className="product-name">{ product.prev.name }</span>
                             </span>
@@ -28,7 +28,7 @@ export default function ProductNav ( props ) {
                         <ALink href={ { pathname: router.pathname, query: { slug: product.next.slug } } } scroll={ false }>
                             Next <i className="d-icon-arrow-right"></i>
                             <span className="product-nav-popup">
-                                <img src={ process.env.NEXT_PUBLIC_ASSET_URI + product.next.pictures[ 0 ].url }
+                                <img src={   product.next.images[ 0 ].url }
                                     alt="product thumbnail" width="110" height="123" />
                                 <span className="product-name">{ product.next.name }</span>
                             </span>

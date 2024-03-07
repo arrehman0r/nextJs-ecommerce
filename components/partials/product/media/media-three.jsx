@@ -8,7 +8,7 @@ export default function MediaThree( props ) {
     const [ index, setIndex ] = useState( 0 );
     const [ isOpen, setOpenState ] = useState( false );
 
-    let lgImages = product.large_pictures ? product.large_pictures : product.pictures;
+    let lgImages = product.large_pictures ? product.large_pictures : product.images;
 
     useEffect( () => {
         setIndex( 0 );
@@ -32,9 +32,9 @@ export default function MediaThree( props ) {
                         index === 0 ?
                             <figure className="product-image mb-4" key={ 'image' + index }>
                                 <Magnifier
-                                    imageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + image.url }
+                                    imageSrc={   image.url }
                                     imageAlt="magnifier"
-                                    largeImageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + image.url }
+                                    largeImageSrc={   image.url }
                                     dragToMove={ false }
                                     mouseActivation="hover"
                                     cursorStyleActive="crosshair"
@@ -70,9 +70,9 @@ export default function MediaThree( props ) {
                             <div className={ `thumb-pictures ${ index % 4 < 2 ? 'col-sm-4' : 'col-sm-8' }` } key={ 'image' + index }>
                                 <figure className="product-image mb-4">
                                     <Magnifier
-                                        imageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + image.url }
+                                        imageSrc={   image.url }
                                         imageAlt="magnifier"
-                                        largeImageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + image.url }
+                                        largeImageSrc={   image.url }
                                         dragToMove={ false }
                                         mouseActivation="hover"
                                         cursorStyleActive="crosshair"

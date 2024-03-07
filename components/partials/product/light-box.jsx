@@ -32,9 +32,9 @@ function MediaLightBox( props ) {
             {
                 isOpen ?
                     <Lightbox
-                        mainSrc={ process.env.NEXT_PUBLIC_ASSET_URI + images[ index ].url }
-                        nextSrc={ process.env.NEXT_PUBLIC_ASSET_URI + images[ ( index + 1 ) % images.length ].url }
-                        prevSrc={ process.env.NEXT_PUBLIC_ASSET_URI + images[ ( index + images.length - 1 ) % images.length ].url }
+                        mainSrc={   images[ index ].url }
+                        nextSrc={   images[ ( index + 1 ) % images.length ].url }
+                        prevSrc={   images[ ( index + images.length - 1 ) % images.length ].url }
                         onCloseRequest={ closeLightBox }
                         onMovePrevRequest={ setPrevHandler }
                         onMoveNextRequest={ setNextHandler }

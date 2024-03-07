@@ -15,7 +15,7 @@ export default function MediaFive( props ) {
     const [ mediaIndex, setMediaIndex ] = useState( 0 );
     const [ isOpen, setOpenState ] = useState( false );
     const [ mediaRef, setMediaRef ] = useState( null );
-    let lgImages = product.large_pictures ? product.large_pictures : product.pictures;
+    let lgImages = product.large_pictures ? product.large_pictures : product.images;
 
     useEffect( () => {
         setIndex( 0 );
@@ -91,9 +91,9 @@ export default function MediaFive( props ) {
                     lgImages.map( ( image, index ) =>
                         <div key={ image + '-' + index }>
                             <Magnifier
-                                imageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + image.url }
+                                imageSrc={   image.url }
                                 imageAlt="magnifier"
-                                largeImageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + image.url }
+                                largeImageSrc={   image.url }
                                 dragToMove={ false }
                                 mouseActivation="hover"
                                 cursorStyleActive="crosshair"

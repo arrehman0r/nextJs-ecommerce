@@ -16,7 +16,7 @@ function PostSeven ( props ) {
                         <ALink href={ `/blog/single/${ post.slug }` }>
                             {
                                 isOriginal ? <LazyLoadImage
-                                    src={ process.env.NEXT_PUBLIC_ASSET_URI + post.large_picture[ 0 ].url }
+                                    src={   post.large_picture[ 0 ].url }
                                     alt="post image"
                                     width={ 380 }
                                     height={ 280 }
@@ -25,7 +25,7 @@ function PostSeven ( props ) {
                                 />
                                     :
                                     <LazyLoadImage
-                                        src={ process.env.NEXT_PUBLIC_ASSET_URI + post.picture[ 0 ].url }
+                                        src={   post.picture[ 0 ].url }
                                         alt="post image"
                                         width={ 380 }
                                         height={ 280 }
@@ -38,14 +38,14 @@ function PostSeven ( props ) {
                         <ALink href={ `/blog/single/${ post.slug }` }>
                             {
                                 isOriginal ? <img
-                                    src={ process.env.NEXT_PUBLIC_ASSET_URI + post.large_picture[ 0 ].url }
+                                    src={   post.large_picture[ 0 ].url }
                                     alt="post image"
                                     width={ post.large_picture[ 0 ].width }
                                     height={ post.large_picture[ 0 ].height }
                                 /> :
 
                                     <img
-                                        src={ process.env.NEXT_PUBLIC_ASSET_URI + post.picture[ 0 ].url }
+                                        src={   post.picture[ 0 ].url }
                                         alt="post image"
                                         width={ post.picture[ 0 ].width }
                                         height={ post.picture[ 0 ].height }
@@ -58,7 +58,7 @@ function PostSeven ( props ) {
                         <>
                             <span className="video-play" onClick={ videoHandler }></span>
                             <video width="380">
-                                <source src={ process.env.NEXT_PUBLIC_ASSET_URI + post.video.url } type="video/mp4" />
+                                <source src={   post.video.url } type="video/mp4" />
                             </video>
                         </>
                         : ''
