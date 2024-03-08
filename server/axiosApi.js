@@ -10,3 +10,11 @@ export const getCategoryProducts = ( id ) => {
 export const getProduct = ( id ) => {
   return makeRequest("get", `products/${id}`);
 };
+
+export const createOrder = (body)=>{
+  return makeRequest("post","orders", body);
+};
+
+export const retrieveOrder = (id)=>{
+  return makeRequest("get",`orders/${id}`);
+}
