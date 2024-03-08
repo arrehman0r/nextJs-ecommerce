@@ -91,7 +91,7 @@ function Checkout(props) {
       console.log("Order created successfully:",response);
      // You can clear the cart like this:
      store.dispatch({ type: "REFRESH_STORE", payload: { current: 1 } });
-     router.push(`order/${response.id}`);
+     router.push(`/order/${response.id}`);
 
       // Handle success response as needed
     } catch (error) {

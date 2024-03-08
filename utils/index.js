@@ -293,6 +293,21 @@ export const getTotalPrice = cartItems => {
     }
     return total;
 }
+export const getCartSubTotal = cartItems => {
+    let total = 0;
+    if ( cartItems ) {
+        for ( let i = 0; i < cartItems.length; i++ ) {
+            total += cartItems[ i ].price * parseInt( cartItems[ i ].quantity, 10 );
+        }
+    }
+    return total;
+}
+
+
+
+
+
+
 
 /**
  * utils to get number of products in cart
@@ -313,3 +328,18 @@ export const getCartCount = cartItems => {
 export const toDecimal = ( price, fixedCount = 2 ) => {
     return price?.toLocaleString( undefined, { minimumFractionDigits: fixedCount, maximumFractionDigits: fixedCount } );
 }
+
+
+export const formatDate = (dateString) => {  
+    if (!dateString) return ''; // Return an empty string if dateString is falsy
+
+    const date = new Date(dateString);
+    
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+        return ''; // Return an empty string if the date is invalid
+    }
+
+    const options = { month: "long", day: "2-digit", year: "numeric" };
+    return new Intl.DateTimeFormat("en-US", options).format(date);
+};

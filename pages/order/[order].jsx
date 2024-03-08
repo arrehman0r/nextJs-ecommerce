@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 
 import ALink from '~/components/features/custom-link';
 
-import { toDecimal, getTotalPrice } from '~/utils';
+import { toDecimal, getCartSubTotal,formatDate } from '~/utils';
 import { retrieveOrder } from '~/server/axiosApi';
 import { useParams } from 'next/navigation';
 
@@ -77,27 +77,27 @@ function Order( ) {
                     <div className="order-results">
                         <div className="overview-item">
                             <span>Order number:</span>
-                            <strong>4935</strong>
+                            <strong>{orderDetails?.number}</strong>
                         </div>
                         <div className="overview-item">
                             <span>Status:</span>
-                            <strong>Processing</strong>
+                            <strong>{orderDetails?.status}</strong>
                         </div>
                         <div className="overview-item">
                             <span>Date:</span>
-                            <strong>November 20, 2020</strong>
+                            <strong>{formatDate(orderDetails?.date_created)}</strong>
                         </div>
                         <div className="overview-item">
-                            <span>Email:</span>
-                            <strong>12345@gmail.com</strong>
+                            <span>Number:</span>
+                            <strong>{orderDetails?.billing?.phone}</strong>
                         </div>
                         <div className="overview-item">
                             <span>Total:</span>
-                            <strong>${ toDecimal( getTotalPrice( orderDetails?.total ) ) }</strong>
+                            <strong>{orderDetails?.total  }</strong>
                         </div>
                         <div className="overview-item">
                             <span>Payment method:</span>
-                            <strong>Cash on delivery</strong>
+                            <strong>{orderDetails?.payment_method_title}</strong>
                         </div>
                     </div>
 
@@ -117,20 +117,20 @@ function Order( ) {
                                     orderDetails?.line_items?.map( item =>
                                         <tr key={ 'order-' + item.name }>
                                             <td className="product-name">{ item.name } <span> <i className="fas fa-times"></i> { item.quantity }</span></td>
-                                            <td className="product-price">${ toDecimal( item.quantity * item.price ) }</td>
+                                            <td className="product-price">Rs.{ toDecimal( item.quantity * item.price ) }</td>
                                         </tr>
                                     ) }
                                 <tr className="summary-subtotal">
                                     <td>
                                         <h4 className="summary-subtitle">Subtotal:</h4>
                                     </td>
-                                    <td className="summary-subtotal-price">${ toDecimal( getTotalPrice( orderDetails?.line_items ) ) }</td>
+                                    <td className="summary-subtotal-price">Rs.{ toDecimal( getCartSubTotal( orderDetails?.line_items ) ) }</td>
                                 </tr>
                                 <tr className="summary-subtotal">
                                     <td>
                                         <h4 className="summary-subtitle">Shipping:</h4>
                                     </td>
-                                    <td className="summary-subtotal-price">{orderDetails?.shipping_total}</td>
+                                    <td className="summary-subtotal-price">Rs.{orderDetails?.shipping_total}</td>
                                 </tr>
                                 <tr className="summary-subtotal">
                                     <td>
@@ -143,22 +143,23 @@ function Order( ) {
                                         <h4 className="summary-subtitle">Total:</h4>
                                     </td>
                                     <td>
-                                        <p className="summary-total-price">${ toDecimal(orderDetails?.total ) }</p>
+                                        <p className="summary-total-price">Rs.{ toDecimal(orderDetails?.total ) }</p>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <h2 className="title title-simple text-left pt-10 mb-2">Billing Address</h2>
+                    <h2 className="title title-simple text-left pt-10 mb-2">Shipping Address</h2>
                     <div className="address-info pb-8 mb-6">
                         <p className="address-detail pb-2">
-                            John Doe<br />
-                        Riode Company<br />
-                        Steven street<br />
-                        El Carjon, CA 92020<br />
-                        123456789
+                           {orderDetails?.billing?.first_name}<br />
+                       {orderDetails?.billing?.phone}<br />
+                       {orderDetails?.billing?.address_1}<br />
+                       {orderDetails?.billing?.address_2}<br />
+                       {orderDetails?.billing?.city}<br />
+                       {orderDetails?.billing?.email}
                     </p>
-                        <p className="email">mail@riode.com</p>
+                        {/* <p className="email"> {orderDetails?.billing?.email}</p> */}
                     </div>
 
                     <ALink href="/shop" className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"><i className="d-icon-arrow-left"></i> Back to List</ALink>
