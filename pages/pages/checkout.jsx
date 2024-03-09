@@ -462,7 +462,7 @@ function Checkout(props) {
                                   </span>
                                 </td>
                                 <td className="product-total text-body">
-                                  ${toDecimal(item.price * item.qty)}
+                                  Rs.{toDecimal(item.price * item.qty)}
                                 </td>
                               </tr>
                             ))}
@@ -472,17 +472,25 @@ function Checkout(props) {
                                 <h4 className="summary-subtitle">Subtotal</h4>
                               </td>
                               <td className="summary-subtotal-price pb-0 pt-0">
-                                ${toDecimal(getTotalPrice(cartList))}
+                                Rs.{toDecimal(getTotalPrice(cartList))}
                               </td>
                             </tr>
                             <tr className="sumnary-shipping shipping-row-last">
-                              <td>
+
+                            {getTotalPrice(cartList)<= 2000?   
+                          (  <>  <td>
                                 <h4 className="summary-subtitle">
                                   Flat Shipping
                                 </h4>
                               </td>
 
-                              <td>Rs 200</td>
+                              <td>Rs.100</td></>) : (<>  <td>
+                                <h4 className="summary-subtitle">
+                                  Free Shipping
+                                </h4>
+                              </td>
+
+                              <td>Rs.00</td></>)}
 
                               {/* <ul> */}
                               {/* <li>
@@ -519,7 +527,7 @@ function Checkout(props) {
                               </td>
                               <td className=" pt-0 pb-0">
                                 <p className="summary-total-price ls-s text-primary">
-                                  ${toDecimal(getTotalPrice(cartList))}
+                                  Rs.{toDecimal(getTotalPrice(cartList)+ (getTotalPrice(cartList)<= 2000? 100:0))}
                                 </p>
                               </td>
                             </tr>
@@ -583,7 +591,7 @@ function Checkout(props) {
                             className="form-control-label"
                             htmlFor="terms-condition"
                           >
-                            I have read and agree to the website{" "}
+                            I have read and agree to the terms
                             {/* <ALink href="#">terms and conditions </ALink>* */}
                           </label>
                         </div>

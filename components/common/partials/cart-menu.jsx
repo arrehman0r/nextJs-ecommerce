@@ -35,7 +35,7 @@ function CartMenu( props ) {
             <a href="#" className="cart-toggle label-block link" onClick={ showCartMenu }>
                 <div className="cart-label d-lg-show">
                     <span className="cart-name">Shopping Cart:</span>
-                    <span className="cart-price">${ toDecimal( getTotalPrice( cartList ) ) }</span>
+                    <span className="cart-price">Rs. { toDecimal( getTotalPrice( cartList ) ) }</span>
                 </div>
                 <i className="d-icon-bag"><span className="cart-count">{ getCartCount( cartList ) }</span></i>
             </a>
@@ -66,7 +66,7 @@ function CartMenu( props ) {
                                                 <ALink href={ '/product/default/' + item.id } className="product-name">{ item.name }</ALink>
                                                 <div className="price-box">
                                                     <span className="product-quantity">{ item.qty }</span>
-                                                    <span className="product-price">${ toDecimal( item.price ) }</span>
+                                                    <span className="product-price">Rs.{ toDecimal( item.price ) }</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,7 +75,7 @@ function CartMenu( props ) {
 
                             <div className="cart-total">
                                 <label>Subtotal:</label>
-                                <span className="price">${ toDecimal( getTotalPrice( cartList ) ) }</span>
+                                <span className="price">Rs.{ toDecimal( getTotalPrice( cartList ) ) }</span>
                             </div>
 
                             <div className="cart-action">

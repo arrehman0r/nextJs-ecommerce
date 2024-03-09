@@ -8,34 +8,34 @@ import { cartActions } from '~/store/cart';
 
 import { toDecimal, getTotalPrice } from '~/utils';
 
-function Cart ( props ) {
+function Cart(props) {
     const { cartList, removeFromCart, updateCart } = props;
-    const [ cartItems, setCartItems ] = useState( [] );
+    const [cartItems, setCartItems] = useState([]);
 
-    useEffect( () => {
-        setCartItems( [ ...cartList ] );
-    }, [ cartList ] )
+    useEffect(() => {
+        setCartItems([...cartList]);
+    }, [cartList])
 
-    const onChangeQty = ( name, qty ) => {
-        setCartItems( cartItems.map( item => {
+    const onChangeQty = (name, qty) => {
+        setCartItems(cartItems.map(item => {
             return item.name === name ? { ...item, qty: qty } : item
-        } ) );
+        }));
     }
 
     const compareItems = () => {
-        if ( cartItems.length !== cartList.length ) return false;
+        if (cartItems.length !== cartList.length) return false;
 
-        for ( let index = 0; index < cartItems.length; index++ ) {
-            if ( cartItems[ index ].qty !== cartList[ index ].qty ) return false;
+        for (let index = 0; index < cartItems.length; index++) {
+            if (cartItems[index].qty !== cartList[index].qty) return false;
         }
 
         return true;
     }
 
     const update = () => {
-        updateCart( cartItems );
+        updateCart(cartItems);
     }
-
+ 
     return (
         <div className="main cart">
             <div className="page-content pt-7 pb-10">
@@ -63,49 +63,49 @@ function Cart ( props ) {
                                             </thead>
                                             <tbody>
                                                 {
-                                                    cartItems.map( item =>
-                                                        <tr key={ 'cart' + item.name }>
+                                                    cartItems.map(item =>
+                                                        <tr key={'cart' + item.name}>
                                                             <td className="product-thumbnail">
                                                                 <figure>
-                                                                    <ALink href={ '/product/default/' + item.id }>
-                                                                        <img src={ item.images[ 0 ].src } width="100" height="100"
+                                                                    <ALink href={'/product/default/' + item.id}>
+                                                                        <img src={item.images[0].src} width="100" height="100"
                                                                             alt="product" />
                                                                     </ALink>
                                                                 </figure>
                                                             </td>
                                                             <td className="product-name">
                                                                 <div className="product-name-section">
-                                                                    <ALink href={ '/product/default/' + item.id }>Converse Training Shoes</ALink>
+                                                                    <ALink href={'/product/default/' + item.id}>{item.name}</ALink>
                                                                 </div>
                                                             </td>
                                                             <td className="product-subtotal">
-                                                                <span className="amount">Rs.{ toDecimal( item.price ) }</span>
+                                                                <span className="amount">Rs.{toDecimal(item.price)}</span>
                                                             </td>
 
                                                             <td className="product-quantity">
-                                                                <Quantity qty={ item.qty } max={ item.stock_quantity } onChangeQty={ qty => onChangeQty( item.name, qty ) } />
+                                                                <Quantity qty={item.qty} max={item.stock_quantity} onChangeQty={qty => onChangeQty(item.name, qty)} />
                                                             </td>
                                                             <td className="product-price">
-                                                                <span className="amount">Rs.{ toDecimal( item.price * item.qty ) }</span>
+                                                                <span className="amount">Rs.{toDecimal(item.price * item.qty)}</span>
                                                             </td>
                                                             <td className="product-close">
-                                                                <ALink href="#" className="product-remove" title="Remove this product" onClick={ () => removeFromCart( item ) }>
+                                                                <ALink href="#" className="product-remove" title="Remove this product" onClick={() => removeFromCart(item)}>
                                                                     <i className="fas fa-times"></i>
                                                                 </ALink>
                                                             </td>
                                                         </tr>
-                                                    ) }
+                                                    )}
                                             </tbody>
                                         </table>
                                         <div className="cart-actions mb-6 pt-4">
                                             <ALink href="/shop" className="btn btn-dark btn-md btn-rounded btn-icon-left mr-4 mb-4"><i className="d-icon-arrow-left"></i>Continue Shopping</ALink>
                                             <button
                                                 type="submit"
-                                                className={ `btn btn-outline btn-dark btn-md btn-rounded ${ compareItems() ? ' btn-disabled' : '' }` }
-                                                onClick={ update }
+                                                className={`btn btn-outline btn-dark btn-md btn-rounded ${compareItems() ? ' btn-disabled' : ''}`}
+                                                onClick={update}
                                             >
                                                 Update Cart
-                                </button>
+                                            </button>
                                         </div>
                                         <div className="cart-coupon-box mb-8">
                                             <h4 className="title coupon-title text-uppercase ls-m">Coupon Discount</h4>
@@ -125,46 +125,34 @@ function Cart ( props ) {
                                                                 <h4 className="summary-subtitle">Subtotal</h4>
                                                             </td>
                                                             <td>
-                                                                <p className="summary-subtotal-price">Rs.{ toDecimal( getTotalPrice( cartItems ) ) }</p>
+                                                                <p className="summary-subtotal-price">Rs.{toDecimal(getTotalPrice(cartItems))}</p>
                                                             </td>
                                                         </tr>
                                                         <tr className="sumnary-shipping shipping-row-last">
                                                             <td colSpan="2">
                                                                 <h4 className="summary-subtitle">Calculate Shipping</h4>
-                                                                {/* <ul>
-                                                                    <li>
-                                                                        <div className="custom-radio">
-                                                                            <input type="radio" id="flat_rate" name="shipping" className="custom-control-input" defaultChecked />
-                                                                            <label className="custom-control-label" htmlFor="flat_rate">Flat rate  <span className="shipping-charge">Rs.100</span></label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div className="custom-radio">
-                                                                            <input type="radio" id="free-shipping" name="shipping" className="custom-control-input" />
-                                                                            <label className="custom-control-label" htmlFor="free-shipping">Free
-																shipping</label>
-                                                                        </div>
-                                                                    </li>
-
-                                                                    {/* <li>
-                                                                        <div className="custom-radio">
-                                                                            <input type="radio" id="local_pickup" name="shipping" className="custom-control-input" />
-                                                                            <label className="custom-control-label" htmlFor="local_pickup">Local pickup</label>
-                                                                        </div>
-                                                                    </li> */}
-                                                                {/* </ul> */} 
                                                             </td>
-                                                            
+
                                                         </tr>
-                                                        <tr>
-    <td>
-      <div class="custom-radio">
-        <input type="radio" id="flat_rate" name="shipping" class="custom-control-input" defaultChecked />
-        <label class="custom-control-label" for="flat_rate">Flat rate</label>
-      </div>
-    </td>
-    <td>Rs.200</td>
-  </tr>
+                                                        {getTotalPrice(cartItems)<= 2000?   
+                                                       ( <tr>
+                                                            <td>
+                                                                <div class="custom-radio">
+                                                                    <input type="radio" id="flat_rate" name="shipping" class="custom-control-input" defaultChecked />
+                                                                    <label class="custom-control-label" for="flat_rate">Flat rate</label>
+                                                                </div>
+                                                            </td>
+                                                            <td>Rs.100</td>
+                                                        </tr>) : 
+                                                       ( <tr>
+                                                            <td>
+                                                                <div class="custom-radio">
+                                                                    <input type="radio" id="flat_rate" name="shipping" class="custom-control-input" defaultChecked />
+                                                                    <label class="custom-control-label" for="flat_rate">Free Shipping</label>
+                                                                </div>
+                                                            </td>
+                                                            <td>Rs.00</td>
+                                                        </tr>)}
                                                     </tbody>
                                                 </table>
                                                 {/* <div className="shipping-address">
@@ -196,7 +184,8 @@ function Cart ( props ) {
                                                                 <h4 className="summary-subtitle">Total</h4>
                                                             </td>
                                                             <td>
-                                                                <p className="summary-total-price ls-s">Rs.{ toDecimal( getTotalPrice( cartItems ) ) }</p>
+                                                            <p className="summary-total-price ls-s">Rs.{toDecimal(getTotalPrice(cartItems) + (getTotalPrice(cartItems) <= 2000 ? 100 : 0))}</p>
+
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -224,10 +213,10 @@ function Cart ( props ) {
     )
 }
 
-function mapStateToProps ( state ) {
+function mapStateToProps(state) {
     return {
         cartList: state.cart.data ? state.cart.data : []
     }
 }
 
-export default connect( mapStateToProps, { removeFromCart: cartActions.removeFromCart, updateCart: cartActions.updateCart } )( Cart );
+export default connect(mapStateToProps, { removeFromCart: cartActions.removeFromCart, updateCart: cartActions.updateCart })(Cart);
