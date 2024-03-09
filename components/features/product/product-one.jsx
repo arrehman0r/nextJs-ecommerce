@@ -37,7 +37,7 @@ function ProductOne( props ) {
 
     const addToCartHandler = ( e ) => {
         e.preventDefault();
-        addToCart( { ...product, qty: 1, price: product.regular_price } );
+        addToCart( { ...product, qty: 1, price: product.sale_price } );
     }
 
     return (
@@ -121,14 +121,14 @@ function ProductOne( props ) {
 
                 <div className="product-price">
                     {
-                        product.regular_price !== product.sale_price ?
+                        product.sale_price !== product.regular_price ?
                             product.variants.length === 0 || ( product.variants.length > 0 && !product.variants[ 0 ].price ) ?
                                 <>
                                     <ins className="new-price">${ toDecimal( product.price) }</ins>
-                                    <del className="old-price">${ toDecimal( product.sale_price ) }</del>
+                                    <del className="old-price">${ toDecimal( product.regular_price ) }</del>
                                 </>
                                 :
-                                < del className="new-price">${ toDecimal( product.regular_price ) } – ${ toDecimal( product.sale_price ) }</del>
+                                < del className="new-price">${ toDecimal( product.sale_price ) } – ${ toDecimal( product.regular_price ) }</del>
                             : <ins className="new-price">${ toDecimal( product.price ) }</ins>
                     }
                 </div>

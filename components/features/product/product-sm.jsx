@@ -44,15 +44,15 @@ function SmallProduct( props ) {
 
                 <div className="product-price">
                     {
-                        product.regular_price !== product.sale_price ?
+                        product.sale_price !== product.regular_price ?
                             product.variants.length === 0 || ( product.variants.length > 0 && !product.variants[ 0 ].price ) ?
                                 <>
-                                    <ins className="new-price">${ toDecimal( product.regular_price ) }</ins>
-                                    <del className="old-price">${ toDecimal( product.sale_price ) }</del>
+                                    <ins className="new-price">${ toDecimal( product.sale_price ) }</ins>
+                                    <del className="old-price">${ toDecimal( product.regular_price ) }</del>
                                 </>
                                 :
-                                < del className="new-price">${ toDecimal( product.regular_price ) } – ${ toDecimal( product.sale_price ) }</del>
-                            : <ins className="new-price">${ toDecimal( product.regular_price ) }</ins>
+                                < del className="new-price">${ toDecimal( product.sale_price ) } – ${ toDecimal( product.regular_price ) }</del>
+                            : <ins className="new-price">${ toDecimal( product.sale_price ) }</ins>
                     }
                 </div>
 

@@ -79,14 +79,14 @@ function Cart ( props ) {
                                                                 </div>
                                                             </td>
                                                             <td className="product-subtotal">
-                                                                <span className="amount">${ toDecimal( item.price ) }</span>
+                                                                <span className="amount">Rs.{ toDecimal( item.price ) }</span>
                                                             </td>
 
                                                             <td className="product-quantity">
-                                                                <Quantity qty={ item.qty } max={ item.stock } onChangeQty={ qty => onChangeQty( item.name, qty ) } />
+                                                                <Quantity qty={ item.qty } max={ item.stock_quantity } onChangeQty={ qty => onChangeQty( item.name, qty ) } />
                                                             </td>
                                                             <td className="product-price">
-                                                                <span className="amount">${ toDecimal( item.price * item.qty ) }</span>
+                                                                <span className="amount">Rs.{ toDecimal( item.price * item.qty ) }</span>
                                                             </td>
                                                             <td className="product-close">
                                                                 <ALink href="#" className="product-remove" title="Remove this product" onClick={ () => removeFromCart( item ) }>
@@ -125,17 +125,17 @@ function Cart ( props ) {
                                                                 <h4 className="summary-subtitle">Subtotal</h4>
                                                             </td>
                                                             <td>
-                                                                <p className="summary-subtotal-price">${ toDecimal( getTotalPrice( cartItems ) ) }</p>
+                                                                <p className="summary-subtotal-price">Rs.{ toDecimal( getTotalPrice( cartItems ) ) }</p>
                                                             </td>
                                                         </tr>
                                                         <tr className="sumnary-shipping shipping-row-last">
                                                             <td colSpan="2">
                                                                 <h4 className="summary-subtitle">Calculate Shipping</h4>
-                                                                <ul>
+                                                                {/* <ul>
                                                                     <li>
                                                                         <div className="custom-radio">
                                                                             <input type="radio" id="flat_rate" name="shipping" className="custom-control-input" defaultChecked />
-                                                                            <label className="custom-control-label" htmlFor="flat_rate">Flat rate</label>
+                                                                            <label className="custom-control-label" htmlFor="flat_rate">Flat rate  <span className="shipping-charge">Rs.100</span></label>
                                                                         </div>
                                                                     </li>
                                                                     <li>
@@ -146,18 +146,28 @@ function Cart ( props ) {
                                                                         </div>
                                                                     </li>
 
-                                                                    <li>
+                                                                    {/* <li>
                                                                         <div className="custom-radio">
                                                                             <input type="radio" id="local_pickup" name="shipping" className="custom-control-input" />
                                                                             <label className="custom-control-label" htmlFor="local_pickup">Local pickup</label>
                                                                         </div>
-                                                                    </li>
-                                                                </ul>
+                                                                    </li> */}
+                                                                {/* </ul> */} 
                                                             </td>
+                                                            
                                                         </tr>
+                                                        <tr>
+    <td>
+      <div class="custom-radio">
+        <input type="radio" id="flat_rate" name="shipping" class="custom-control-input" defaultChecked />
+        <label class="custom-control-label" for="flat_rate">Flat rate</label>
+      </div>
+    </td>
+    <td>Rs.200</td>
+  </tr>
                                                     </tbody>
                                                 </table>
-                                                <div className="shipping-address">
+                                                {/* <div className="shipping-address">
                                                     <label>Shipping to <strong>CA.</strong></label>
                                                     <div className="select-box">
                                                         <select name="country" className="form-control" defaultValue="us">
@@ -178,7 +188,7 @@ function Cart ( props ) {
                                                     <input type="text" className="form-control" name="code" placeholder="Town / City" />
                                                     <input type="text" className="form-control" name="code" placeholder="ZIP" />
                                                     <ALink href="#" className="btn btn-md btn-dark btn-rounded btn-outline">Update totals</ALink>
-                                                </div>
+                                                </div> */}
                                                 <table className="total">
                                                     <tbody>
                                                         <tr className="summary-subtotal">
@@ -186,7 +196,7 @@ function Cart ( props ) {
                                                                 <h4 className="summary-subtitle">Total</h4>
                                                             </td>
                                                             <td>
-                                                                <p className="summary-total-price ls-s">${ toDecimal( getTotalPrice( cartItems ) ) }</p>
+                                                                <p className="summary-total-price ls-s">Rs.{ toDecimal( getTotalPrice( cartItems ) ) }</p>
                                                             </td>
                                                         </tr>
                                                     </tbody>

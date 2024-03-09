@@ -39,7 +39,7 @@ function ProductSeven( props ) {
         e.preventDefault();
         if ( product.stock > 0 ) {
             let qty = e.currentTarget.closest( '.product-with-qty' ).querySelector( '.product-quantity .quantity' ).value;
-            addToCart( { ...product, qty: qty, price: product.regular_price } );
+            addToCart( { ...product, qty: qty, price: product.sale_price } );
         }
     }
 
@@ -101,15 +101,15 @@ function ProductSeven( props ) {
 
                 <div className="product-price">
                     {
-                        product.regular_price !== product.sale_price ?
+                        product.sale_price !== product.regular_price ?
                             product.variants.length === 0 || ( product.variants.length > 0 && !product.variants[ 0 ].price ) ?
                                 <>
-                                    <ins className="new-price">${ toDecimal( product.regular_price ) }</ins>
-                                    <del className="old-price">${ toDecimal( product.sale_price ) }</del>
+                                    <ins className="new-price">${ toDecimal( product.sale_price ) }</ins>
+                                    <del className="old-price">${ toDecimal( product.regular_price ) }</del>
                                 </>
                                 :
-                                < del className="new-price">${ toDecimal( product.regular_price ) } – ${ toDecimal( product.sale_price ) }</del>
-                            : <ins className="new-price">${ toDecimal( product.regular_price ) }</ins>
+                                < del className="new-price">${ toDecimal( product.sale_price ) } – ${ toDecimal( product.regular_price ) }</del>
+                            : <ins className="new-price">${ toDecimal( product.sale_price ) }</ins>
                     }
                 </div>
 

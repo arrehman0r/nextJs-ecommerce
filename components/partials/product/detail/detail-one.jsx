@@ -130,30 +130,30 @@ function DetailOne(props) {
         tmpName += curColor !== "null" ? "-" + curColor : "";
         tmpName += curSize !== "null" ? "-" + curSize : "";
 
-        if (product.regular_price === product.sale_price) {
-          tmpPrice = product.regular_price;
+        if (product.sale_price === product.regular_price) {
+          tmpPrice = product.sale_price;
         } else if (
-          !product.variations[0].regular_price &&
-          product.sale_price > 0
+          !product.variations[0].sale_price &&
+          product.regular_price > 0
         ) {
-          tmpPrice = product.regular_price;
+          tmpPrice = product.sale_price;
         } else {
-          tmpPrice = product.variations[curIndex].sale_price
-            ? product.variations[curIndex].sale_price
-            : product.variations[curIndex].regular_price;
+          tmpPrice = product.variations[curIndex].regular_price
+            ? product.variations[curIndex].regular_price
+            : product.variations[curIndex].sale_price;
         }
 
         addToCart({
           ...product,
           name: tmpName,
           qty: quantity,
-          regular_price: tmpPrice,
+          sale_price: tmpPrice,
         });
       } else {
         addToCart({
           ...product,
           qty: quantity,
-          regular_price: product.regular_price,
+          sale_price: product.sale_price,
         });
       }
     }
@@ -237,29 +237,29 @@ function DetailOne(props) {
 
       <div className="product-price mb-2">
         
-        {product.regular_price !== product.sale_price ? (
+        {product.sale_price !== product.regular_price ? (
           product.variations.length === 0 ||
           (product.variations.length > 0 &&
-            !product.variations[0].regular_price) ? (
+            !product.variations[0].sale_price) ? (
             <> 
               <ins className="new-price">
-                ${product.regular_price}
+                ${product.sale_price}
               </ins>
-              <del className="old-price">${product.sale_price}</del>
+              <del className="old-price">${product.regular_price}</del>
             </>
           ) : ( 
             <del className="new-price">
                
-              ${toDecimal(product.regular_price)} – $
-              {toDecimal(product.sale_price)}
+              ${toDecimal(product.sale_price)} – $
+              {toDecimal(product.regular_price)}
             </del>
           )
         ) : (
-          <ins className="new-price">${toDecimal(product.regular_price)}</ins>
+          <ins className="new-price">${toDecimal(product.sale_price)}</ins>
         )}
       </div>
 
-      {product.regular_price !== product.sale_price &&
+      {product.sale_price !== product.regular_price &&
       product.variations.length === 0 ? (
         <Countdown type={2} />
       ) : (
@@ -282,8 +282,8 @@ function DetailOne(props) {
         </ALink>
       </div>
 
-      <p className="product-short-desc">{product.short_description}</p>
-
+      <div className="product-short-desc" dangerouslySetInnerHTML={{ __html: product.short_description }} />
+     
       {product && product.variations.length > 0 ? (
         <>
           {product.variations[0].color ? (
@@ -359,17 +359,17 @@ function DetailOne(props) {
               <div className="card-wrapper">
                 {curIndex > -1 ? (
                   <div className="single-product-price">
-                    {product.variations[curIndex].regular_price ? (
-                      product.variations[curIndex].sale_price ? (
+                    {product.variations[curIndex].sale_price ? (
+                      product.variations[curIndex].regular_price ? (
                         <div className="product-price mb-0">
                           <ins className="new-price">
                             $
-                            {toDecimal(product.variations[curIndex].sale_price)}
+                            {toDecimal(product.variations[curIndex].regular_price)}
                           </ins>
                           <del className="old-price">
                             $
                             {toDecimal(
-                              product.variations[curIndex].regular_price
+                              product.variations[curIndex].sale_price
                             )}
                           </del>
                         </div>
@@ -378,7 +378,7 @@ function DetailOne(props) {
                           <ins className="new-price">
                             $
                             {toDecimal(
-                              product.variations[curIndex].regular_price
+                              product.variations[curIndex].sale_price
                             )}
                           </ins>
                         </div>
@@ -423,19 +423,19 @@ function DetailOne(props) {
                 <div className="product-info">
                   <div className="product-price mb-0">
                     {curIndex > -1 && product.variations[0] ? (
-                      product.variations[curIndex].regular_price ? (
-                        product.variations[curIndex].sale_price ? (
+                      product.variations[curIndex].sale_price ? (
+                        product.variations[curIndex].regular_price ? (
                           <>
                             <ins className="new-price">
                               $
                               {toDecimal(
-                                product.variations[curIndex].sale_price
+                                product.variations[curIndex].regular_price
                               )}
                             </ins>
                             <del className="old-price">
                               $
                               {toDecimal(
-                                product.variations[curIndex].regular_price
+                                product.variations[curIndex].sale_price
                               )}
                             </del>
                           </>
@@ -444,7 +444,7 @@ function DetailOne(props) {
                             <ins className="new-price">
                               $
                               {toDecimal(
-                                product.variations[curIndex].regular_price
+                                product.variations[curIndex].sale_price
                               )}
                             </ins>
                           </>
@@ -452,25 +452,25 @@ function DetailOne(props) {
                       ) : (
                         ""
                       )
-                    ) : product.regular_price !== product.sale_price ? (
+                    ) : product.sale_price !== product.regular_price ? (
                       product.variations.length === 0 ? (
                         <>
                           <ins className="new-price">
-                            ${toDecimal(product.regular_price)}
+                            ${toDecimal(product.sale_price)}
                           </ins>
                           <del className="old-price">
-                            ${toDecimal(product.sale_price)}
+                            ${toDecimal(product.regular_price)}
                           </del>
                         </>
                       ) : (
                         <del className="new-price">
-                          ${toDecimal(product.regular_price)} – $
-                          {toDecimal(product.sale_price)}
+                          ${toDecimal(product.sale_price)} – $
+                          {toDecimal(product.regular_price)}
                         </del>
                       )
                     ) : (
                       <ins className="new-price">
-                        ${toDecimal(product.regular_price)}
+                        ${toDecimal(product.sale_price)}
                       </ins>
                     )}
                   </div>

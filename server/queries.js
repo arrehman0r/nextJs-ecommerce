@@ -31,7 +31,7 @@ const PRODUCT_SIMPLE = gql`
         }
         variants {
             price
-            sale_price
+            regular_price
         }
     }
 `
@@ -55,7 +55,7 @@ const PRODUCT_SMALL = gql`
         }
         variants {
             price
-            sale_price
+            regular_price
         }
     }
 `
@@ -141,7 +141,7 @@ export const GET_PRODUCT = gql`
                 }
                 variants {
                     price
-                    sale_price
+                    regular_price
                     color {
                         name
                         color

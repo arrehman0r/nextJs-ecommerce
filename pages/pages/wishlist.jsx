@@ -67,14 +67,14 @@ function Wishlist(props) {
                                                     </td>
                                                     <td className="product-price">
                                                         {
-                                                            item.regular_price !== item.sale_price ?
-                                                                < span className="amount">${toDecimal(item.regular_price)} – ${toDecimal(item.sale_price)}</span>
+                                                            item.sale_price !== item.regular_price ?
+                                                                < span className="amount">${toDecimal(item.sale_price)} – ${toDecimal(item.regular_price)}</span>
                                                                 : item.discount > 0 && item.variations.length > 0 ?
                                                                     <>
                                                                         <span className="amount">${toDecimal(item.salePrice)}</span>
                                                                         <span className="amount">${toDecimal(item.price)}</span>
                                                                     </>
-                                                                    : <span className="amount">${toDecimal(item.regular_price)}</span>
+                                                                    : <span className="amount">${toDecimal(item.sale_price)}</span>
                                                         }
                                                     </td>
                                                     <td className="product-stock-status">

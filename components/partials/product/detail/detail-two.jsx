@@ -147,18 +147,18 @@ function DetailOne( props ) {
                 tmpName += curColor !== 'null' ? '-' + curColor : '';
                 tmpName += curSize !== 'null' ? '-' + curSize : '';
 
-                if ( product.data.regular_price === product.data.sale_price ) {
-                    tmpPrice = product.data.regular_price;
+                if ( product.data.sale_price === product.data.regular_price ) {
+                    tmpPrice = product.data.sale_price;
                 } else if ( !product.data.variants[ 0 ].price && product.data.discount > 0 ) {
-                    tmpPrice = product.data.regular_price;
+                    tmpPrice = product.data.sale_price;
                 } else {
-                    tmpPrice = product.data.variants[ curIndex ].sale_price ? product.data.variants[ curIndex ].sale_price : product.data.variants[ curIndex ].price;
+                    tmpPrice = product.data.variants[ curIndex ].regular_price ? product.data.variants[ curIndex ].regular_price : product.data.variants[ curIndex ].price;
                 }
 
 
                 addToCart( { ...product.data, name: tmpName, qty: qty, price: tmpPrice } );
             } else {
-                addToCart( { ...product.data, qty: qty, price: product.data.regular_price } );
+                addToCart( { ...product.data, qty: qty, price: product.data.sale_price } );
             }
         }
     }
@@ -213,20 +213,20 @@ function DetailOne( props ) {
 
             <div className="product-price">
                 {
-                    product.data.regular_price !== product.data.sale_price ?
+                    product.data.sale_price !== product.data.regular_price ?
                         product.data.variants.length === 0 || ( product.data.variants.length > 0 && !product.data.variants[ 0 ].price ) ?
                             <>
-                                <ins className="new-price">${ toDecimal( product.data.regular_price ) }</ins>
-                                <del className="old-price">${ toDecimal( product.data.sale_price ) }</del>
+                                <ins className="new-price">${ toDecimal( product.data.sale_price ) }</ins>
+                                <del className="old-price">${ toDecimal( product.data.regular_price ) }</del>
                             </>
                             :
-                            < del className="new-price">${ toDecimal( product.data.regular_price ) } – ${ toDecimal( product.data.sale_price ) }</del>
-                        : <ins className="new-price">${ toDecimal( product.data.regular_price ) }</ins>
+                            < del className="new-price">${ toDecimal( product.data.sale_price ) } – ${ toDecimal( product.data.regular_price ) }</del>
+                        : <ins className="new-price">${ toDecimal( product.data.sale_price ) }</ins>
                 }
             </div>
 
             {
-                product.data.regular_price !== product.data.sale_price && product.data.variants.length === 0 ?
+                product.data.sale_price !== product.data.regular_price && product.data.variants.length === 0 ?
                     <Countdown type={ 2 } /> : ''
             }
 
@@ -293,9 +293,9 @@ function DetailOne( props ) {
                                         <div ref={ setCollapsibleElement } className={ `overflow-hidden single-product-price ${ toggleState }` }>
                                             {
                                                 product.data.variants[ curIndex ].price ?
-                                                    product.data.variants[ curIndex ].sale_price ?
+                                                    product.data.variants[ curIndex ].regular_price ?
                                                         <div className="product-price">
-                                                            <ins className="new-price">${ toDecimal( product.data.variants[ curIndex ].sale_price ) }</ins>
+                                                            <ins className="new-price">${ toDecimal( product.data.variants[ curIndex ].regular_price ) }</ins>
                                                             <del className="old-price">${ toDecimal( product.data.variants[ curIndex ].price ) }</del>
                                                         </div>
                                                         : <div className="product-price">
