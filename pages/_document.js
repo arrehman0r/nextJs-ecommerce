@@ -20,27 +20,34 @@ export default class MyDocument extends Document {
 
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-          <link
+          {/* <link
             rel="stylesheet"
             type="text/css"
             href="https://d-themes.com/react/riode/demo-1/vendor/riode-fonts/riode-fonts.css"
-          />
-          <link
+          /> */}
+          {/* <link
             rel="stylesheet"
             type="text/css"
             href="https://d-themes.com/react/riode/demo-1/vendor/fontawesome-free/css/all.min.css"
-          />
+          /> */}
+
           <link
             rel="stylesheet"
             type="text/css"
-            href="https://d-themes.com/react/riode/demo-1/vendor/owl-carousel/owl.carousel.min.css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
           />
+
+          {/* <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://d-themes.com/react/riode/demo-1/vendor/owl-carousel/owl.carousel.min.css"
+          /> */}
         </Head>
 
         <body>
           <Main />
 
-          <script src="https://d-themes.com/react/riode/demo-1/js/jquery.min.js"></script>
+          {/* <script src="https://d-themes.com/react/riode/demo-1/js/jquery.min.js"></script> */}
 
           <NextScript />
         </body>
