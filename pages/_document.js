@@ -20,7 +20,7 @@ export default class MyDocument extends Document {
 
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-          <link
+          {/* <link
             rel="stylesheet"
             type="text/css"
             href="https://d-themes.com/react/riode/demo-1/vendor/riode-fonts/riode-fonts.css"
@@ -29,7 +29,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             type="text/css"
             href="https://d-themes.com/react/riode/demo-1/vendor/fontawesome-free/css/all.min.css"
-          />
+          /> */}
           <link
             rel="stylesheet"
             type="text/css"

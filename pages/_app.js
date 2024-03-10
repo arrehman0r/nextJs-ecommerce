@@ -11,8 +11,8 @@ import { demoActions } from '~/store/demo';
 import { currentDemo } from '~/server/queries';
 
 import "~/public/sass/style.scss";
-// import "./../public/vendor/fontawesome-free/css/all.min.css"
-// import "./../public/vendor/riode-fonts/riode-fonts.css"
+import "./../public/vendor/fontawesome-free/css/all.min.css"
+import "./../public/vendor/riode-fonts/riode-fonts.css"
 // import "./../public/js/jquery.min.js"
 // import  "./../public/vendor/owl-carousel/owl.carousel.min.css"
 const App = ({ Component, pageProps }) => {
