@@ -1,5 +1,5 @@
 import Document, { NextScript, Head, Main, Html } from "next/document";
-import Script from "next/script";
+
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
@@ -33,7 +33,7 @@ export default class MyDocument extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+            href="https://d-themes.com/react/riode/demo-1/vendor/owl-carousel/owl.carousel.min.css"
           />
         </Head>
 
