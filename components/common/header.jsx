@@ -7,8 +7,9 @@ import CartMenu from '~/components/common/partials/cart-menu';
 import MainMenu from '~/components/common/partials/main-menu';
 import SearchBox from '~/components/common/partials/search-box';
 import LoginModal from '~/components/features/modals/login-modal';
-
+import logo from "./../../public/images/brand/party_shope_logo.svg";
 import { headerBorderRemoveList } from '~/utils/data/menu'
+import { Logo } from '~/public/images/svg';
 
 export default function Header( props ) {
     const router = useRouter();
@@ -29,11 +30,11 @@ export default function Header( props ) {
         <header className="header header-border">
             <div className="header-top">
                 <div className="container">
-                    <div className="header-left">
-                        <p className="welcome-msg">Welcome to Riode store message or remove it!</p>
+                    <div className="header-right">
+                        <p className="welcome-msg">Welcome to Our Party Shope!</p>
                     </div>
                     <div className="header-right">
-                        <div className="dropdown">
+                        {/* <div className="dropdown">
                             <ALink href="#">USD</ALink>
                             <ul className="dropdown-box">
                                 <li><ALink href="#">USD</ALink></li>
@@ -51,7 +52,7 @@ export default function Header( props ) {
                                     <ALink href="#">FRH</ALink>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
 
                         <span className="divider"></span>
                         <ALink href="/pages/contact-us" className="contact d-lg-show"><i className="d-icon-map"></i>Contact</ALink>
@@ -69,14 +70,15 @@ export default function Header( props ) {
                         </ALink>
 
                         <ALink href="/" className="logo">
-                            <img src='./images/logo.png' alt="logo" width="153" height="44" />
+                            <Logo/>
+                            {/* <img src={logo} alt="logo" width="153" height="44" /> */}
                         </ALink>
 
                         <SearchBox />
                     </div>
 
                     <div className="header-right">
-                        <ALink href="tel:#" className="icon-box icon-box-side">
+                        {/* <ALink href="tel:#" className="icon-box icon-box-side">
                             <div className="icon-box-icon mr-0 mr-lg-2">
                                 <i className="d-icon-phone"></i>
                             </div>
@@ -84,8 +86,8 @@ export default function Header( props ) {
                                 <h4 className="icon-box-title">Call Us Now:</h4>
                                 <p>0(800) 123-456</p>
                             </div>
-                        </ALink>
-                        <span className="divider"></span>
+                        </ALink> */}
+                        {/* <span className="divider"></span> */}
                         <ALink href="/pages/wishlist" className="wishlist">
                             <i className="d-icon-heart"></i>
                         </ALink>
@@ -103,8 +105,8 @@ export default function Header( props ) {
                     </div>
 
                     <div className="header-right">
-                        <ALink href="#"><i className="d-icon-card"></i>Special Offers</ALink>
-                        <a href="https://d-themes.com/buynow/riodereact" className="ml-6">Buy Riode!</a>
+                        <ALink href="/"><i className="d-icon-card"></i>Special Offers</ALink>
+                        <a href="/" className="ml-6">Buy Now!</a>
                     </div>
                 </div>
             </div>

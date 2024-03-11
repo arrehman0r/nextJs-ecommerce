@@ -36,11 +36,11 @@ function IntroSection( props ) {
                         </h4>
 
                         <Reveal keyframes={ fadeInUpShorter } delay={ 1000 } duration={ 1200 }>
-                            <h2 className="banner-title font-weight-bold text-white lh-1 ls-md">Fashionable</h2>
+                            <h2 className="banner-title font-weight-bold text-white lh-1 ls-md">Party</h2>
 
                             <h3 className="font-weight-normal lh-1 ls-l text-white">Collection</h3>
 
-                            <p className="text-white ls-s mb-7">Get Free Shipping on all orders over $99.00</p>
+                            <p className="text-white ls-s mb-7">Get Free Shipping on all orders over Rs.2000</p>
                         </Reveal>
 
                         <Reveal keyframes={ fadeInUpShorter } delay={ 1800 } duration={ 1000 }>
@@ -50,7 +50,7 @@ function IntroSection( props ) {
                 </div>
             </div>
 
-            <div className="banner banner-fixed intro-slide2" style={ { backgroundColor: "#dddee0" } }>
+            {/* <div className="banner banner-fixed intro-slide2" style={ { backgroundColor: "#dddee0" } }>
                 <figure>
                     <LazyLoadImage
                         src="./images/home/slides/slide2.jpg"
@@ -77,7 +77,7 @@ function IntroSection( props ) {
 
                         <Reveal keyframes={ fadeInUp } delay={ 1200 } duration={ 1000 }>
                             <p className="font-primary ls-s text-dark mb-4">
-                                Up to 70% off on all products <br />online &amp; Free Shipping over $90
+                                Up to 70% off on all products <br />online &amp; Free Shipping over Rs.2000
                             </p>
                         </Reveal>
 
@@ -86,8 +86,8 @@ function IntroSection( props ) {
                         </Reveal>
                     </div>
                 </div>
-            </div>
-
+            </div> */}
+{/* 
             <div className="banner banner-fixed video-banner intro-slide3" style={ { backgroundColor: "#dddee0" } }>
                 <figure>
                     <video src={   "/uploads/video/video-1.mp4" } width="1903" height="630" autoPlay={ true } muted loop></video>
@@ -112,7 +112,7 @@ function IntroSection( props ) {
                         </Reveal>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </OwlCarousel >
     )
 }
