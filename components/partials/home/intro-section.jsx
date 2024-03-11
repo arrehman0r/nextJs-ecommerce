@@ -1,21 +1,21 @@
 import React from 'react';
 import Reveal from "react-awesome-reveal";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
+import Image from 'next/image';
 // import Custom Components
 import ALink from '~/components/features/custom-link';
 import OwlCarousel from '~/components/features/owl-carousel';
 
 import { introSlider } from '~/utils/data/carousel';
 import { fadeInUpShorter, fadeInRightShorter, fadeIn, fadeInUp, fadeInRight } from '~/utils/data/keyframes';
-
+import banner1 from "./../../../public/images/banners/partyshope_banner.jpg"
 function IntroSection( props ) {
     return (
         <OwlCarousel adClass="owl-theme owl-dot-inner owl-dot-white intro-slider animation-slider" options={ introSlider }>
             <div className="banner banner-fixed intro-slide1" style={ { backgroundColor: "#46b2e8" } }>
                 <figure>
-                    <LazyLoadImage
-                        src="./images/home/slides/slide1.jpg"
+                    <Image
+                        src={banner1}
                         alt="Intro Slider"
                         effect="opacity"
                         width="auto"
