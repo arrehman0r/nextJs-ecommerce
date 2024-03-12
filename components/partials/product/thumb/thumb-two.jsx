@@ -39,7 +39,7 @@ function ThumbTwo ( props ) {
                 {
                     thumbs.map( ( thumb, index ) => (
                         <div className={ `product-thumb ${ index === 0 ? 'active' : '' }` } onClick={ ( e ) => { thumbActiveHandler( e, index ) } } key={ thumb + '-2-' + index }>
-                            <img src={   thumb.url } alt="product thumbnail" width="137" height="137" />
+                            <img src={   thumb.src } alt="product thumbnail" width="137" height="137" />
                         </div>
                     ) )
                 }
