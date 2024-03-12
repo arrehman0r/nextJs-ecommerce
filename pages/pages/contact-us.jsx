@@ -21,10 +21,10 @@ function ContactUs () {
     return (
         <main className="main contact-us">
             <Helmet>
-                <title>Riode React eCommerce Template | Contact Us</title>
+                <title>Party Shope | Contact Us</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Contact Us</h1>
+            <h1 className="d-none">Party Shope</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">
@@ -47,20 +47,20 @@ function ContactUs () {
                                 <div className="col-lg-3 col-md-4 col-sm-6 ls-m mb-4">
                                     <div className="grey-section d-flex align-items-center h-100">
                                         <div>
-                                            <h4 className="mb-2 text-capitalize">Headquarters</h4>
-                                            <p>1600 Amphitheatre Parkway<br />New York WC1 1BA</p>
+                                            <h4 className="mb-2 text-capitalize">Office Location</h4>
+                                            <p>307 Walton Road<br />Lahore Cantt</p>
 
                                             <h4 className="mb-2 text-capitalize">Phone Number</h4>
                                             <p>
-                                                <ALink href="#">1.800.458.56</ALink><br />
-                                                <ALink href="#">1.800.458.56</ALink>
+                                                <ALink href="#">03025243420</ALink><br />
+                                                <ALink href="#">03224906361</ALink>
                                             </p>
 
                                             <h4 className="mb-2 text-capitalize">Support</h4>
                                             <p className="mb-4">
-                                                <ALink href="#">support@your-domain.com</ALink><br />
-                                                <ALink href="#">help@your-domain.com</ALink><br />
-                                                <ALink href="#">Sale</ALink>
+                                                <ALink href="#">info@partyshope.com</ALink><br />
+                                                <ALink href="#">help@partyshope.com</ALink><br />
+                                                {/* <ALink href="#">Sale</ALink> */}
                                             </p>
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@ function ContactUs () {
                         <div className="container">
                             <h2 className="title title-center mb-7 text-normal">Our store</h2>
                             <div className="row cols-sm-2 cols-lg-4">
-                                <div className="store">
+                                {/* <div className="store">
                                     <figure className="banner-radius">
                                         <LazyLoadImage
                                             src="./images/subpages/store-1.jpg"
@@ -118,7 +118,7 @@ function ContactUs () {
                                             </div>
                                         </div>
                                     </figure>
-                                </div>
+                                </div> */}
                                 <div className="store">
                                     <figure className="banner-radius">
                                         <LazyLoadImage
@@ -129,10 +129,10 @@ function ContactUs () {
                                             effect="opacity"
                                             style={ { backgroundColor: "#EEE" } }
                                         />
-                                        <h4 className="overlay-visible">London</h4>
+                                        <h4 className="overlay-visible">Lahore</h4>
                                         <div className="overlay overlay-transparent">
-                                            <ALink className="mt-8" href="mail:#">mail@londonriodestore.com</ALink>
-                                            <ALink href="tel:#">Phone: (123) 456-7890</ALink>
+                                            <ALink className="mt-8" href="mail:#">info@partyshope.com</ALink>
+                                            <ALink href="tel:#">Phone: 03025243420</ALink>
                                             <div className="social-links mt-1">
                                                 <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
                                                 <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
@@ -141,7 +141,7 @@ function ContactUs () {
                                         </div>
                                     </figure>
                                 </div>
-                                <div className="store">
+                                {/* <div className="store">
                                     <figure className="banner-radius">
                                         <LazyLoadImage
                                             src="./images/subpages/store-3.jpg"
@@ -162,8 +162,8 @@ function ContactUs () {
                                             </div>
                                         </div>
                                     </figure>
-                                </div>
-                                <div className="store">
+                                </div> */}
+                                {/* <div className="store">
                                     <figure className="banner-radius">
                                         <LazyLoadImage
                                             src="./images/subpages/store-4.jpg"
@@ -184,14 +184,14 @@ function ContactUs () {
                                             </div>
                                         </div>
                                     </figure>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </section>
                 </Reveal>
 
                 <Reveal keyframes={ fadeIn } delay="50" duration="1000" triggerOnce>
-                <div className="grey-sectdion google-map" id="googlemaps" style={ { height: "386px" } }>
+                {/* <div className="grey-sectdion google-map" id="googlemaps" style={ { height: "386px" } }>
                         <GoogleMapReact 
                             bootstrapURLKeys={ { key: 'AIzaSyBgVsModMpsR59_OIK-2sEcmhBBkW4xUuw' } }
                             defaultCenter={ { lat: 59.95, lng: 30.33 } }
@@ -203,7 +203,7 @@ function ContactUs () {
                                 text="My Marker"
                             />
                         </GoogleMapReact>
-                    </div>
+                    </div> */}
                 </Reveal>
             </div>
         </main>

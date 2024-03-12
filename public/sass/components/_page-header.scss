@@ -51,6 +51,9 @@ $page-header-background: #C8C3BF !default;
         }
     }
     li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         &:not(:last-child) a {
             color: #999;
             transition: color .3s;

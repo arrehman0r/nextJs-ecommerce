@@ -14,10 +14,10 @@ function MainMenu() {
                     <ALink href='/'>Home</ALink>
                 </li>
 
-                <li className={ `submenu  ${ pathname.includes( '/shop' ) ? 'active' : '' }` }>
+                <li className={ `  ${ pathname.includes( '/shop' ) ? 'active' : '' }` }>
                     <ALink href='/shop'>Categories</ALink>
 
-                    <div className="megamenu">
+                    {/* <div className="megamenu">
                         <div className="row">
                             <div className="col-6 col-sm-4 col-md-3 col-lg-4">
                                 <h4 className="menu-title">Variations 1</h4>
@@ -63,13 +63,13 @@ function MainMenu() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </li>
 
-                <li className={ `submenu  ${ pathname.includes( '/product' ) && !pathname.includes( '/elements' ) ? 'active' : '' }` }>
-                    <ALink href="/product/default/fashionable-leather-satchel">Products</ALink>
+                <li className={ `  ${ pathname.includes( '/product' ) && !pathname.includes( '/elements' ) ? 'active' : '' }` }>
+                    <ALink href="">Products</ALink>
 
-                    <div className="megamenu">
+                    {/* <div className="megamenu">
                         <div className="row">
                             <div className="col-6 col-sm-4 col-md-3 col-lg-4">
                                 <h4 className="menu-title">Product Pages</h4>
@@ -113,13 +113,15 @@ function MainMenu() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </li>
+                {/* <li className={ `submenu  ${ pathname.includes( '/pages' ) ? 'active' : '' }` }> */}
+                {/* just add submenu class */}
 
-                <li className={ `submenu  ${ pathname.includes( '/pages' ) ? 'active' : '' }` }>
-                    <ALink href="#">Pages</ALink>
+                <li className={ `  ${ pathname.includes( '/pages' ) ? 'active' : '' }` }>
+                    <ALink href="pages/contact-us">Contact</ALink>
 
-                    <ul>
+                    {/* <ul>
                         {
                             mainMenu.other.map( ( item, index ) => (
                                 <li key={ `other-${ item.title }` }>
@@ -130,13 +132,13 @@ function MainMenu() {
                                 </li>
                             ) )
                         }
-                    </ul>
+                    </ul> */}
                 </li>
 
-                <li className={ `submenu  ${ pathname.includes( '/blog' ) && !pathname.includes( '/elements' ) ? 'active' : '' }` }>
+                <li className={ `  ${ pathname.includes( '/blog' ) && !pathname.includes( '/elements' ) ? 'active' : '' }` }>
                     <ALink href={ `/blog/classic` }>Blog</ALink>
 
-                    <ul>
+                    {/* <ul>
                         {
                             mainMenu.blog.map( ( item, index ) => (
                                 <li key={ "blog" + item.title } className={ item.subPages ? "submenu" : "" }>
@@ -161,11 +163,11 @@ function MainMenu() {
                                 </li>
                             ) )
                         }
-                    </ul>
+                    </ul> */}
                 </li>
 
-                <li className={ `${ pathname.includes( '/elements' ) ? 'active' : '' } d-xl-show submenu` }>
-                    <ALink href={ `/elements` }>Elements</ALink>
+                {/* <li className={ `${ pathname.includes( '/elements' ) ? 'active' : '' } d-xl-show submenu` }>
+                    <ALink href={ `/elements` }>About Us</ALink>
 
                     <ul>
                         {
@@ -178,10 +180,10 @@ function MainMenu() {
                             ) )
                         }
                     </ul>
-                </li>
+                </li> */}
 
                 <li>
-                    <ALink href="/pages/about-us">About Us</ALink>
+                    <ALink href="">About Us</ALink>
                 </li>
             </ul>
         </nav>

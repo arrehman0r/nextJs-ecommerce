@@ -1,5 +1,8 @@
 import ALink from '~/components/features/custom-link';
-
+import { Logo } from '~/public/images/svg';
+import paymentImage from "./../../public/images/banners/payment.png"
+import Image from 'next/image';
+import shoplogo from "./../../public/images/banners/shoplogo.png"
 export default function Footer () {
     return (
         <footer className="footer">
@@ -8,7 +11,8 @@ export default function Footer () {
                     <div className="row align-items-center">
                         <div className="col-lg-3">
                             <ALink href="/" className="logo-footer">
-                                <img src="./images/logo-footer.png" alt="logo-footer" width="154" height="43" />
+                                {/* <img src="./images/logo-footer.png" alt="logo-footer" width="154" height="43" /> */}
+                                <Logo color="#ffffff"/>
                             </ALink>
 
                         </div>
@@ -38,15 +42,15 @@ export default function Footer () {
                                 <ul className="widget-body">
                                     <li>
                                         <label>Phone: </label>
-                                        <ALink href="tel:#">Toll Free (123) 456-7890</ALink>
+                                        <ALink href="tel:#">Call 03025243420</ALink>
                                     </li>
                                     <li>
                                         <label>Email: </label>
-                                        <ALink href="mailto:mail@riode.com">mail@riode.com</ALink>
+                                        <ALink href="mailto:mail@riode.com">info@partyshope.com</ALink>
                                     </li>
                                     <li>
                                         <label>Address: </label>
-                                        <ALink href="#">123 Street Name, City, England</ALink>
+                                        <ALink href="#">307 Walton Road, Lahore, Pakistan</ALink>
                                     </li>
                                     <li>
                                         <label>WORKING DAYS / HOURS: </label>
@@ -106,9 +110,10 @@ export default function Footer () {
                         </div>
                         <div className="col-lg-3 col-md-6">
                             <div className="widget widget-instagram">
-                                <h4 className="widget-title">Instagram</h4>
+                                <h4 className="widget-title">About</h4>
                                 <figure className="widget-body row">
-                                    <div className="col-3">
+                                    <Image src={shoplogo} alt=''/>
+                                    {/* <div className="col-3">
                                         <img src="./images/instagram/01.jpg" alt="instagram 1" width="64" height="64" />
                                     </div>
                                     <div className="col-3">
@@ -131,21 +136,21 @@ export default function Footer () {
                                     </div>
                                     <div className="col-3">
                                         <img src="./images/instagram/08.jpg" alt="instagram 8" width="64" height="64" />
-                                    </div>
+                                    </div> */}
                                 </figure>
                             </div>
                         </div>
                     </div>
                 </div>
-
+             
                 <div className="footer-bottom">
                     <div className="footer-left">
                         <figure className="payment">
-                            <img src="./images/payment.png" alt="payment" width="159" height="29" />
+                        <Image src={paymentImage} alt="payment" width="200" height="150"  />
                         </figure>
                     </div>
                     <div className="footer-center">
-                        <p className="copyright ls-normal">Riode eCommerce &copy; 2021. All Rights Reserved</p>
+                        <p className="copyright ls-normal">Party Shope &copy; 2024. All Rights Reserved</p>
                     </div>
                     <div className="footer-right">
                         <div className="social-links">

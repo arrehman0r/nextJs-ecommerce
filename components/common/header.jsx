@@ -7,7 +7,6 @@ import CartMenu from '~/components/common/partials/cart-menu';
 import MainMenu from '~/components/common/partials/main-menu';
 import SearchBox from '~/components/common/partials/search-box';
 import LoginModal from '~/components/features/modals/login-modal';
-import logo from "./../../public/images/brand/party_shope_logo.svg";
 import { headerBorderRemoveList } from '~/utils/data/menu'
 import { Logo } from '~/public/images/svg';
 
