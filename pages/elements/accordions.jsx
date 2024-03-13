@@ -11,10 +11,10 @@ function Accordions() {
     return (
         <>
             <Helmet>
-                <title>Riode React eCommerce Template | Accordions</title>
+                <title>Party Shope Web Store | Accordions</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Accordions</h1>
+            <h1 className="d-none">Party Shope Web Store - Accordions</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Accordions" parentUrl="/elements" />
 

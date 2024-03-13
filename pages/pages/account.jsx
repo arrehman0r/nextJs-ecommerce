@@ -8,10 +8,10 @@ function Account() {
     return (
         <main className="main account">
             <Helmet>
-                <title>Riode React eCommerce Template | Account</title>
+                <title>Party Shope Web Store | Account</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Account</h1>
+            <h1 className="d-none">Party Shope Web Store - Account</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

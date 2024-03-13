@@ -43,10 +43,10 @@ function ProductStickyBoth() {
     return (
         <main className="main single-product product-sticky-both">
             <Helmet>
-                <title>Riode React eCommerce Template | Product Sticky Both</title>
+                <title>Party Shope Web Store | Product Sticky Both</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Product Sticky Both</h1>
+            <h1 className="d-none">Party Shope Web Store - Product Sticky Both</h1>
 
             {
                 product !== undefined ?

@@ -8,10 +8,10 @@ function Login() {
     return (
         <main className="main">
             <Helmet>
-                <title>Riode React eCommerce Template | Login</title>
+                <title>Party Shope Web Store | Login</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Login</h1>
+            <h1 className="d-none">Party Shope Web Store - Login</h1>
             <nav className="breadcrumb-nav">
                 <div className="container">
                     <ul className="breadcrumb">

@@ -10,10 +10,10 @@ function ShopBoxedBanner() {
     return (
         <main className="main">
             <Helmet>
-                <title>Riode React eCommerce Template - Shop Boxed Banner Page</title>
+                <title>Party Shope Web Store - Shop Boxed Banner Page</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Shop Boxed Banner Page</h1>
+            <h1 className="d-none">Party Shope Web Store - Shop Boxed Banner Page</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

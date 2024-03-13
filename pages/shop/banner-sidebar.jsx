@@ -10,10 +10,10 @@ function ShopBannerSidebar () {
     return (
         <main className="main">
             <Helmet>
-                <title>Riode React eCommerce Template - Shop Banner Sidebar Page</title>
+                <title>Party Shope Web Store - Shop Banner Sidebar Page</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Shop Banner Sidebar Page</h1>
+            <h1 className="d-none">Party Shope Web Store - Shop Banner Sidebar Page</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

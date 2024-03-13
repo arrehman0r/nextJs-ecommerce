@@ -10,10 +10,10 @@ function ElementTabs() {
     return (
         <>
             <Helmet>
-                <title>Riode React eCommerce Template | Tabs</title>
+                <title>Party Shope Web Store | Tabs</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Tabs</h1>
+            <h1 className="d-none">Party Shope Web Store - Tabs</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Tabs" parentUrl="/elements" />
 

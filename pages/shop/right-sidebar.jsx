@@ -10,10 +10,10 @@ function ShopRightSidebar () {
     return (
         <main className="main">
             <Helmet>
-                <title>Riode React eCommerce Template - Shop With Right Sidebar</title>
+                <title>Party Shope Web Store - Shop With Right Sidebar</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Shop With Right Sidebar</h1>
+            <h1 className="d-none">Party Shope Web Store - Shop With Right Sidebar</h1>
 
             <ShopBanner subTitle="Categories" title="With Right Sidebar" current="With Right Sidebar" />
 

@@ -36,11 +36,11 @@ import { getStaticProps } from './../data/index';
     return (
         <div className="main home">
             <Helmet>
-                <title>Riode React eCommerce Template - Home</title>
+                <title>Party Shope Web Store - Home</title>
             </Helmet>
 
 
-            <h1 className="d-none">Riode React eCommerce Template - Home</h1>
+            <h1 className="d-none">Party Shope Web Store - Home</h1>
 
             <div className="page-content">
                 <div className="intro-section">
@@ -65,7 +65,7 @@ import { getStaticProps } from './../data/index';
                 <SmallCollection featured={ featured } latest={ latest } bestSelling={ bestSelling } onSale={ onSale } loading={ loading } /> */}
             </div>
 
-            <NewsletterModal />
+            {/* <NewsletterModal /> */}
         </div>
     )
 }

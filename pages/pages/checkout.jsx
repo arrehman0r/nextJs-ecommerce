@@ -103,10 +103,10 @@ function Checkout(props) {
   return (
     <main className="main checkout">
       <Helmet>
-        <title>Riode React eCommerce Template | Checkout</title>
+        <title>Party Shope Web Store | Checkout</title>
       </Helmet>
 
-      <h1 className="d-none">Riode React eCommerce Template - Checkout</h1>
+      <h1 className="d-none">Party Shope Web Store - Checkout</h1>
 
       <div
         className={`page-content pt-7 pb-10 ${

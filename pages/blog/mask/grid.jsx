@@ -48,10 +48,10 @@ function PostMaskGrid( { router } ) {
     return (
         <main className="main skeleton-body">
             <Helmet>
-                <title>Riode React eCommerce Template | Blog Mask Grid</title>
+                <title>Party Shope Web Store | Blog Mask Grid</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Blog Mask Grid</h1>
+            <h1 className="d-none">Party Shope Web Store - Blog Mask Grid</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

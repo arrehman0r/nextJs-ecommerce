@@ -1,49 +1,62 @@
-import { useQuery } from '@apollo/react-hooks';
+// import { useQuery } from '@apollo/react-hooks';
 import Helmet from 'react-helmet';
 
 import Breadcrumb from '~/components/features/breadcrumb';
 import OwlCarousel from '~/components/features/owl-carousel';
 
-import { GET_PRODUCTS } from '~/server/queries';
-import withApollo from '~/server/apollo';
+// import { GET_PRODUCTS } from '~/server/queries';
+// import withApollo from '~/server/apollo';
 
 import ProductOne from '~/components/features/product/product-one';
-import ProductTwo from '~/components/features/product/product-two';
-import ProductThree from '~/components/features/product/product-three';
-import ProductFour from '~/components/features/product/product-four';
-import ProductFive from '~/components/features/product/product-five';
-import ProductSix from '~/components/features/product/product-six';
-import ProductSeven from '~/components/features/product/product-seven';
-import ProductEight from '~/components/features/product/product-eight';
-import SmallProduct from '~/components/features/product/product-sm';
-import ElementsList from '~/components/partials/elements/elements-list';
+// import ProductTwo from '~/components/features/product/product-two';
+// import ProductThree from '~/components/features/product/product-three';
+// import ProductFour from '~/components/features/product/product-four';
+// import ProductFive from '~/components/features/product/product-five';
+// import ProductSix from '~/components/features/product/product-six';
+// import ProductSeven from '~/components/features/product/product-seven';
+// import ProductEight from '~/components/features/product/product-eight';
+// import SmallProduct from '~/components/features/product/product-sm';
+// import ElementsList from '~/components/partials/elements/elements-list';
 
-import { mainSlider1, mainSlider7, mainSlider19 } from '~/utils/data/carousel';
+// import { mainSlider1, mainSlider7, mainSlider19 } from '~/utils/data/carousel';
+import { getAllProducts } from '~/server/axiosApi';
 
-function Products() {
-    const { data, loading } = useQuery( GET_PRODUCTS );
-    const products = data ? data.products.data : [];
 
+
+export async function getStaticProps() {
+    try {
+      const products = await getAllProducts();
+      return { props: { products } };
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      return { props: { products: [] } };
+    }
+  }
+  
+function Products({products}) {
+   
+    // const products = data ? data.products.data : [];
+console.log("all products",products)
     return (
         <main className="skeleton-body">
             <Helmet>
-                <title>Riode React eCommerce Template | Products</title>
+                <title>Party Shope Web Store | Products</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Products</h1>
+            <h1 className="d-none">Party Shope Web Store - Products</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Products" parentUrl="/elements" />
 
             <div className="page-content">
                 <div className="container">
                     <section className="mt-10 pt-8">
-                        <h2 className="title title-center">Default Style</h2>
+                        <h2 className="title title-center">All Products</h2>
 
                         {
-                            !loading ?
+                            products ?
                                 <div className="row product-wrapper">
                                     {
-                                        products.slice( 0, 4 ).map( ( item ) =>
+                                        products.map( ( item ) =>
                                             <div className="col-md-3 col-6" key={ 'default-' + item.slug }>
                                                 <ProductOne product={ item } />
                                             </div>
@@ -57,10 +70,10 @@ function Products() {
                                         )
                                     }
                                 </div>
-                        }
+}
                     </section>
 
-                    <section className="mt-8">
+                    {/* <section className="mt-8">
                         <h2 className="title title-center">Centered</h2>
 
                         {
@@ -82,9 +95,9 @@ function Products() {
                                     }
                                 </div>
                         }
-                    </section>
+                    </section> */}
 
-                    <section className="mt-8">
+                    {/* <section className="mt-8">
                         <h2 className="title title-center">Classic Button</h2>
 
                         {
@@ -106,8 +119,8 @@ function Products() {
                                     }
                                 </div>
                         }
-                    </section>
-
+                    </section> */}
+{/* 
                     <section className="mt-8">
                         <h2 className="title title-center">Pop-up</h2>
 
@@ -130,9 +143,9 @@ function Products() {
                                     }
                                 </div>
                         }
-                    </section>
+                    </section> */}
 
-                    <section className="mt-8">
+                    {/* <section className="mt-8">
                         <h2 className="title title-center">Split Line 5 Columns</h2>
 
                         {
@@ -154,9 +167,9 @@ function Products() {
                                     }
                                 </div>
                         }
-                    </section>
+                    </section> */}
 
-                    <section className="mt-10">
+                    {/* <section className="mt-10">
                         <h2 className="title title-center">Without Space</h2>
 
                         {
@@ -176,9 +189,9 @@ function Products() {
                                     }
                                 </OwlCarousel>
                         }
-                    </section>
+                    </section> */}
 
-                    <section className="mt-10 pt-2">
+                    {/* <section className="mt-10 pt-2">
                         <h2 className="title title-center">Image Gap Style</h2>
 
                         {
@@ -200,9 +213,9 @@ function Products() {
                                     }
                                 </div>
                         }
-                    </section>
+                    </section> */}
 
-                    <section className="mt-10">
+                    {/* <section className="mt-10">
                         <h2 className="title title-center">Modern Style 1</h2>
 
                         {
@@ -222,9 +235,9 @@ function Products() {
                                     }
                                 </OwlCarousel>
                         }
-                    </section>
+                    </section> */}
 
-                    <section className="mt-10 pb-4">
+                    {/* <section className="mt-10 pb-4">
                         <h2 className="title title-center">Modern Style 2</h2>
 
                         {
@@ -244,9 +257,9 @@ function Products() {
                                     }
                                 </OwlCarousel>
                         }
-                    </section>
+                    </section> */}
 
-                    <section className="mt-8">
+                    {/* <section className="mt-8">
                         <h2 className="title title-center">Product List</h2>
 
                         {
@@ -326,13 +339,13 @@ function Products() {
                                     </div>
                                 </div>
                         }
-                    </section>
+                    </section> */}
                 </div>
 
-                <ElementsList adClass="mt-9" />
+           
             </div>
         </main>
     )
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( Products );
+export default  Products ;

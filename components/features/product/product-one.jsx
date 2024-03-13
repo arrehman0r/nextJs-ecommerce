@@ -15,10 +15,10 @@ function ProductOne( props ) {
 
     // decide if the product is wishlisted
     let isWishlisted;
-    isWishlisted = wishlist.findIndex( item => item.slug === product.slug ) > -1 ? true : false;
+    isWishlisted = wishlist.findIndex( item => item.id === product.id ) > -1 ? true : false;
 
     const showQuickviewHandler = () => {
-        openQuickview( product.slug );
+        openQuickview( product.id );
     }
 
     const wishlistHandler = ( e ) => {
@@ -43,7 +43,7 @@ function ProductOne( props ) {
     return (
         <div className={ `product shadow-media ${ adClass }` }>
             <figure className="product-media">
-                <ALink href={ `/product/default/${ product.slug }` }>
+                <ALink href={ `/product/default/${ product.id }` }>
                     <LazyLoadImage
                         alt="product"
                         src={    product.images[ 0 ].src }
@@ -57,7 +57,7 @@ function ProductOne( props ) {
                         product.images.length >= 2 ?
                             <LazyLoadImage
                                 alt="product"
-                                src={   product.images[ 1 ].url }
+                                src={   product.images[ 1 ].src }
                                 threshold={ 500 }
                                 effect="opacity"
                                 width="300"
@@ -72,7 +72,7 @@ function ProductOne( props ) {
                     { product.is_top ? <label className="product-label label-top">Top</label> : '' }
                     {
                         product.discount > 0 ?
-                            product.variants.length === 0 ?
+                            product.variations.length === 0 ?
                                 <label className="product-label label-sale">{ product.discount }% OFF</label>
                                 : <label className="product-label label-sale">Sale</label>
                             : ''
@@ -81,8 +81,8 @@ function ProductOne( props ) {
 
                 <div className="product-action-vertical">
                     {
-                        product.variants.length > 0 ?
-                            <ALink href={ `/product/default/${ product.slug }` } className="btn-product-icon btn-cart" title="Go to product">
+                        product.variations.length > 0 ?
+                            <ALink href={ `/product/default/${ product.id }` } className="btn-product-icon btn-cart" title="Go to product">
                                 <i className="d-icon-arrow-right"></i>
                             </ALink> :
                             <a href="#" className="btn-product-icon btn-cart" title="Add to cart" onClick={ addToCartHandler }>
@@ -106,7 +106,7 @@ function ProductOne( props ) {
                         product.categories ?
                             product.categories.map( ( item, index ) => (
                                 <React.Fragment key={ item.name + '-' + index }>
-                                    <ALink href={ { pathname: '/shop', query: { category: item.slug } } }>
+                                    <ALink href={ { pathname: '/shop', query: { category: item.id } } }>
                                         { item.name }
                                         { index < product.categories.length - 1 ? ', ' : "" }
                                     </ALink>
@@ -116,13 +116,13 @@ function ProductOne( props ) {
                 </div>
 
                 <h3 className="product-name">
-                    <ALink href={ `/product/default/${ product.slug }` }>{ product.name }</ALink>
+                    <ALink href={ `/product/default/${ product.id }` }>{ product.name }</ALink>
                 </h3>
 
                 <div className="product-price">
                     {
                         product.sale_price !== product.regular_price ?
-                            product.variants.length === 0 || ( product.variants.length > 0 && !product.variants[ 0 ].price ) ?
+                            product.variations.length === 0 || ( product.variations.length > 0 && !product.variations[ 0 ].price ) ?
                                 <>
                                     <ins className="new-price">${ toDecimal( product.price) }</ins>
                                     <del className="old-price">${ toDecimal( product.regular_price ) }</del>
@@ -139,7 +139,7 @@ function ProductOne( props ) {
                         <span className="tooltiptext tooltip-top">{ toDecimal( product.ratings ) }</span>
                     </div>
 
-                    <ALink href={ `/product/default/${ product.slug }` } className="rating-reviews">( { product.reviews } reviews )</ALink>
+                    <ALink href={ `/product/default/${ product.id }` } className="rating-reviews">( { product.reviews } reviews )</ALink>
                 </div>
             </div>
         </div>

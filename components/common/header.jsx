@@ -63,10 +63,11 @@ export default function Header( props ) {
 
             <div className="header-middle sticky-header fix-top sticky-content">
                 <div className="container">
-                    <div className="header-left">
-                        <ALink href="#" className="mobile-menu-toggle" onClick={ showMobileMenu }>
+                <ALink href="#" className="mobile-menu-toggle" onClick={ showMobileMenu }>
                             <i className="d-icon-bars2"></i>
                         </ALink>
+                    <div className="header-left">
+                       
 
                         <ALink href="/" className="logo">
                             <Logo/>

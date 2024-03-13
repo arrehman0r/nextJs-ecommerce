@@ -42,10 +42,10 @@ function ProductGallery() {
     return (
         <main className="main single-product product-layout-gallery">
             <Helmet>
-                <title>Riode React eCommerce Template | Product Gallery</title>
+                <title>Party Shope Web Store | Product Gallery</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Product Gallery</h1>
+            <h1 className="d-none">Party Shope Web Store - Product Gallery</h1>
 
             {
                 product !== undefined ?

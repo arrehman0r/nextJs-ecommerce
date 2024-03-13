@@ -15,10 +15,10 @@ function ShopNavigationFilter () {
     return (
         <main className="main navigation-filter">
             <Helmet>
-                <title>Riode React eCommerce Template - Shop Navigation Filter</title>
+                <title>Party Shope Web Store - Shop Navigation Filter</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Shop Navigation Filter</h1>
+            <h1 className="d-none">Party Shope Web Store - Shop Navigation Filter</h1>
 
             <ShopBanner subTitle="categories" title="Navigation Filter" current="Navigation Filter" />
 

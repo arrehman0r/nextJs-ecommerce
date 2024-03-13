@@ -9,10 +9,10 @@ function ShopOffCanvas () {
     return (
         <main className="main">
             <Helmet>
-                <title>Riode React eCommerce Template - Shop Off-Canvas Filter</title>
+                <title>Party Shope Web Store - Shop Off-Canvas Filter</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Shop Off-Canvas Filter</h1>
+            <h1 className="d-none">Party Shope Web Store - Shop Off-Canvas Filter</h1>
 
             <ShopBanner subTitle="Categories" title="Off-Canvas Filter" current="Product Tag - off-canvas filter" />
 

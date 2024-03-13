@@ -117,7 +117,7 @@ function MobileMenu( props ) {
                     </li>
 
                     <li>
-                        <Card title="Products" type="mobile" url="/product/default/fashionable-leather-satchel">
+                        <Card title="Products" type="mobile" url="/elements/products">
                             <ul>
                                 <li>
                                     <Card title="Product Pages" type="mobile">
@@ -222,7 +222,7 @@ function MobileMenu( props ) {
                         </Card>
                     </li>
 
-                    <li className="mb-4 border-no"><a href="https://d-themes.com/buynow/riodereact">Buy Riode!</a></li>
+                    <li className="mb-4 border-no"><a href="">Buy Now!</a></li>
 
                     <li><ALink href={ '/pages/account' }>Login</ALink></li>
                     <li><ALink href={ '/pages/cart' }>My Cart</ALink></li>

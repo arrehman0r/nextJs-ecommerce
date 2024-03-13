@@ -40,10 +40,10 @@ function ProductGrid() {
     return (
         <main className="main mt-6 single-product product-layout-grid">
             <Helmet>
-                <title>Riode React eCommerce Template | Product Grid</title>
+                <title>Party Shope Web Store | Product Grid</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Product Grid</h1>
+            <h1 className="d-none">Party Shope Web Store - Product Grid</h1>
 
             {
                 product !== undefined ?

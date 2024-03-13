@@ -12,10 +12,10 @@ function ComingSoon() {
     return (
         <main className="main faq">
             <Helmet>
-                <title>Riode React eCommerce Template | FAQs</title>
+                <title>Party Shope Web Store | FAQs</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - FAQs</h1>
+            <h1 className="d-none">Party Shope Web Store - FAQs</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

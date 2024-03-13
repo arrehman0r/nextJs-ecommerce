@@ -18,3 +18,7 @@ export const createOrder = (body)=>{
 export const retrieveOrder = (id)=>{
   return makeRequest("get",`orders/${id}`);
 }
+
+export const getAllProducts = ()=>{
+  return makeRequest("get","products");
+}

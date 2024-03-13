@@ -10,10 +10,10 @@ function Icons() {
     return (
         <>
             <Helmet>
-                <title>Riode React eCommerce Template | Icons</title>
+                <title>Party Shope Web Store | Icons</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Icons</h1>
+            <h1 className="d-none">Party Shope Web Store - Icons</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Icons" parentUrl="/elements" />
 

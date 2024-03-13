@@ -35,10 +35,10 @@ function AboutUs() {
     return (
         <main className="main about-us">
             <Helmet>
-                <title>Riode React eCommerce Template | About Us</title>
+                <title>Party Shope Web Store | About Us</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - About Us</h1>
+            <h1 className="d-none">Party Shope Web Store - About Us</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

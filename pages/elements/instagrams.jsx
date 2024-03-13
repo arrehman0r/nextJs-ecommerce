@@ -14,10 +14,10 @@ function Instagrams () {
     return (
         <>
             <Helmet>
-                <title>Riode React eCommerce Template | Instagrams</title>
+                <title>Party Shope Web Store | Instagrams</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Instagrams</h1>
+            <h1 className="d-none">Party Shope Web Store - Instagrams</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Instagram" parentUrl="/elements" />
 

@@ -40,10 +40,10 @@ function ProductHorizontal() {
     return (
         <main className="main mt-6 single-product">
             <Helmet>
-                <title>Riode React eCommerce Template | Product Default</title>
+                <title>Party Shope Web Store | Product Default</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Product Default</h1>
+            <h1 className="d-none">Party Shope Web Store - Product Default</h1>
 
             {
                 product !== undefined ?

@@ -35,10 +35,10 @@ function Shop({ categoryProducts }) {
     return (
         <main className="main">
             <Helmet>
-                <title>Riode React eCommerce Template - Shop Page</title>
+                <title>Party Shope Web Store - Shop Page</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Shop Page</h1>
+            <h1 className="d-none">Party Shope Web Store - Shop Page</h1>
 
             <ShopBanner />
            
@@ -46,7 +46,7 @@ function Shop({ categoryProducts }) {
             <div className="page-content mb-10 pb-3">
                 <div className="container">
                     <div className="row main-content-wrap gutter-lg">
-                        <SidebarFilterOne />
+                        {/* <SidebarFilterOne /> */}
 
                         <div className="col-lg-9 main-content">
                         <ProductListOne products={categoryProducts} />

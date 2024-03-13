@@ -159,7 +159,8 @@
     }
 }
 .logo-footer, .logo-footer img {
-    display: block;
+    display: flex;
+    justify-content: center
 }
 // Footer Top
 .footer-top {

@@ -39,10 +39,10 @@ function ProductMasonry() {
     return (
         <main className="main mt-6 single-product">
             <Helmet>
-                <title>Riode React eCommerce Template | Product Masonry</title>
+                <title>Party Shope Web Store | Product Masonry</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Product Masonry</h1>
+            <h1 className="d-none">Party Shope Web Store - Product Masonry</h1>
 
             {
                 product !== undefined ?

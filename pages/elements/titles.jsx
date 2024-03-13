@@ -9,10 +9,10 @@ function Titles() {
     return (
         <>
             <Helmet>
-                <title>Riode React eCommerce Template | Titles</title>
+                <title>Party Shope Web Store | Titles</title>
             </Helmet>
 
-            <h1 className="d-none">Riode React eCommerce Template - Titles</h1>
+            <h1 className="d-none">Party Shope Web Store - Titles</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Titles" parentUrl="/elements" />
 
