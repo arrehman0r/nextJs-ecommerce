@@ -243,9 +243,9 @@ function DetailOne(props) {
             !product.variations[0].sale_price) ? (
             <> 
               <ins className="new-price">
-                ${product.sale_price}
+                Rs.{product.sale_price}
               </ins>
-              <del className="old-price">${product.regular_price}</del>
+              <del className="old-price">Rs.{product.regular_price}</del>
             </>
           ) : ( 
             <del className="new-price">
@@ -255,7 +255,7 @@ function DetailOne(props) {
             </del>
           )
         ) : (
-          <ins className="new-price">${toDecimal(product.sale_price)}</ins>
+          <ins className="new-price">Rs.{toDecimal(product.sale_price)}</ins>
         )}
       </div>
 

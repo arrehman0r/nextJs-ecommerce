@@ -125,10 +125,10 @@ function ProductOne( props ) {
                             product.variations.length === 0 || ( product.variations.length > 0 && !product.variations[ 0 ].price ) ?
                                 <>
                                     <ins className="new-price">${ toDecimal( product.price) }</ins>
-                                    <del className="old-price">${ toDecimal( product.regular_price ) }</del>
+                                    <del className="old-price">Rs.{ toDecimal( product.regular_price ) }</del>
                                 </>
                                 :
-                                < del className="new-price">${ toDecimal( product.sale_price ) } – ${ toDecimal( product.regular_price ) }</del>
+                                < del className="new-price">Rs.{ toDecimal( product.sale_price ) } – Rs.{ toDecimal( product.regular_price ) }</del>
                             : <ins className="new-price">${ toDecimal( product.price ) }</ins>
                     }
                 </div>

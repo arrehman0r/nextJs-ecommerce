@@ -18,7 +18,7 @@ function ServiceBox ( props ) {
                             <div className="icon-box-content">
                                 <h4 className="icon-box-title text-capitalize ls-normal lh-1">Free Shipping &amp; Return</h4>
 
-                                <p className="ls-s lh-1">Free shipping on orders over $99</p>
+                                <p className="ls-s lh-1">Free shipping on orders over Rs.2000</p>
                             </div>
                         </div>
                     </Reveal>

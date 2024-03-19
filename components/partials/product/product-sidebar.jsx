@@ -67,7 +67,7 @@ function ProductsSidebar( props ) {
                                     </span>
                                     <div className="icon-box-content">
                                         <h4 className="icon-box-title text-capitalize">Free Shipping</h4>
-                                        <p>For all orders over $99</p>
+                                        <p>For all orders over Rs.2000</p>
                                     </div>
                                 </div>
                                 <div className="icon-box icon-box-side icon-box2">

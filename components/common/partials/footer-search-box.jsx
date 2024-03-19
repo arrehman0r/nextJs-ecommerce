@@ -120,12 +120,12 @@ function SearchForm() {
                                     product.sale_price !== product.regular_price ?
                                         product.variants.length === 0 ?
                                             <>
-                                                <span className="new-price mr-1">${ toDecimal( product.sale_price ) }</span>
-                                                <span className="old-price">${ toDecimal( product.regular_price ) }</span>
+                                                <span className="new-price mr-1">Rs.{ toDecimal( product.sale_price ) }</span>
+                                                <span className="old-price">Rs.{ toDecimal( product.regular_price ) }</span>
                                             </>
                                             :
-                                            < span className="new-price">${ toDecimal( product.sale_price ) } – ${ toDecimal( product.regular_price ) }</span>
-                                        : <span className="new-price">${ toDecimal( product.sale_price ) }</span>
+                                            < span className="new-price">Rs.{ toDecimal( product.sale_price ) } – Rs.{ toDecimal( product.regular_price ) }</span>
+                                        : <span className="new-price">Rs.{ toDecimal( product.sale_price ) }</span>
                                 }
                             </span>
                         </ALink>

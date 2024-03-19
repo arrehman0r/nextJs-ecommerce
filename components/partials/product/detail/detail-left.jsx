@@ -36,7 +36,7 @@ function DetailLeft( props ) {
                                 <del className="old-price">${ toDecimal( product.regular_price) }</del>
                             </>
                             :
-                            < del className="new-price">${ toDecimal( product.price) } – ${ toDecimal( product.regular_price ) }</del>
+                            < del className="new-price">${ toDecimal( product.price) } – Rs.{ toDecimal( product.regular_price ) }</del>
                         : <ins className="new-price">${ toDecimal( product.data.price ) }</ins>
                 }
             </div>

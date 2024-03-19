@@ -2,7 +2,7 @@ import axios from "axios";
 // import { ToastNotification } from "../Utils/ToastNotifications";
 
 
-export const baseURL = "https://partyshope.com/wp-json/wc/v3/"
+export const baseURL = "https://partyi.store/wp-json/wc/v3/"
 
 
 export const instance = axios.create({
@@ -41,8 +41,8 @@ export const makeRequest = async (type, path, body, options={}) => {
 
 instance.interceptors.request.use(
   (config) => {
-    const username = "ck_5178b1c36b67be97e00929724e35ecb24ab4295e";
-    const password = "cs_1bc331a05fdf7091f2f3e71fbbdb8f76361af329";
+    const username = "ck_b88f19162ada4d118e72598071d482f29b61aacc";
+    const password = "cs_36deb8696cf3a5b14478b522ffa9719ae25df1c0";
     config.auth = {
       username,
       password,

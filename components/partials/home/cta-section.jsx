@@ -26,7 +26,7 @@ function CtaSection () {
 
                         <h3 className="banner-title font-weight-bold text-white">Summer Season Sale</h3>
 
-                        <p className="text-white ls-s">Free shipping on orders over $99</p>
+                        <p className="text-white ls-s">Free shipping on orders over Rs.2000</p>
 
                         <ALink href="/shop" className="btn btn-primary btn-rounded btn-icon-right">Shop Now<i className="d-icon-arrow-right"></i></ALink>
                     </div>

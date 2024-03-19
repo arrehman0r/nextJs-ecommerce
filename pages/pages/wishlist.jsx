@@ -68,13 +68,13 @@ function Wishlist(props) {
                                                     <td className="product-price">
                                                         {
                                                             item.sale_price !== item.regular_price ?
-                                                                < span className="amount">${toDecimal(item.sale_price)} – ${toDecimal(item.regular_price)}</span>
+                                                                < span className="amount">Rs.{toDecimal(item.sale_price)} – Rs.{toDecimal(item.regular_price)}</span>
                                                                 : item.discount > 0 && item.variations.length > 0 ?
                                                                     <>
-                                                                        <span className="amount">${toDecimal(item.salePrice)}</span>
-                                                                        <span className="amount">${toDecimal(item.price)}</span>
+                                                                        <span className="amount">Rs.{toDecimal(item.salePrice)}</span>
+                                                                        <span className="amount">Rs.{toDecimal(item.price)}</span>
                                                                     </>
-                                                                    : <span className="amount">${toDecimal(item.sale_price)}</span>
+                                                                    : <span className="amount">Rs.{toDecimal(item.sale_price)}</span>
                                                         }
                                                     </td>
                                                     <td className="product-stock-status">
