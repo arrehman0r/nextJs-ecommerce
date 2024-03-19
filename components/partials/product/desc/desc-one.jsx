@@ -57,12 +57,12 @@ function DescOne( props ) {
                             <span className="nav-link">Additional information</span>
                         </Tab> : ''
                 }
-                {
+                {/* {
                     isGuide ?
                         <Tab className="nav-item">
                             <span className="nav-link">Size Guide</span>
                         </Tab> : ''
-                }
+                } */}
                 <Tab className="nav-item">
                     <span className="nav-link">Reviews ({ product.reviews })</span>
                 </Tab>
@@ -74,18 +74,16 @@ function DescOne( props ) {
                         <div className="col-md-6">
                             <h5 className="description-title mb-4 font-weight-semi-bold ls-m">Features</h5>
                             <p className="mb-2">
-                                Praesent id enim sit amet.Tdio vulputate eleifend in in tortor.
-                                ellus massa. siti iMassa ristique sit amet condim vel, facilisis
-                                quimequistiqutiqu amet condim Dilisis Facilisis quis sapien. Praesent id
-                                enim sit amet.
+                            <div className="product-short-desc" dangerouslySetInnerHTML={{ __html: product?.description }} />
+
 										</p>
-                            <ul className="mb-8">
+                            {/* <ul className="mb-8">
                                 <li>Praesent id enim sit amet.Tdio vulputate</li>
                                 <li>Eleifend in in tortor. ellus massa.Dristique sitii</li>
                                 <li>Massa ristique sit amet condim vel</li>
                                 <li>Dilisis Facilisis quis sapien. Praesent id enim sit amet</li>
-                            </ul>
-                            <h5 className="description-title mb-3 font-weight-semi-bold ls-m">Specifications
+                            </ul> */}
+                            {/* <h5 className="description-title mb-3 font-weight-semi-bold ls-m">Specifications
 										</h5>
                             <table className="table">
                                 <tbody>
@@ -109,24 +107,24 @@ function DescOne( props ) {
                                         <td className="border-no pl-4">Praesent id enim</td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table> */}
                         </div>
                         <div className="col-md-6 pl-md-6 pt-4 pt-md-0">
-                            <h5 className="description-title font-weight-semi-bold ls-m mb-5">Video Description</h5>
+                            {/* <h5 className="description-title font-weight-semi-bold ls-m mb-5">Video Description</h5>
                             <figure className="p-relative d-inline-block mb-3">
                                 <img src="./images/product.jpg" width="559" height="370" alt="Product" />
 
                                 <a className="btn-play btn-iframe" href="#" data="/uploads/video/video-1.mp4" onClick={ showVideoModalHandler }>
                                     <i className="d-icon-play-solid"></i>
                                 </a>
-                            </figure>
+                            </figure> */}
                             <div className="icon-box-wrap d-flex flex-wrap">
                                 <div className="icon-box icon-box-side icon-border pt-2 pb-2 mb-4 mr-10">
                                     <div className="icon-box-icon">
                                         <i className="d-icon-lock"></i>
                                     </div>
                                     <div className="icon-box-content">
-                                        <h4 className="icon-box-title lh-1 pt-1 ls-s text-normal">2 year
+                                        <h4 className="icon-box-title lh-1 pt-1 ls-s text-normal">14 Days Return
 														warranty</h4>
                                         <p>Guarantee with no doubt</p>
                                     </div>
@@ -142,7 +140,7 @@ function DescOne( props ) {
                                     <div className="icon-box-content">
                                         <h4 className="icon-box-title lh-1 pt-1 ls-s text-normal">Free shipping
 													</h4>
-                                        <p>On orders over $50.00</p>
+                                        <p>On orders over Rs.2000</p>
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +212,7 @@ function DescOne( props ) {
                         </TabPanel>
                         : ''
                 }
-                {
+                {/* {
                     isGuide ?
                         <TabPanel className="tab-pane product-tab-size-guide">
                             <figure className="size-image mt-4 mb-4">
@@ -272,7 +270,7 @@ function DescOne( props ) {
                                 </table>
                             </figure>
                         </TabPanel> : ''
-                }
+                } */}
 
                 <TabPanel className="tab-pane product-tab-reviews">
                     {

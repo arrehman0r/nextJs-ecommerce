@@ -4,8 +4,8 @@ import { useQuery } from "@apollo/react-hooks";
 import Helmet from "react-helmet";
 import imagesLoaded from "imagesloaded";
 
-import withApollo from "~/server/apollo";
-import { GET_PRODUCT } from "~/server/queries";
+// import withApollo from "~/server/apollo";
+// import { GET_PRODUCT } from "~/server/queries";
 
 import OwlCarousel from "~/components/features/owl-carousel";
 
@@ -16,29 +16,37 @@ import RelatedProducts from "~/components/partials/product/related-products";
 
 import { mainSlider17 } from "~/utils/data/carousel";
 import { getProduct } from "~/server/axiosApi";
+import { getAllProducts } from "../../../server/axiosApi";
 
-export async function getServerSideProps({ params }) {
-  const productId = params.slug;
+export async function getStaticPaths() {
+  // Fetch a list of all product IDs from your backend (adjust the API endpoint as needed)
+  const products = await getAllProducts();
+  console.log("products1:",products)
+  // Extract IDs from products and convert them to strings
+  const paths = products.map((product) => ({ params: { slug: String(product.id) } }));
 
+  // Set fallback: 'blocking' or 'blocking' to handle missing paths (optional)
+  return { paths, fallback: false }; // No fallback generation for missing paths here
+}
+
+
+export async function getStaticProps({ params }) {
+  const slug = params.slug;
   try {
-    const product = await getProduct(productId);
-
-    return {
-      props: {
-        product,
-      },
-    };
+    const product = await getProduct(slug);
+    // Fetch related products
+    const relatedProducts = await Promise.all(product.related_ids.map(async (id) => await getProduct(id)));
+    return { props: { product, relatedProducts } };
   } catch (error) {
     console.error("Error fetching product:", error);
     return {
-      props: {
-        product: null, // You might want to handle the case where product fetching fails
-      },
+      props: { product: null },
+      notFound: true,
     };
   }
 }
 
-function ProductDefault({ product }) {
+function ProductDefault({ product, relatedProducts }) {
   const [loaded, setLoadingState] = useState(true);
 
   useEffect(() => {
@@ -72,7 +80,7 @@ function ProductDefault({ product }) {
             {console.log("this is single product", product)}
             <DescOne product={product} />
 
-            <RelatedProducts products={product} />
+            <RelatedProducts products={relatedProducts} />
           </div>
         </div>
       ) : (
@@ -89,19 +97,23 @@ function ProductDefault({ product }) {
 
           <div className="skel-pro-tabs"></div>
 
-          {/* <section className="pt-3 mt-4">
+       
+        </div>
+      )}
+     {/* <section className="pt-3 mt-4">
                     <h2 className="title justify-content-center">Related Products</h2>
 
                     <OwlCarousel adClass="owl-carousel owl-theme owl-nav-full" options={ mainSlider17 }>
                         {
-                            [ 1, 2, 3, 4, 5, 6 ].map( ( item ) =>
-                                <div className="product-loading-overlay" key={ 'popup-skel-' + item }></div>
+                          relatedProducts.map( ( item ) =>
+                                <div className="product-loading-overlay" key={ 'popup-skel-' + item }>
+
+                                  {item.name}
+                                </div>
                             )
                         }
                     </OwlCarousel>
-                </section> */}
-        </div>
-      )}
+                </section>  */}
     </main>
   );
 }
