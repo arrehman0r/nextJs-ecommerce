@@ -14,7 +14,7 @@ export default function CartPopup ( props ) {
 
                 <div className="product product-purchased  product-cart mb-0">
                     <figure className="product-media pure-media">
-                        <ALink href={ `/product/default/${ product.slug }` }>
+                        <ALink href={ `/product/default/${ product.id }` }>
                             <img
                                 src={ product.images[ 0 ].src }
                                 alt="product"
@@ -24,10 +24,10 @@ export default function CartPopup ( props ) {
                         </ALink>
                     </figure>
                     <div className="product-detail">
-                        <ALink href={ `/product/default/${ product.slug }` } className="product-name">{ product.name }</ALink>
+                        <ALink href={ `/product/default/${ product.id }` } className="product-name">{ product.name }</ALink>
                         <span className="price-box">
                             <span className="product-quantity">{ product.qty }</span>
-                            <span className="product-price">${ toDecimal( product.price ) }</span>
+                            <span className="product-price">Rs.{ toDecimal( product.price ) }</span>
                         </span>
                     </div>
                 </div>
