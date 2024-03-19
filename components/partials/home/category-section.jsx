@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import Reveal from "react-awesome-reveal";
 import { LazyLoadImage } from "react-lazy-load-image-component";
