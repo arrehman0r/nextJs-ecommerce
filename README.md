@@ -1,37 +1,36 @@
-# riode-react-nextjs-vercel
+# Next.js WordPress eCommerce Template
 
-![image](https://user-images.githubusercontent.com/95362611/185815861-dd6dfe93-4388-45ae-a4f6-d37ae740ff26.png)
+This is a Next.js template for building an eCommerce website that fetches products and categories from the WordPress REST API. It includes functionality for browsing products, placing orders, and managing order details.
 
+## Features
 
-## Getting Started
+- **Product Pages:** View detailed information about individual products.
+- **Category Pages:** Browse products by category.
+- **Home Page:** Landing page for the website.
+- **Order Detail Page:** View details of placed orders.
+- **Contact Us Page:** Allows users to get in touch with customer support.
+- **About Page:** Information about the company or website.
+- **Checkout Page:** Process orders and complete transactions.
 
-First, run the development server:
+## Tech Stacks
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- **Next.js:** A React framework for building server-side rendered and static web applications.
+- **SCSS:** A CSS preprocessor for styling the website with enhanced features.
+- **Redux:** A predictable state container for managing application state.
+- **Redux Saga:** A middleware library for managing side effects in Redux applications.
+- **Redux Persist:** Persist and rehydrate a Redux store.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Additional Components
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- **Owl Carousel:** A responsive carousel plugin for displaying product images or banners.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Configuration
+Update WordPress REST API endpoints in the codebase to match your WordPress site.
+Customize the styling using SCSS files located in the project's styles directory.
+Configure Redux store and sagas to meet your application's requirements.
+Customize and extend components as needed to match your eCommerce website's design and functionality.
+Contributing
+Contributions are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Abdul Rehman
+arrehman0r@gmail.com
