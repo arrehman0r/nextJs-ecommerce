@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation';
 
 function Checkout(props) {
   const { cartList } = props;
-  const [isFirst, setFirst] = useState(false);
+
   const store = useStore();
   const router = useRouter();
   console.log("this is cart list", cartList);
@@ -47,7 +47,7 @@ function Checkout(props) {
         quantity: item.qty,
       }));
 
-
+const email = customerDetails.email || "info@partyshope.com";
     const orderDetails = {
       payment_method: "bacs",
       payment_method_title: "Cash on Delivery",
@@ -61,7 +61,7 @@ function Checkout(props) {
         state: customerDetails?.state,
         postcode: customerDetails?.zip,
         country: "PK",
-        email: customerDetails?.email,
+        email: email,
         phone: customerDetails?.phone,
       },
       shipping: {
@@ -76,13 +76,20 @@ function Checkout(props) {
       },
 
       line_items: lineItems,
-      shipping_lines: [
-        {
-          method_id: "flat_rate",
-          method_title: "Flat Rate",
-          total: "100.00",
-        },
-      ],
+
+    shipping_lines: getTotalPrice(cartList) <= 2000 ? [ // Check if the order amount is less than or equal to 2000 Rs
+      {
+        method_id: "flat_rate",
+        method_title: "Flat Rate",
+        total: "100.00",
+      },
+    ] : [ // If the order amount is greater than 2000 Rs, apply free shipping
+      {
+        method_id: "free_shipping",
+        method_title: "Free Shipping",
+        total: "0.00",
+      },
+    ],
     };
 
     try {
@@ -90,9 +97,10 @@ function Checkout(props) {
       const response = await createOrder(orderDetails);
       console.log("Order created successfully:",response);
      // You can clear the cart like this:
+     if (response.id){ 
      store.dispatch({ type: "REFRESH_STORE", payload: { current: 1 } });
      router.push(`/order/${response.id}`);
-
+     }
       // Handle success response as needed
     } catch (error) {
       console.error("Error creating order:", error);
