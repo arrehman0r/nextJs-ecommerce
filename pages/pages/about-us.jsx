@@ -50,7 +50,7 @@ function AboutUs() {
             </nav>
             <div className="page-header pl-4 pr-4"
                 style={ { backgroundImage: `url( ./images/page-header/about-us.jpg )`, backgroundColor: "#3C63A4" } }>
-                <h3 className="page-subtitle font-weight-bold">Welcome to Riode</h3>
+                <h3 className="page-subtitle font-weight-bold">Welcome to Party</h3>
                 <h1 className="page-title font-weight-bold lh-1 text-white text-capitalize">Our Services</h1>
                 <p className="page-desc text-white mb-0">Lorem quis bibendum auctor, nisi elit consequat ipsum,<br /> nec sagittis sem nibh id elit.</p>
             </div>
@@ -140,7 +140,7 @@ function AboutUs() {
                                     <p className="section-desc text-grey">
                                         Already millions of people are very satisfied by thi.<br />
                                         s page builder and the number is growing more and more. Technolog<br />
-                                        developing, requirements are increasing. Riode has brought.
+                                        developing, requirements are increasing. Party has brought.
                                     </p>
                                     <ALink href="#" className="btn btn-dark btn-link btn-underline ls-m">Visit Our Store<i className="d-icon-arrow-right"></i></ALink>
                                 </div>
@@ -159,7 +159,7 @@ function AboutUs() {
                                     <p className="section-desc text-grey">
                                         Already millions of people are very satisfied by thi.<br />
                                         s page builder and the number is growing more and more. Technolog<br />
-                                        developing, requirements are increasing. Riode has brought.
+                                        developing, requirements are increasing. Party has brought.
                                     </p>
                                     <ALink href="#" className="btn btn-dark btn-link btn-underline ls-m">Get Our Store<i className="d-icon-arrow-right"></i></ALink>
                                 </div>

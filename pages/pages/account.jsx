@@ -128,7 +128,7 @@ function Account() {
                                             <div className="card-body">
                                                 <h5 className="card-title text-uppercase">Billing Address</h5>
                                                 <p>John Doe<br />
-                                                    Riode Company<br />
+                                                    Party Company<br />
                                                         Steven street<br />
                                                             El Carjon, CA 92020
 												</p>

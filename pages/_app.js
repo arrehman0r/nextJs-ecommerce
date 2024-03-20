@@ -41,7 +41,7 @@ const App = ({ Component, pageProps }) => {
                     <title>Party - Online Party Store</title>
 
                     <meta name="keywords" content="React Template" />
-                    <meta name="description" content="Riode - React eCommerce Template" />
+                    <meta name="description" content="Party - React eCommerce Template" />
                     <meta name="author" content="D-THEMES" />
                 </Helmet>
 

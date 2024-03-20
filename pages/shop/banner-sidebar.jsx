@@ -33,7 +33,7 @@ function ShopBannerSidebar () {
                         <div className="col-lg-9 main-content">
                             <div className="shop-banner-default banner mb-1" style={ { backgroundImage: "url('./images/shop/banner.jpg')", backgroundColor: "#f2f2f3" } }>
                                 <div className="banner-content">
-                                    <h4 className="banner-subtitle font-weight-bold ls-normal text-uppercase text-white">Riode Shop</h4>
+                                    <h4 className="banner-subtitle font-weight-bold ls-normal text-uppercase text-white">Party Shop</h4>
                                     <h1 className="banner-title font-weight-bold text-white">Banner with Sidebar</h1>
                                     <ALink href="/shop" className="btn btn-white btn-outline btn-icon-right btn-rounded text-normal">Discover now<i className="d-icon-arrow-right"></i></ALink>
                                 </div>

@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <base href="/react/riode/demo-1/"></base>
-          {/* <title>Riode - React eCommerce Template</title> */}
+          {/* <title>Party - React eCommerce Template</title> */}
           <link rel="icon" href="images/icons/favicon.png" />
           <link
             rel="stylesheet"

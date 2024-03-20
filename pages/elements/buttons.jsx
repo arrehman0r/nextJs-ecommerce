@@ -102,7 +102,7 @@ function Buttons() {
                         <div className="mb-10 mt-4 pb-2">
                             <div className="title-wrapper">
                                 <h2 className="title title-center">Flat With Icon</h2>
-                                <p className="text-center">Add included Riode icons to default buttons, using any color.
+                                <p className="text-center">Add included Party icons to default buttons, using any color.
                                 </p>
                             </div>
 

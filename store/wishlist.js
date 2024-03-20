@@ -49,7 +49,7 @@ export const wishlistActions = {
 };
 
 const persistConfig = {
-    keyPrefix: "riode-",
+    keyPrefix: "party-",
     key: "wishlist",
     storage
 }

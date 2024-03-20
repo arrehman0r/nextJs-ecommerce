@@ -16,7 +16,7 @@ function Login() {
                 <div className="container">
                     <ul className="breadcrumb">
                         <li><ALink href="/"><i className="d-icon-home"></i></ALink></li>
-                        <li><ALink href="/shop">Riode Shop</ALink></li>
+                        <li><ALink href="/shop">Party Shop</ALink></li>
                         <li>My Account</li>
                     </ul>
                 </div>

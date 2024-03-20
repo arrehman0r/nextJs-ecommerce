@@ -28,7 +28,7 @@ function ShopBoxedBanner() {
                 <div className="container">
                     <div className="shop-boxed-banner banner mb-lg-6" style={ { backgroundImage: "url('./images/shop/banner2.jpg')", backgroundColor: "#f2f2f3" } }>
                         <div className="banner-content">
-                            <h4 className="banner-subtitle font-weight-bold ls-normal text-uppercase text-white">Riode Shop</h4>
+                            <h4 className="banner-subtitle font-weight-bold ls-normal text-uppercase text-white">Party Shop</h4>
                             <h1 className="banner-title font-weight-bold text-white">Boxed Banner Style</h1>
                             <ALink href="/shop" className="btn btn-white btn-outline btn-rounded text-normal">Discover now<i className="d-icon-arrow-right"></i></ALink>
                         </div>

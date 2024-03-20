@@ -60,7 +60,7 @@ export const modalActions = {
 };
 
 const persistConfig = {
-    keyPrefix: "riode-",
+    keyPrefix: "party-",
     key: "modal",
     storage
 }

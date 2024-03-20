@@ -46,7 +46,7 @@ export default function Footer () {
                                     </li>
                                     <li>
                                         <label>Email: </label>
-                                        <ALink href="mailto:mail@riode.com">info@partyshope.com</ALink>
+                                        <ALink href="mailto:mail@party.com">info@partyshope.com</ALink>
                                     </li>
                                     <li>
                                         <label>Address: </label>

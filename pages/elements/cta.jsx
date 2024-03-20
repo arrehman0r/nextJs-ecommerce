@@ -39,7 +39,7 @@ function Cta() {
                                     <h4 className="banner-subtitle font-weight-normal ls-s text-body">Upgrade and save</h4>
                                 </div>
                                 <div className="banner-text mb-lg-0 mb-4 mr-lg-4 pl-lg-6 pr-lg-0 pl-2 pr-2">
-                                    <h4 className="font-weight-normal ls-normal text-uppercase mb-0">Get a Riode gift
+                                    <h4 className="font-weight-normal ls-normal text-uppercase mb-0">Get a Party gift
                                         card+25% off</h4>
                                     <p className="ls-m mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                                         eiusmod.</p>
@@ -69,7 +69,7 @@ function Cta() {
                                     <div className="banner-content">
                                         <h3 className="banner-title text-uppercase font-weight-bold ls-m text-primary">20%
                                             off</h3>
-                                        <h4 className="banner-subtitle font-weight-bold ls-m text-white">Riode Birthday
+                                        <h4 className="banner-subtitle font-weight-bold ls-m text-white">Party Birthday
                                             Sale</h4>
                                         <p className="ls-s text-light">Get all the latest information on <br />Events, Sales
                                             and Offers.</p>

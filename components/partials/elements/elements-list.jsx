@@ -7,7 +7,7 @@ function ElementsList ( props ) {
         <section className={ 'element-section ' + props.adClass }>
             <div className={ 'container ' + props.subClass }>
                 <p className="text-center text-uppercase ls-s mb-1">For your new website design.</p>
-                <h2 className="title title-center ls-s mb-8">Riode Elements</h2>
+                <h2 className="title title-center ls-s mb-8">Party Elements</h2>
                 <div className="row elements">
                     <div className="col-xl-5col col-lg-3 col-md-4 col-sm-6 col-12">
                         <ALink href="/elements/accordions" className="element-type">

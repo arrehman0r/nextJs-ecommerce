@@ -27,7 +27,7 @@ export const demoActions = {
 };
 
 const persistConfig = {
-    keyPrefix: "riode-",
+    keyPrefix: "party-",
     key: "demo",
     storage
 }

@@ -74,7 +74,7 @@ export function* cartSaga() {
 }
 
 const persistConfig = {
-    keyPrefix: "riode-",
+    keyPrefix: "party-",
     key: "cart",
     storage
 }

@@ -21,7 +21,7 @@ function Icons() {
                 <section className="sample-icons container">
                     <div className="title-wrap mb-6">
                         <h3 className="title title-center mb-2">Icons</h3>
-                        <p className="text-center">Riode comes with Riode Icons and <a href="https://fontawesome.com/icons"
+                        <p className="text-center">Party comes with Party Icons and <a href="https://fontawesome.com/icons"
                             target="_blank" rel="noopener noreferrer" className="text-primary">Font Awesome 5 Icons </a> that can be used in
                                 your website.</p>
                     </div>
@@ -66,7 +66,7 @@ function Icons() {
                     <Tabs selectedTabClassName="show" selectedTabPanelClassName="active" defaultIndex={0} className="tab tab-boxed tab-nav-boxed tab-outline">
                         <TabList className="nav nav-tabs" role="tablist">
                             <Tab className="nav-item">
-                                <a className="nav-link">Riode Icons</a>
+                                <a className="nav-link">Party Icons</a>
                             </Tab>
                             <Tab className="nav-item">
                                 <a className="nav-link">Font Awesome</a>
