@@ -36,7 +36,7 @@ function DetailOne(props) {
     colors = [],
     sizes = [];
   isWishlisted =
-    wishlist.findIndex((item) => item.slug === product.slug) > -1
+    wishlist.findIndex((item) => item.id === product.id) > -1
       ? true
       : false;
 
@@ -104,7 +104,7 @@ function DetailOne(props) {
     if (toggleWishlist && !isWishlisted) {
       let currentTarget = e.currentTarget;
       currentTarget.classList.add("load-more-overlay", "loading");
-      toggleWishlist(product.data);
+      toggleWishlist(product);
 
       setTimeout(() => {
         currentTarget.classList.remove("load-more-overlay", "loading");
@@ -225,7 +225,7 @@ function DetailOne(props) {
           {product.categories.map((item, index) => (
             <React.Fragment key={item.name + "-" + index}>
               <ALink
-                href={{ pathname: "/shop", query: { category: item.slug } }}
+                href={{ pathname: "/shop", query: { category: item.id } }}
               >
                 {item.name}
               </ALink>
@@ -405,7 +405,7 @@ function DetailOne(props) {
           <div className="container">
             <div className="sticky-product-details">
               <figure className="product-image">
-                <ALink href={"/product/default/" + product.slug}>
+                <ALink href={"/product/default/" + product.id}>
                   <img
                     src={product.images[0].src}
                     width="90"
@@ -416,7 +416,7 @@ function DetailOne(props) {
               </figure>
               <div>
                 <h4 className="product-title">
-                  <ALink href={"/product/default/" + product.slug}>
+                  <ALink href={"/product/default/" + product.id}>
                     {product.name}
                   </ALink>
                 </h4>

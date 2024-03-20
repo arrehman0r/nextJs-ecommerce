@@ -57,7 +57,7 @@ console.log("all products",products)
                                 <div className="row product-wrapper">
                                     {
                                         products.map( ( item ) =>
-                                            <div className="col-md-3 col-6" key={ 'default-' + item.slug }>
+                                            <div className="col-md-3 col-6" key={ 'default-' + item.id }>
                                                 <ProductOne product={ item } />
                                             </div>
                                         )
@@ -81,7 +81,7 @@ console.log("all products",products)
                                 <div className="row product-wrapper">
                                     {
                                         products.slice( 0, 4 ).map( ( item ) =>
-                                            <div className="col-md-3 col-6" key={ 'centered-' + item.slug }>
+                                            <div className="col-md-3 col-6" key={ 'centered-' + item.id }>
                                                 <ProductTwo product={ item } />
                                             </div>
                                         )
@@ -105,7 +105,7 @@ console.log("all products",products)
                                 <div className="row product-wrapper">
                                     {
                                         products.slice( 0, 4 ).map( ( item ) =>
-                                            <div className="col-md-3 col-6" key={ 'classic-' + item.slug }>
+                                            <div className="col-md-3 col-6" key={ 'classic-' + item.id }>
                                                 <ProductThree product={ item } />
                                             </div>
                                         )
@@ -129,7 +129,7 @@ console.log("all products",products)
                                 <div className="row product-wrapper">
                                     {
                                         products.slice( 0, 4 ).map( ( item ) =>
-                                            <div className="col-md-3 col-6" key={ 'popup-' + item.slug }>
+                                            <div className="col-md-3 col-6" key={ 'popup-' + item.id }>
                                                 <ProductFour product={ item } />
                                             </div>
                                         )
@@ -153,7 +153,7 @@ console.log("all products",products)
                                 <div className="row product-wrapper split-line">
                                     {
                                         products.slice( 0, 5 ).map( ( item ) =>
-                                            <div className="col-xl-5col col-lg-3 col-sm-4 col-6" key={ 'split-line-' + item.slug }>
+                                            <div className="col-xl-5col col-lg-3 col-sm-4 col-6" key={ 'split-line-' + item.id }>
                                                 <ProductFive product={ item } />
                                             </div>
                                         )
@@ -177,7 +177,7 @@ console.log("all products",products)
                                 <OwlCarousel adClass="owl-theme gutter-xs" options={ mainSlider1 }>
                                     {
                                         products.slice( 0, 5 ).map( ( item ) =>
-                                            <ProductTwo product={ item } key={ 'without-space-' + item.slug } />
+                                            <ProductTwo product={ item } key={ 'without-space-' + item.id } />
                                         )
                                     }
                                 </OwlCarousel> :
@@ -199,7 +199,7 @@ console.log("all products",products)
                                 <div className="row product-wrapper equal-height">
                                     {
                                         products.slice( 0, 4 ).map( ( item ) =>
-                                            <div className="col-md-3 col-6" key={ 'image-gap-' + item.slug }>
+                                            <div className="col-md-3 col-6" key={ 'image-gap-' + item.id }>
                                                 <ProductTwo product={ item } adClass="product-image-gap" />
                                             </div>
                                         )
@@ -223,7 +223,7 @@ console.log("all products",products)
                                 <OwlCarousel adClass="owl-theme" options={ mainSlider19 }>
                                     {
                                         products.slice( 0, 5 ).map( ( item ) =>
-                                            <ProductSix product={ item } key={ 'modern-style-one-' + item.slug } />
+                                            <ProductSix product={ item } key={ 'modern-style-one-' + item.id } />
                                         )
                                     }
                                 </OwlCarousel> :
@@ -245,7 +245,7 @@ console.log("all products",products)
                                 <OwlCarousel adClass="owl-theme" options={ mainSlider19 }>
                                     {
                                         products.slice( 0, 5 ).map( ( item ) =>
-                                            <ProductSeven product={ item } key={ 'modern-style-two-' + item.slug } />
+                                            <ProductSeven product={ item } key={ 'modern-style-two-' + item.id } />
                                         )
                                     }
                                 </OwlCarousel> :
@@ -269,7 +269,7 @@ console.log("all products",products)
                                         <div className="row">
                                             {
                                                 products.slice( 0, 2 ).map( ( item ) =>
-                                                    <div className="col-6 col-sm-12" key={ 'list-' + item.slug }>
+                                                    <div className="col-6 col-sm-12" key={ 'list-' + item.id }>
                                                         <ProductEight product={ item } />
                                                     </div>
                                                 )
@@ -285,7 +285,7 @@ console.log("all products",products)
                                                     <div className="products-col">
                                                         {
                                                             products.slice( 0, 4 ).map( item => (
-                                                                <SmallProduct product={ item } key={ 'small-' + item.slug } />
+                                                                <SmallProduct product={ item } key={ 'small-' + item.id } />
                                                             ) )
                                                         }
                                                     </div>
@@ -293,7 +293,7 @@ console.log("all products",products)
                                                     <div className="products-col">
                                                         {
                                                             products.slice( 4, 8 ).map( item => (
-                                                                <SmallProduct product={ item } key={ 'small-' + item.slug } />
+                                                                <SmallProduct product={ item } key={ 'small-' + item.id } />
                                                             ) )
                                                         }
                                                     </div>

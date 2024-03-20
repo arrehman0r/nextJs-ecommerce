@@ -28,7 +28,7 @@ function DetailOne( props ) {
 
     // decide if the product is wishlisted
     let isWishlisted, colors = [], sizes = [];
-    isWishlisted = wishlist.findIndex( item => item.slug === product.data.slug ) > -1 ? true : false;
+    isWishlisted = wishlist.findIndex( item => item.id === product.data.slug ) > -1 ? true : false;
 
     if ( product.data && product.data.variants.length > 0 ) {
         if ( product.data.variants[ 0 ].size )
@@ -202,7 +202,7 @@ function DetailOne( props ) {
                     {
                         product.data.categories.map( ( item, index ) =>
                             <React.Fragment key={ item.name + '-' + index }>
-                                <ALink href={ { pathname: '/shop', query: { category: item.slug } } }>
+                                <ALink href={ { pathname: '/shop', query: { category: item.id } } }>
                                     { item.name }
                                 </ALink>
                                 { index < product.data.categories.length - 1 ? ', ' : '' }

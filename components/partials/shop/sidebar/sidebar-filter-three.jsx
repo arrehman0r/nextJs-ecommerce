@@ -94,11 +94,11 @@ function SidebarFilterThree() {
                         {
                             filterData.sizes.map( ( item, index ) =>
                                 <li
-                                    className={ containsAttrInUrl( 'sizes', item.slug ) ? 'active' : '' }
+                                    className={ containsAttrInUrl( 'sizes', item.id ) ? 'active' : '' }
                                     key={ item + ' - ' + index }
                                     onClick={ selectFilterHandler }
                                 >
-                                    <ALink href={ { pathname: router.pathname, query: { ...query, page: 1, sizes: getUrlForAttrs( 'sizes', item.slug ), type: router.query.type ? router.query.type : null } } } scroll={ false }>{ item.name }
+                                    <ALink href={ { pathname: router.pathname, query: { ...query, page: 1, sizes: getUrlForAttrs( 'sizes', item.id ), type: router.query.type ? router.query.type : null } } } scroll={ false }>{ item.name }
                                     </ALink>
                                 </li>
                             )
@@ -113,11 +113,11 @@ function SidebarFilterThree() {
                         {
                             filterData.colors.map( ( item, index ) =>
                                 <li
-                                    className={ containsAttrInUrl( 'colors', item.slug ) ? 'active' : '' }
+                                    className={ containsAttrInUrl( 'colors', item.id ) ? 'active' : '' }
                                     key={ item + ' - ' + index }
                                     onClick={ selectFilterHandler }
                                 >
-                                    <ALink href={ { pathname: router.pathname, query: { ...query, page: 1, colors: getUrlForAttrs( 'colors', item.slug ), type: router.query.type ? router.query.type : null } } } scroll={ false }>{ item.name }
+                                    <ALink href={ { pathname: router.pathname, query: { ...query, page: 1, colors: getUrlForAttrs( 'colors', item.id ), type: router.query.type ? router.query.type : null } } } scroll={ false }>{ item.name }
                                     </ALink>
                                 </li>
                             )

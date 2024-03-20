@@ -16,7 +16,7 @@ function ProductFive( props ) {
 
     // decide if the product is wishlisted
     let isWishlisted;
-    isWishlisted = wishlist.findIndex( item => item.slug === product.slug ) > -1 ? true : false;
+    isWishlisted = wishlist.findIndex( item => item.id === product.id ) > -1 ? true : false;
 
     useEffect( () => {
         let items = document.querySelectorAll( '.product-slideup-content' );
@@ -39,7 +39,7 @@ function ProductFive( props ) {
     }, [] )
 
     const showQuickviewHandler = () => {
-        openQuickview( product.slug );
+        openQuickview( product.id );
     }
 
     const wishlistHandler = ( e ) => {
@@ -75,7 +75,7 @@ function ProductFive( props ) {
     return (
         <div className={ `product product-slideup text-center ${ adClass } ${ product.variants.length > 0 ? 'product-variable' : '' }` }>
             <figure className="product-media">
-                <ALink href={ `/product/default/${ product.slug }` }>
+                <ALink href={ `/product/default/${ product.id }` }>
                     <LazyLoadImage
                         alt="product"
                         src={    product.images[ 0 ].src }
@@ -119,7 +119,7 @@ function ProductFive( props ) {
                         product.categories ?
                             product.categories.map( ( item, index ) => (
                                 <React.Fragment key={ item.name + '-' + index }>
-                                    <ALink href={ { pathname: '/shop', query: { category: item.slug } } }>
+                                    <ALink href={ { pathname: '/shop', query: { category: item.id } } }>
                                         { item.name }
                                         { index < product.categories.length - 1 ? ', ' : "" }
                                     </ALink>
@@ -129,7 +129,7 @@ function ProductFive( props ) {
                 </div>
 
                 <h3 className="product-name">
-                    <ALink href={ `/product/default/${ product.slug }` }>{ product.name }</ALink>
+                    <ALink href={ `/product/default/${ product.id }` }>{ product.name }</ALink>
                 </h3>
 
                 <div className="product-price">
@@ -152,7 +152,7 @@ function ProductFive( props ) {
                         <span className="tooltiptext tooltip-top">{ toDecimal( product.ratings ) }</span>
                     </div>
 
-                    <ALink href={ `/product/default/${ product.slug }` } className="rating-reviews">( { product.reviews } reviews )</ALink>
+                    <ALink href={ `/product/default/${ product.id }` } className="rating-reviews">( { product.reviews } reviews )</ALink>
                 </div>
 
                 <div className="product-action">
@@ -161,7 +161,7 @@ function ProductFive( props ) {
                     </a>
                     {
                         product.variants.length > 0 ?
-                            <ALink href={ `/product/default/${ product.slug }` } className="btn-product btn-cart" title="Go to product">
+                            <ALink href={ `/product/default/${ product.id }` } className="btn-product btn-cart" title="Go to product">
                                 <span>Select Options</span>
                             </ALink> :
                             <a href="#" className="btn-product btn-cart" title="Add to cart" onClick={ addToCartHandler }>

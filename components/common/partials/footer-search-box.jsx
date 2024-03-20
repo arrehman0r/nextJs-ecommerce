@@ -111,7 +111,7 @@ function SearchForm() {
 
                 <div className="live-search-list bg-white">
                     { search.length > 2 && data && data.products.data.map( ( product, index ) => (
-                        <ALink href={ `/product/default/${ product.slug }` } className="autocomplete-suggestion" key={ `search-result-${ index }` }>
+                        <ALink href={ `/product/default/${ product.id }` } className="autocomplete-suggestion" key={ `search-result-${ index }` }>
                             <LazyLoadImage effect="opacity" src={    product.images[ 0 ].src } width={ 40 } height={ 40 } alt="product" />
                             <div className="search-name" dangerouslySetInnerHTML={ removeXSSAttacks( matchEmphasize( product.name ) ) }></div>
 

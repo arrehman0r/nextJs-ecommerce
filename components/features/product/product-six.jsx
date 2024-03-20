@@ -15,10 +15,10 @@ function ProductSix( props ) {
 
     // decide if the product is wishlisted
     let isWishlisted;
-    isWishlisted = wishlist.findIndex( item => item.slug === product.slug ) > -1 ? true : false;
+    isWishlisted = wishlist.findIndex( item => item.id === product.id ) > -1 ? true : false;
 
     const showQuickviewHandler = () => {
-        openQuickview( product.slug );
+        openQuickview( product.id );
     }
 
     const wishlistHandler = ( e ) => {
@@ -43,7 +43,7 @@ function ProductSix( props ) {
     return (
         <div className={ `product ${ product.variants.length > 0 ? 'product-variable' : '' } text-center shadow-media cart-full ${ adClass }` }>
             <figure className="product-media">
-                <ALink href={ `/product/default/${ product.slug }` }>
+                <ALink href={ `/product/default/${ product.id }` }>
                     <LazyLoadImage
                         alt="product"
                         src={    product.images[ 0 ].src }
@@ -93,7 +93,7 @@ function ProductSix( props ) {
 
             <div className="product-details">
                 <h3 className="product-name">
-                    <ALink href={ `/product/default/${ product.slug }` }>{ product.name }</ALink>
+                    <ALink href={ `/product/default/${ product.id }` }>{ product.name }</ALink>
                 </h3>
 
                 <div className="product-price">
@@ -112,7 +112,7 @@ function ProductSix( props ) {
 
                 {
                     product.variants.length > 0 ?
-                        <ALink href={ `/product/default/${ product.slug }` } className="btn-product btn-cart" title="Go to product">
+                        <ALink href={ `/product/default/${ product.id }` } className="btn-product btn-cart" title="Go to product">
                             <span>Select Options</span>
                         </ALink> :
                         <a href="#" className="btn-product btn-cart" title="Add to cart" onClick={ addToCartHandler }>

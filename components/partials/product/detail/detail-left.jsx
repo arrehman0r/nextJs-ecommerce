@@ -18,7 +18,7 @@ function DetailLeft( props ) {
                     {
                         product.data.categories.map( ( item, index ) =>
                             <React.Fragment key={ item.name + '-' + index }>
-                                <ALink href={ { pathname: '/shop', query: { category: item.slug } } }>
+                                <ALink href={ { pathname: '/shop', query: { category: item.id } } }>
                                     { item.name }
                                 </ALink>
                                 { index < product.data.categories.length - 1 ? ', ' : '' }

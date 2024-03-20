@@ -106,7 +106,7 @@ function ProductListTwo( props ) {
                     gridType === 'grid' ?
                         <div className={ `row product-wrapper cols-2 cols-sm-3` }>
                             { products.length > 0 && products.map( item =>
-                                <div className="product-wrap" key={ 'shop-' + item.slug }>
+                                <div className="product-wrap" key={ 'shop-' + item.id }>
                                     <ProductTwo product={ item } adClass="" />
                                 </div>
                             ) }
@@ -114,7 +114,7 @@ function ProductListTwo( props ) {
                         :
                         <div className="product-lists product-wrapper">
                             { products.length > 0 && products.map( item =>
-                                <ProductEight product={ item } key={ 'shop-list-' + item.slug } />
+                                <ProductEight product={ item } key={ 'shop-list-' + item.id } />
                             ) }
                         </div>
                 }

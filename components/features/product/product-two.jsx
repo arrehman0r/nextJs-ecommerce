@@ -15,10 +15,10 @@ function ProductTwo( props ) {
 
     // decide if the product is wishlisted
     let isWishlisted;
-    isWishlisted = wishlist.findIndex( item => item.slug === product.slug ) > -1 ? true : false;
+    isWishlisted = wishlist.findIndex( item => item.id === product.id ) > -1 ? true : false;
 
     const showQuickviewHandler = () => {
-        openQuickview( product.slug );
+        openQuickview( product.id );
     }
 
     const wishlistHandler = ( e ) => {
@@ -85,7 +85,7 @@ function ProductTwo( props ) {
                 <div className="product-action-vertical">
                     {
                         product.variations.length > 0 ?
-                            <ALink href={ `/product/default/${ product.slug }` } className="btn-product-icon btn-cart" title="Go to product">
+                            <ALink href={ `/product/default/${ product.id }` } className="btn-product-icon btn-cart" title="Go to product">
                                 <i className="d-icon-arrow-right"></i>
                             </ALink> :
                             <a href="#" className="btn-product-icon btn-cart" title="Add to cart" onClick={ addToCartHandler }>
@@ -121,7 +121,7 @@ function ProductTwo( props ) {
                 }
 
                 <h3 className="product-name">
-                    <ALink href={ `/product/default/${ product.slug }` }>{ product.name }</ALink>
+                    <ALink href={ `/product/default/${ product.id }` }>{ product.name }</ALink>
                 </h3>
 
                 <div className="product-price">
@@ -144,7 +144,7 @@ function ProductTwo( props ) {
                         <span className="tooltiptext tooltip-top">{ toDecimal( product.ratings ) }</span>
                     </div>
 
-                    <ALink href={ `/product/default/${ product.slug }` } className="rating-reviews">( { product.reviews } reviews )</ALink>
+                    <ALink href={ `/product/default/${ product.id }` } className="rating-reviews">( { product.reviews } reviews )</ALink>
                 </div>
             </div>
         </div>

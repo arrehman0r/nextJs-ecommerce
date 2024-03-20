@@ -139,12 +139,12 @@ function SidebarFilterOne ( props ) {
                                                 item.children ?
                                                     <li
                                                         key={ item.name + ' - ' + index }
-                                                        className={ `with-ul overflow-hidden ${ item.slug === query.category || item.children.findIndex( subCat => subCat.slug === query.category ) > -1 ? 'show' : '' } ` }
+                                                        className={ `with-ul overflow-hidden ${ item.id === query.category || item.children.findIndex( subCat => subCat.slug === query.category ) > -1 ? 'show' : '' } ` }
                                                     >
                                                         <SlideToggle collapsed={ true } >
                                                             { ( { onToggle, setCollapsibleElement, toggleState } ) => (
                                                                 <>
-                                                                    <ALink href={ { pathname: router.pathname, query: { category: item.slug, grid: query.grid, type: router.query.type ? router.query.type : null } } } scroll={ false }>{ item.name }
+                                                                    <ALink href={ { pathname: router.pathname, query: { category: item.id, grid: query.grid, type: router.query.type ? router.query.type : null } } } scroll={ false }>{ item.name }
                                                                         <i className={ `fas fa-chevron-down ${ toggleState.toLowerCase() }` } onClick={ e => { onToggle(); e.stopPropagation(); e.preventDefault(); } }></i>
                                                                     </ALink>
 
@@ -166,10 +166,10 @@ function SidebarFilterOne ( props ) {
                                                         </SlideToggle >
                                                     </li> :
                                                     <li
-                                                        className={ query.category === item.slug ? 'show' : '' }
+                                                        className={ query.category === item.id ? 'show' : '' }
                                                         key={ item.name + ' - ' + index }
                                                     >
-                                                        <ALink href={ { pathname: router.pathname, query: { category: item.slug, grid: query.grid, type: router.query.type ? router.query.type : null } } } scroll={ false }>{ item.name }
+                                                        <ALink href={ { pathname: router.pathname, query: { category: item.id, grid: query.grid, type: router.query.type ? router.query.type : null } } } scroll={ false }>{ item.name }
                                                         </ALink>
                                                     </li>
                                             ) )
@@ -211,10 +211,10 @@ function SidebarFilterOne ( props ) {
                                         {
                                             filterData.sizes.map( ( item, index ) =>
                                                 <li
-                                                    className={ containsAttrInUrl( 'sizes', item.slug ) ? 'active' : '' }
+                                                    className={ containsAttrInUrl( 'sizes', item.id ) ? 'active' : '' }
                                                     key={ item + ' - ' + index }
                                                 >
-                                                    <ALink scroll={ false } href={ { pathname: router.pathname, query: { ...query, page: 1, sizes: getUrlForAttrs( 'sizes', item.slug ), type: router.query.type ? router.query.type : null } } }>{ item.name }
+                                                    <ALink scroll={ false } href={ { pathname: router.pathname, query: { ...query, page: 1, sizes: getUrlForAttrs( 'sizes', item.id ), type: router.query.type ? router.query.type : null } } }>{ item.name }
                                                     </ALink>
                                                 </li>
                                             )
@@ -229,10 +229,10 @@ function SidebarFilterOne ( props ) {
                                         {
                                             filterData.colors.map( ( item, index ) =>
                                                 <li
-                                                    className={ containsAttrInUrl( 'colors', item.slug ) ? 'active' : '' }
+                                                    className={ containsAttrInUrl( 'colors', item.id ) ? 'active' : '' }
                                                     key={ item + ' - ' + index }
                                                 >
-                                                    <ALink scroll={ false } href={ { pathname: router.pathname, query: { ...query, page: 1, colors: getUrlForAttrs( 'colors', item.slug ), type: router.query.type ? router.query.type : null } } }>{ item.name }
+                                                    <ALink scroll={ false } href={ { pathname: router.pathname, query: { ...query, page: 1, colors: getUrlForAttrs( 'colors', item.id ), type: router.query.type ? router.query.type : null } } }>{ item.name }
                                                     </ALink>
                                                 </li>
                                             )
@@ -247,10 +247,10 @@ function SidebarFilterOne ( props ) {
                                         {
                                             filterData.brands.map( ( item, index ) =>
                                                 <li
-                                                    className={ containsAttrInUrl( 'brands', item.slug ) ? 'active' : '' }
+                                                    className={ containsAttrInUrl( 'brands', item.id ) ? 'active' : '' }
                                                     key={ item + ' - ' + index }
                                                 >
-                                                    <ALink scroll={ false } href={ { pathname: router.pathname, query: { ...query, page: 1, brands: getUrlForAttrs( 'brands', item.slug ), type: router.query.type ? router.query.type : null } } }>{ item.name }
+                                                    <ALink scroll={ false } href={ { pathname: router.pathname, query: { ...query, page: 1, brands: getUrlForAttrs( 'brands', item.id ), type: router.query.type ? router.query.type : null } } }>{ item.name }
                                                     </ALink>
                                                 </li>
                                             )
