@@ -37,9 +37,10 @@ function CategorySection({ categories }) {
                     </figure>
 
                     <div className="category-content">
-                      <h4 className="category-name font-weight-bold ls-l">
-                        {category?.name}
-                      </h4>
+                      <h4
+                        className="category-name font-weight-bold ls-l"
+                        dangerouslySetInnerHTML={{ __html: category?.name }}
+                      ></h4>
                     </div>
                   </ALink>
                 </div>

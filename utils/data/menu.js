@@ -2,65 +2,28 @@ export const mainMenu = {
     "shop": {
         "variation1": [
             {
-                "title": "Banner With Sidebar",
-                "url": "shop/banner-sidebar"
+                "title": "Leaves Deocrations",
+                "url": "shop/?category=20",
+                 "hot": true
             },
             {
-                "title": "Boxed Banner",
+                "title": "Glass Vase",
                 "url": "shop/boxed-banner"
             },
             {
-                "title": "Infinite Ajaxscroll",
+                "title": "Fairy Lights",
                 "url": "shop/infinite-scroll"
             },
-            {
-                "title": "Horizontal Filter",
-                "url": "shop/horizontal-filter"
-            },
-            {
-                "title": "Navigation Filter",
-                "url": "shop/navigation-filter",
-                "hot": true
-            },
-            {
-                "title": "Off-Canvas Filter",
-                "url": "shop/off-canvas-filter"
-            },
-            {
-                "title": "Right Toggle Sidebar",
-                "url": "shop/right-sidebar"
-            }
+          
         ],
-        "variation2": [
+        "variation2":
+         [
             {
-                "title": "3 Columns Mode",
+                "title": "Party Supplies",
                 "url": "shop/grid/3cols",
                 "new": true
             },
-            {
-                "title": "4 Columns Mode",
-                "url": "shop/grid/4cols"
-            },
-            {
-                "title": "5 Columns Mode",
-                "url": "shop/grid/5cols"
-            },
-            {
-                "title": "6 Columns Mode",
-                "url": "shop/grid/6cols"
-            },
-            {
-                "title": "7 Columns Mode",
-                "url": "shop/grid/7cols"
-            },
-            {
-                "title": "8 Columns Mode",
-                "url": "shop/grid/8cols"
-            },
-            {
-                "title": "List Mode",
-                "url": "shop/?type=list"
-            }
+           
         ]
     },
     "product": {

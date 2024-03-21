@@ -1,123 +1,146 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
-import ALink from '~/components/features/custom-link';
-import Card from '~/components/features/accordion/card';
+import ALink from "~/components/features/custom-link";
+import Card from "~/components/features/accordion/card";
 
-import { mainMenu } from '~/utils/data/menu';
+import { mainMenu } from "~/utils/data/menu";
 
-function MobileMenu( props ) {
-    const [ search, setSearch ] = useState( "" );
-    const [ timer, setTimer ] = useState( null );
-    const router = useRouter();
+function MobileMenu(props) {
+  const [search, setSearch] = useState("");
+  const [timer, setTimer] = useState(null);
+  const router = useRouter();
 
-    useEffect( () => {
-        window.addEventListener( 'resize', hideMobileMenuHandler );
-        document.querySelector( "body" ).addEventListener( "click", onBodyClick );
+  useEffect(() => {
+    window.addEventListener("resize", hideMobileMenuHandler);
+    document.querySelector("body").addEventListener("click", onBodyClick);
 
-        return () => {
-            window.removeEventListener( 'resize', hideMobileMenuHandler );
-            document.querySelector( "body" ).removeEventListener( "click", onBodyClick );
-        }
-    }, [] )
+    return () => {
+      window.removeEventListener("resize", hideMobileMenuHandler);
+      document.querySelector("body").removeEventListener("click", onBodyClick);
+    };
+  }, []);
 
-    useEffect( () => {
-        setSearch( "" );
-    }, [ router.query.slug ] )
+  useEffect(() => {
+    setSearch("");
+  }, [router.query.slug]);
 
-    const hideMobileMenuHandler = () => {
-        if ( window.innerWidth > 991 ) {
-            document.querySelector( 'body' ).classList.remove( 'mmenu-active' );
-        }
+  const hideMobileMenuHandler = () => {
+    if (window.innerWidth > 991) {
+      document.querySelector("body").classList.remove("mmenu-active");
     }
+  };
 
-    const hideMobileMenu = () => {
-        document.querySelector( 'body' ).classList.remove( 'mmenu-active' );
-    }
+  const hideMobileMenu = () => {
+    document.querySelector("body").classList.remove("mmenu-active");
+  };
 
-    function onSearchChange( e ) {
-        setSearch( e.target.value );
-    }
+  function onSearchChange(e) {
+    setSearch(e.target.value);
+  }
 
-    function onBodyClick( e ) {
-        if ( e.target.closest( '.header-search' ) ) return e.target.closest( '.header-search' ).classList.contains( 'show-results' ) || e.target.closest( '.header-search' ).classList.add( 'show-results' );
+  function onBodyClick(e) {
+    if (e.target.closest(".header-search"))
+      return (
+        e.target.closest(".header-search").classList.contains("show-results") ||
+        e.target.closest(".header-search").classList.add("show-results")
+      );
 
-        document.querySelector( '.header-search.show' ) && document.querySelector( '.header-search.show' ).classList.remove( 'show' );
-        document.querySelector( '.header-search.show-results' ) && document.querySelector( '.header-search.show-results' ).classList.remove( 'show-results' );
-    }
+    document.querySelector(".header-search.show") &&
+      document.querySelector(".header-search.show").classList.remove("show");
+    document.querySelector(".header-search.show-results") &&
+      document
+        .querySelector(".header-search.show-results")
+        .classList.remove("show-results");
+  }
 
-    function onSubmitSearchForm( e ) {
-        e.preventDefault();
-        router.push( {
-            pathname: '/shop',
-            query: {
-                search: search
-            }
-        } );
-    }
+  function onSubmitSearchForm(e) {
+    e.preventDefault();
+    router.push({
+      pathname: "/shop",
+      query: {
+        search: search,
+      },
+    });
+  }
 
-    return (
-        <div className="mobile-menu-wrapper">
-            <div className="mobile-menu-overlay" onClick={ hideMobileMenu }>
-            </div>
+  return (
+    <div className="mobile-menu-wrapper">
+      <div className="mobile-menu-overlay" onClick={hideMobileMenu}></div>
 
-            <ALink className="mobile-menu-close" href="#" onClick={ hideMobileMenu }><i className="d-icon-times"></i></ALink>
+      <ALink className="mobile-menu-close" href="#" onClick={hideMobileMenu}>
+        <i className="d-icon-times"></i>
+      </ALink>
 
-            <div className="mobile-menu-container scrollable">
-                <form action="#" className="input-wrapper" onSubmit={ onSubmitSearchForm }>
-                    <input type="text" className="form-control" name="search" autoComplete="off" value={ search } onChange={ onSearchChange }
-                        placeholder="Search your keyword..." required />
-                    <button className="btn btn-search" type="submit">
-                        <i className="d-icon-search"></i>
-                    </button>
-                </form>
+      <div className="mobile-menu-container scrollable">
+        <form
+          action="#"
+          className="input-wrapper"
+          onSubmit={onSubmitSearchForm}
+        >
+          <input
+            type="text"
+            className="form-control"
+            name="search"
+            autoComplete="off"
+            value={search}
+            onChange={onSearchChange}
+            placeholder="Search your keyword..."
+            required
+          />
+          <button className="btn btn-search" type="submit">
+            <i className="d-icon-search"></i>
+          </button>
+        </form>
 
-                <ul className="mobile-menu mmenu-anim">
-                    <li>
-                        <ALink href="/">Home</ALink>
-                    </li>
-
-                    <li>
-                        <Card title="categories" type="mobile" url="/shop">
-                            <ul>
-                                <li>
-                                    <Card title="Variations 1" type="mobile">
-                                        <ul>
-                                            {
-                                                mainMenu.shop.variation1.map( ( item, index ) => (
-                                                    <li key={ `shop-${ item.title }` }>
-                                                        <ALink href={ '/' + item.url }>
-                                                            { item.title }
-                                                            { item.hot ? <span className="tip tip-hot">Hot</span> : "" }
-                                                        </ALink>
-                                                    </li>
-                                                ) )
-                                            }
-                                        </ul>
-                                    </Card>
-                                </li>
-                                <li>
-                                    <Card title="Variations 2" type="mobile">
-                                        <ul>
-                                            {
-                                                mainMenu.shop.variation2.map( ( item, index ) => (
-                                                    <li key={ `shop-${ item.title }` }>
-                                                        <ALink href={ '/' + item.url }>
-                                                            { item.title }
-                                                            { item.new ? <span className="tip tip-new">New</span> : "" }
-                                                        </ALink>
-                                                    </li>
-                                                ) )
-                                            }
-                                        </ul>
-                                    </Card>
-                                </li>
-                            </ul>
-                        </Card>
-                    </li>
-
-                    <li>
-                        <Card title="Products" type="mobile" url="/elements/products">
+        <ul className="mobile-menu mmenu-anim">
+          <li>
+            <ALink href="/">Home</ALink>
+          </li>
+          <li>
+            <Card title="categories" type="mobile" url="/shop">
+              <ul>
+                <li>
+                  <Card title="Home & Decor" type="mobile">
+                    <ul>
+                      {mainMenu.shop.variation1.map((item, index) => (
+                        <li key={`shop-${item.title}`}>
+                          <ALink href={"/" + item.url}>
+                            {item.title}
+                            {item.hot ? (
+                              <span className="tip tip-hot">Hot</span>
+                            ) : (
+                              ""
+                            )}
+                          </ALink>
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
+                </li>
+                <li>
+                  <Card title="Party Decorations" type="mobile">
+                    <ul>
+                      {mainMenu.shop.variation2.map((item, index) => (
+                        <li key={`shop-${item.title}`}>
+                          <ALink href={"/" + item.url}>
+                            {item.title}
+                            {item.new ? (
+                              <span className="tip tip-new">New</span>
+                            ) : (
+                              ""
+                            )}
+                          </ALink>
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
+                </li>
+              </ul>
+            </Card>
+          </li>
+          {/* <li>
+                        <Card title="All Products" type="mobile" url="/elements/products">
                             <ul>
                                 <li>
                                     <Card title="Product Pages" type="mobile">
@@ -157,8 +180,8 @@ function MobileMenu( props ) {
                     </li>
 
                     <li>
-                        <Card title="Pages" type="mobile" url="/pages/about-us">
-                            <ul>
+                        <Card title="Contact" type="mobile" url="/pages/contact-us">
+                           <ul>
                                 {
                                     mainMenu.other.map( ( item, index ) => (
                                         <li key={ `other-${ item.title }` }>
@@ -175,7 +198,7 @@ function MobileMenu( props ) {
 
                     <li>
                         <Card title="Blog" type="mobile" url="/blog/classic">
-                            <ul>
+                        <ul>
                                 {
                                     mainMenu.blog.map( ( item, index ) => (
                                         item.subPages ?
@@ -207,8 +230,8 @@ function MobileMenu( props ) {
                     </li>
 
                     <li>
-                        <Card title="elements" type="mobile" url="/elements">
-                            <ul>
+                        <Card title="About" type="mobile" url="pages/about-us">
+                          <ul>
                                 {
                                     mainMenu.element.map( ( item, index ) => (
                                         <li key={ `elements-${ item.title }` }>
@@ -218,19 +241,37 @@ function MobileMenu( props ) {
                                         </li>
                                     ) )
                                 }
-                            </ul>
+                            </ul> 
                         </Card>
-                    </li>
-
-                    <li className="mb-4 border-no"><a href="">Buy Now!</a></li>
-
-                    <li><ALink href={ '/pages/account' }>Login</ALink></li>
-                    <li><ALink href={ '/pages/cart' }>My Cart</ALink></li>
-                    <li><ALink href={ '/pages/wishlist' }>Wishlist</ALink></li>
-                </ul>
-            </div>
-        </div>
-    )
+                    </li> */}
+          <li className=" border-no">
+            <a href="/elements/products">All Products</a>
+          </li>{" "}
+          <li className=" border-no">
+            <a href="/pages/contact-us">Contact</a>
+          </li>{" "}
+          <li className=" border-no">
+            <a href="">Blog</a>
+          </li>{" "}
+          <li className=" border-no">
+            <a href="/pages/about-us">About</a>
+          </li>
+          <li className="mb-4 border-no">
+            <a href="">Buy Now!</a>
+          </li>
+          <li>
+            <ALink href={"/pages/account"}>Login</ALink>
+          </li>
+          <li>
+            <ALink href={"/pages/cart"}>My Cart</ALink>
+          </li>
+          <li>
+            <ALink href={"/pages/wishlist"}>Wishlist</ALink>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
 }
 
-export default React.memo( MobileMenu );
+export default React.memo(MobileMenu);
