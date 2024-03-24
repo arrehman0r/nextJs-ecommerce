@@ -13,6 +13,7 @@ import { wishlistActions } from "~/store/wishlist";
 import { cartActions } from "~/store/cart";
 
 import { toDecimal } from "~/utils";
+import ShippingTime from "~/components/features/shipping";
 
 function DetailOne(props) {
   let router = useRouter();
@@ -36,9 +37,7 @@ function DetailOne(props) {
     colors = [],
     sizes = [];
   isWishlisted =
-    wishlist.findIndex((item) => item.id === product.id) > -1
-      ? true
-      : false;
+    wishlist.findIndex((item) => item.id === product.id) > -1 ? true : false;
 
   if (product && product.variations.length > 0) {
     if (product.variations[0].size)
@@ -224,9 +223,7 @@ function DetailOne(props) {
         <span className="product-brand">
           {product.categories.map((item, index) => (
             <React.Fragment key={item.name + "-" + index}>
-              <ALink
-                href={{ pathname: "/shop", query: { category: item.id } }}
-              >
+              <ALink href={{ pathname: "/shop", query: { category: item.id } }}>
                 {item.name}
               </ALink>
               {index < product.categories.length - 1 ? ", " : ""}
@@ -236,21 +233,17 @@ function DetailOne(props) {
       </div>
 
       <div className="product-price mb-2">
-        
         {product.sale_price !== product.regular_price ? (
           product.variations.length === 0 ||
           (product.variations.length > 0 &&
             !product.variations[0].sale_price) ? (
-            <> 
-              <ins className="new-price">
-                Rs.{product.sale_price}
-              </ins>
+            <>
+              <ins className="new-price">Rs.{product.sale_price}</ins>
               <del className="old-price">Rs.{product.regular_price}</del>
             </>
-          ) : ( 
+          ) : (
             <del className="new-price">
-               
-              ${toDecimal(product.sale_price)} – $
+              Rs.{toDecimal(product.sale_price)} – Rs.
               {toDecimal(product.regular_price)}
             </del>
           )
@@ -265,6 +258,8 @@ function DetailOne(props) {
       ) : (
         ""
       )}
+
+      <ShippingTime />
 
       <div className="ratings-container">
         <div className="ratings-full">
@@ -282,8 +277,11 @@ function DetailOne(props) {
         </ALink>
       </div>
 
-      <div className="product-short-desc" dangerouslySetInnerHTML={{ __html: product.short_description }} />
-     
+      <div
+        className="product-short-desc"
+        dangerouslySetInnerHTML={{ __html: product.short_description }}
+      />
+
       {product && product.variations.length > 0 ? (
         <>
           {product.variations[0].color ? (
@@ -364,22 +362,20 @@ function DetailOne(props) {
                         <div className="product-price mb-0">
                           <ins className="new-price">
                             $
-                            {toDecimal(product.variations[curIndex].regular_price)}
+                            {toDecimal(
+                              product.variations[curIndex].regular_price
+                            )}
                           </ins>
                           <del className="old-price">
                             $
-                            {toDecimal(
-                              product.variations[curIndex].sale_price
-                            )}
+                            {toDecimal(product.variations[curIndex].sale_price)}
                           </del>
                         </div>
                       ) : (
                         <div className="product-price mb-0">
                           <ins className="new-price">
                             $
-                            {toDecimal(
-                              product.variations[curIndex].sale_price
-                            )}
+                            {toDecimal(product.variations[curIndex].sale_price)}
                           </ins>
                         </div>
                       )

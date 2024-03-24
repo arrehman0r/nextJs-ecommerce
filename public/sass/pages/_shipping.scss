@@ -1,0 +1,14 @@
+// shipping section
+
+.shipping {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 2rem;
+  background-color: #f85705;
+
+  p {
+    margin: 0;
+    color: white;
+  }
+}
