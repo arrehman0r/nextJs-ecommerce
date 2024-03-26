@@ -1,5 +1,5 @@
 import React from "react";
-import Shipping from "~/public/svg";
+import { Shipping } from "~/public/svg";
 
 export default function ShippingTime() {
   const currentDate = new Date();
@@ -15,11 +15,14 @@ export default function ShippingTime() {
   const formattedDelivery = deliveryDate.toLocaleDateString(undefined, options);
 
   return (
-    <div className="shipping">
+    <div className="shipping-time">
       <Shipping />
-      <p>
-        Get it by {formattedShipping} - {formattedDelivery}
-      </p>
+      <div>
+        <p>
+          Get it by {formattedShipping} - {formattedDelivery}
+        </p>
+        <h1>Free Delivery on Rs.2000</h1>
+      </div>
     </div>
   );
 }

@@ -1,14 +1,27 @@
-// shipping section
-
-.shipping {
-  display: flex;
+.shipping-time {
+  display: inline-flex;
   align-items: center;
   margin-bottom: 2rem;
   gap: 2rem;
   background-color: #f85705;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  padding-right: 6rem;
 
   p {
     margin: 0;
     color: white;
+    font-weight: bold;
+  }
+  h1 {
+    font-size: 14px;
+    margin: 0;
+    color: #fff;
+    font-weight: 200;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .shipping-time {
+    display: flex;
   }
 }

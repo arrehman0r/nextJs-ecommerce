@@ -14,6 +14,7 @@ import { cartActions } from "~/store/cart";
 
 import { toDecimal } from "~/utils";
 import ShippingTime from "~/components/features/shipping";
+import FreeReturn from "~/components/features/free-returns";
 
 function DetailOne(props) {
   let router = useRouter();
@@ -216,22 +217,21 @@ function DetailOne(props) {
       )}
 
       <h2 className="product-name">{product?.name}</h2>
-
+      {/* 
       <div className="product-meta">
         SKU: <span className="product-sku">{product?.sku}</span>
-        CATEGORIES:{" "}
+        CATEGORIES:
         <span className="product-brand">
           {product.categories.map((item, index) => (
             <React.Fragment key={item.name + "-" + index}>
-              <ALink href={{ pathname: "/shop", query: { category: item.id } }}>
-                {item.name}
-              </ALink>
-              {index < product.categories.length - 1 ? ", " : ""}
+              {index > 0 && ", "}{" "}
+            
+              {item.name}
             </React.Fragment>
           ))}
         </span>
-      </div>
-
+      </div> */}
+      <FreeReturn />
       <div className="product-price mb-2">
         {product.sale_price !== product.regular_price ? (
           product.variations.length === 0 ||
@@ -258,9 +258,9 @@ function DetailOne(props) {
       ) : (
         ""
       )}
-
-      <ShippingTime />
-
+      <div>
+        <ShippingTime />
+      </div>
       <div className="ratings-container">
         <div className="ratings-full">
           <span
@@ -478,7 +478,7 @@ function DetailOne(props) {
                         style={{ width: 20 * product.ratings + "%" }}
                       ></span>
                       <span className="tooltiptext tooltip-top">
-                        {toDecimal(product.ratings)}
+                        {toDecimal(product.rating_count)}
                       </span>
                     </div>
 
