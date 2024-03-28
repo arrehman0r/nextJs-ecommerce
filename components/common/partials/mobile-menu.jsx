@@ -97,7 +97,7 @@ function MobileMenu(props) {
           <li>
             <ALink href="/">Home</ALink>
           </li>
-          <li>
+          {/* <li>
             <Card title="categories" type="mobile" url="/shop">
               <ul>
                 <li>
@@ -138,7 +138,7 @@ function MobileMenu(props) {
                 </li>
               </ul>
             </Card>
-          </li>
+          </li> */}
           {/* <li>
                         <Card title="All Products" type="mobile" url="/elements/products">
                             <ul>

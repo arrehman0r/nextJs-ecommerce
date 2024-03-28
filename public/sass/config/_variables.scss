@@ -3,10 +3,10 @@
 ------------------------------------------- */
 
 // 1. Colors
-$primary-color: #26c !default;
-$primary-color-dark:  #222 !default;
+$primary-color: #007bc2 !default;
+$primary-color-dark: #222 !default;
 $secondary-color: #d26e4b !default;
-$alert-color: #b10001 !default; 
+$alert-color: #b10001 !default;
 $success-color: #a8c26e !default;
 $body-color: #666 !default;
 $dark-color: #222 !default;
@@ -20,11 +20,26 @@ $white-color: #fff !default;
 $alt-font-family: sans-serif !default;
 $second-font-family: Poppins, $alt-font-family !default;
 $font-family: Poppins, $alt-font-family !default;
-$third-font-family: 'Open Sans', $alt-font-family !default;
+$third-font-family: "Open Sans", $alt-font-family !default;
 
 // 3. Breakpoints
-$breakpoints: (xs: 480px, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1600px, xlst: 1920px);
-$max-breakpoints: (xs: 479px, sm: 575px, md: 767px, lg: 991px, xl: 1199px, xxl: 1599px);
+$breakpoints: (
+  xs: 480px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px,
+  xlst: 1920px,
+);
+$max-breakpoints: (
+  xs: 479px,
+  sm: 575px,
+  md: 767px,
+  lg: 991px,
+  xl: 1199px,
+  xxl: 1599px,
+);
 
 // 4. Link Colors
 $social-facebook: #3b5998;

@@ -10,7 +10,7 @@ import { fadeIn } from "~/utils/data/keyframes";
 function CategorySection({ categories }) {
   return (
     <Reveal keyframes={fadeIn} delay={300} duration={1200} triggerOnce>
-      <section className="pt-10 mt-7">
+      <section className=" mt-7">
         <div className="container">
           <h2 className="title title-center mb-5">Browse Our Categories</h2>
 
