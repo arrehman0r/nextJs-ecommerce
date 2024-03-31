@@ -81,6 +81,17 @@ export default function StickyFooter() {
     tmp = e.currentTarget.scrollY;
   };
 
+  // Phone number to which you want to send the message
+  const phoneNumber = "03188444029";
+
+  // Message you want to send
+  const message = "Hello! I have a question about your products.";
+
+  // URL for the WhatsApp API
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+    message
+  )}`;
+
   return (
     <div className="sticky-footer sticky-content fix-bottom">
       <ALink href="/" className="sticky-link active">
@@ -95,9 +106,14 @@ export default function StickyFooter() {
         <i className="d-icon-heart"></i>
         <span>Wishlist</span>
       </ALink>
-      <ALink href="/pages/account" className="sticky-link">
-        <i className="d-icon-user"></i>
-        <span>Account</span>
+      <ALink
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="sticky-link"
+      >
+        <i className="d-icon-phone"></i>
+        <span>Whatsapp</span>
       </ALink>
 
       <FooterSearchBox />
