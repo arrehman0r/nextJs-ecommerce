@@ -47,7 +47,7 @@ function ProductOne(props) {
     e.preventDefault();
     addToCart({ ...product, qty: 1, price: product.sale_price });
   };
-
+  console.log("this is product:", product);
   return (
     <div className={`product shadow-media ${adClass}`}>
       <figure className="product-media">
