@@ -69,7 +69,7 @@ function MainMenu() {
         <li
           className={`  ${
             pathname.includes("/elements/products") &&
-            !pathname.includes("/elements")
+            !pathname.includes("/elements/products/")
               ? "active"
               : ""
           }`}
@@ -125,8 +125,8 @@ function MainMenu() {
         {/* <li className={ `submenu  ${ pathname.includes( '/pages' ) ? 'active' : '' }` }> */}
         {/* just add submenu class */}
 
-        <li className={`  ${pathname.includes("/pages") ? "active" : ""}`}>
-          <ALink href="pages/contact-us">Contact</ALink>
+        <li className={`  ${pathname.includes("/pages/contact-us") ? "active" : ""}`}>
+          <ALink href="/pages/contact-us">Contact</ALink>
 
           {/* <ul>
                         {
@@ -195,8 +195,8 @@ function MainMenu() {
                     </ul>
                 </li> */}
 
-        <li>
-          <ALink href="">About Us</ALink>
+<li className={`  ${pathname.includes("/pages/about-us") ? "active" : ""}`}>
+          <ALink href="/pages/about-us">About Us</ALink>
         </li>
       </ul>
     </nav>

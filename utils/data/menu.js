@@ -101,11 +101,11 @@ export const mainMenu = {
     "other": [
         {
             "title": "About",
-            "url": "pages/about-us"
+            "url": "/pages/about-us"
         },
         {
             "title": "Contact Us",
-            "url": "pages/contact-us"
+            "url": "/pages/contact-us"
         },
         {
             "title": "My Account",

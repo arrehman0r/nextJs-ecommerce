@@ -29,7 +29,7 @@ function ContactUs () {
             <nav className="breadcrumb-nav">
                 <div className="container">
                     <ul className="breadcrumb">
-                        <li><ALink href="/"><i className="d-icon-home"></i></ALink></li>
+                        <li><ALink href="/pages/contact-us"><i className="d-icon-home"></i></ALink></li>
                         <li>Contact Us</li>
                     </ul>
                 </div>

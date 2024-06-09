@@ -43,7 +43,7 @@ function AboutUs() {
             <nav className="breadcrumb-nav">
                 <div className="container">
                     <ul className="breadcrumb">
-                        <li><ALink href="/"><i className="d-icon-home"></i></ALink></li>
+                        <li><ALink href="/pages/about-us"><i className="d-icon-home"></i></ALink></li>
                         <li>About Us</li>
                     </ul>
                 </div>
@@ -51,8 +51,8 @@ function AboutUs() {
             <div className="page-header pl-4 pr-4"
                 style={ { backgroundImage: `url( ./images/page-header/about-us.jpg )`, backgroundColor: "#3C63A4" } }>
                 <h3 className="page-subtitle font-weight-bold">Welcome to Party</h3>
-                <h1 className="page-title font-weight-bold lh-1 text-white text-capitalize">Our Services</h1>
-                <p className="page-desc text-white mb-0">Lorem quis bibendum auctor, nisi elit consequat ipsum,<br /> nec sagittis sem nibh id elit.</p>
+                <h1 className="page-title font-weight-bold lh-1 text-white text-capitalize">About Us</h1>
+                <p className="page-desc text-white mb-0">We Are Providing Premuim Quality,<br /> Birthday and Party Decorations Items.</p>
             </div>
 
             <div className="page-content mt-10 pt-10">
@@ -64,13 +64,13 @@ function AboutUs() {
                                     <h5 className="section-subtitle lh-2 ls-md font-weight-normal">01. What We Do</h5>
                                     <h3 className="section-title lh-1 font-weight-bold">Provide perfect and practical services
                                     </h3>
-                                    <p className="section-desc">Lorem quis bibendum auctar, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+                                    <p className="section-desc">All items that you need to celebrate your and your love ones special day.</p>
                                 </div>
                                 <div className="col-lg-8 ">
                                     <div className="row">
                                         <div className="col-md-4 mb-4">
                                             <div className="counter text-center text-dark">
-                                                <CountUp start={ 0 } end={ 35 } duration={ 4 }>
+                                                <CountUp start={ 0 } end={ 100 } duration={ 4 }>
                                                     { ( { countUpRef, start } ) => (
                                                         <div className="count-to">
                                                             <span ref={ countUpRef } />
@@ -78,13 +78,13 @@ function AboutUs() {
                                                         </div>
                                                     ) }
                                                 </CountUp>
-                                                <h5 className="count-title font-weight-bold text-body ls-md">Business Year</h5>
-                                                <p className="text-grey mb-0">Lorem ipsum dolor sit<br />amet, conctetur adipisci elit. viverra erat orci.</p>
+                                                <h5 className="count-title font-weight-bold text-body ls-md">Chat Response</h5>
+                                                <p className="text-grey mb-0">Our team is fully active<br />24/7 team is available on chat.</p>
                                             </div>
                                         </div>
                                         <div className="col-md-4 mb-4">
                                             <div className="counter text-center text-dark">
-                                                <CountUp start={ 0 } end={ 50 } duration={ 4 }>
+                                                <CountUp start={ 0 } end={ 100 } duration={ 4 }>
                                                     { ( { countUpRef, start } ) => (
                                                         <div className="count-to">
                                                             <span ref={ countUpRef } />
@@ -92,13 +92,13 @@ function AboutUs() {
                                                         </div>
                                                     ) }
                                                 </CountUp>
-                                                <h5 className="count-title font-weight-bold text-body ls-md">Design Brands</h5>
-                                                <p className="text-grey mb-0">Lorem ipsum dolor sit<br />amet, conctetur adipisci elit. viverra erat orci.</p>
+                                                <h5 className="count-title font-weight-bold text-body ls-md">Shipping Rate</h5>
+                                                <p className="text-grey mb-0">Fast shipment rate<br />we process out orders daily.</p>
                                             </div>
                                         </div>
                                         <div className="col-md-4 mb-4">
                                             <div className="counter text-center text-dark">
-                                                <CountUp start={ 0 } end={ 130 } duration={ 4 }>
+                                                <CountUp start={ 0 } end={ 100 } duration={ 4 }>
                                                     { ( { countUpRef, start } ) => (
                                                         <div className="count-to">
                                                             <span ref={ countUpRef } />
@@ -106,8 +106,8 @@ function AboutUs() {
                                                         </div>
                                                     ) }
                                                 </CountUp>
-                                                <h5 className="count-title font-weight-bold text-body ls-md">Team Members</h5>
-                                                <p className="text-grey mb-0">Lorem ipsum dolor sit<br />amet, conctetur adipisci elit. viverra erat orci.</p>
+                                                <h5 className="count-title font-weight-bold text-body ls-md">Hight Quality</h5>
+                                                <p className="text-grey mb-0">Providing premium<br />is our first priority.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@ function AboutUs() {
                                 <div className="col-md-7 mb-4">
                                     <figure>
                                         <LazyLoadImage
-                                            src="./images/subpages/customer.jpg"
+                                            src="/images/subpages/customer.jpg"
                                             alt="Happy Customer"
                                             width="580"
                                             height="507"
@@ -138,18 +138,18 @@ function AboutUs() {
                                     <h5 className="section-subtitle lh-2 ls-md font-weight-normal">02. Happy Customer</h5>
                                     <h3 className="section-title lh-1 font-weight-bold">Provide fashionable and<br />qualifed products</h3>
                                     <p className="section-desc text-grey">
-                                        Already millions of people are very satisfied by thi.<br />
-                                        s page builder and the number is growing more and more. Technolog<br />
-                                        developing, requirements are increasing. Party has brought.
+                                        Already millions of people are very satisfied by our store.<br />
+                                       and the number is growing more and more.<br />
+                                       
                                     </p>
-                                    <ALink href="#" className="btn btn-dark btn-link btn-underline ls-m">Visit Our Store<i className="d-icon-arrow-right"></i></ALink>
+                                    <ALink href="/" className="btn btn-dark btn-link btn-underline ls-m">Visit Our Store<i className="d-icon-arrow-right"></i></ALink>
                                 </div>
                             </div>
                         </div>
                     </section>
                 </Reveal>
 
-                <Reveal keyframes={ fadeIn } delay="50" duration="1000" triggerOnce>
+                {/* <Reveal keyframes={ fadeIn } delay="50" duration="1000" triggerOnce>
                     <section className="store-section pb-10">
                         <div className="container">
                             <div className="row align-items-center">
@@ -180,9 +180,9 @@ function AboutUs() {
                             </div>
                         </div>
                     </section>
-                </Reveal>
+                </Reveal> */}
 
-                <Reveal keyframes={ fadeIn } delay="50" duration="1000" triggerOnce>
+                {/* <Reveal keyframes={ fadeIn } delay="50" duration="1000" triggerOnce>
                     <section className="brand-section grey-section pt-10 pb-10">
                         <div className="container mt-8 mb-10">
                             <h5 className="section-subtitle lh-2 ls-md font-weight-normal mb-1 text-center">04. Our Clients</h5>
@@ -210,9 +210,9 @@ function AboutUs() {
                             </OwlCarousel>
                         </div>
                     </section>
-                </Reveal>
+                </Reveal> */}
 
-                <Reveal keyframes={ fadeIn } delay="50" duration="1000" triggerOnce>
+                {/* <Reveal keyframes={ fadeIn } delay="50" duration="1000" triggerOnce>
                     <section className="team-section pt-8 mt-10 pb-10 mb-6">
                         <div className="container">
                             <h5 className="section-subtitle lh-2 ls-md font-weight-normal mb-1 text-center">05. Our Leaders</h5>
@@ -316,7 +316,7 @@ function AboutUs() {
                             </div>
                         </div>
                     </section>
-                </Reveal>
+                </Reveal> */}
             </div>
         </main>
     )
