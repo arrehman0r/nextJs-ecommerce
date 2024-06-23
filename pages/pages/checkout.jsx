@@ -34,13 +34,11 @@ function Checkout(props) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log("name:",name,"valeu:",value)
     setCustomerDetails((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleCreateOrder = async (e) => {
     e.preventDefault();
-    console.log("control is on handleCart",customerDetails)
     const lineItems = cartList.map(item => ({
         product_id: item.id,
         // variation_id: item.variationId, // If variationId exists

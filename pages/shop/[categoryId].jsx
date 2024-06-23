@@ -9,12 +9,12 @@ import { getAllCategories } from "~/server/axiosApi";
 
 export async function getStaticPaths() {
   const categories = await getAllCategories(); // Implement this function to fetch category IDs
-  console.log("all categories.......", categories);
+
   // Generate the paths based on the category IDs
   const paths = categories.map(({ id }) => ({
     params: { categoryId: String(id) },
   }));
-  console.log("paths", paths);
+
   return { paths, fallback: false }; // Set fallback to false if you know all possible categories
 }
 
