@@ -29,6 +29,9 @@ export const makeRequest = async (type, path, body, options={}) => {
     })
     .catch(function (error) {
       console.log(error, "error");
+
+
+      
       if (error.code === 401) {
         // ToastNotification("error", "Session expired. Please login again");
       }else if (error.code === 'ECONNABORTED' ) {
@@ -41,8 +44,8 @@ export const makeRequest = async (type, path, body, options={}) => {
 
 instance.interceptors.request.use(
   (config) => {
-    const username = "ck_3a23d88a3295dc44f0587aa0aaf9a932b78af9da";
-    const password = "cs_51f79346476a84905ee795618f390d6619900ab0";
+    const username = "ck_b25676b8d09eb93723809e56bcc70767830ebbe4";
+    const password = "cs_d70f7243406cc40887939eb2df4bb4bf0515ab4b";
     config.auth = {
       username,
       password,

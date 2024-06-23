@@ -8,6 +8,7 @@ import ALink from "~/components/features/custom-link";
 import { fadeIn } from "~/utils/data/keyframes";
 
 function CategorySection({ categories }) {
+  const sortedCategories = categories?.sort((a, b) => b.name.localeCompare(a.name));
   return (
     <Reveal keyframes={fadeIn} delay={300} duration={1200} triggerOnce>
       <section className=" mt-7">
@@ -15,10 +16,10 @@ function CategorySection({ categories }) {
           <h2 className="title title-center mb-5">Browse Our Categories</h2>
 
           <div className="row">
-            {console.log("cast===", categories)}
-            {categories?.map((category) => (
+            
+            {sortedCategories?.map((category) => (
               <div className="col-xs-6 col-lg-3 mb-4" key={category?.id}>
-                {console.log("selexcted id ", category?.id)}
+               
                 <div className="category category-default1 category-absolute banner-radius overlay-zoom">
                   <ALink
                     href={{
