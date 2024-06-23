@@ -133,11 +133,11 @@ function ProductTwo(props) {
         </div>
 
         <div className="product-action">
-          <ALink
-            href="#"
+   
+         <ALink href={`/product/default/${product.id}`}
             className="btn-product btn-quickview"
             title="Quick View"
-            onClick={showQuickviewHandler}
+            // onClick={showQuickviewHandler}
           >
             Quick View
           </ALink>

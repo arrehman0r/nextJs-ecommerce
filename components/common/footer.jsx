@@ -50,7 +50,7 @@ export default function Footer () {
                                     </li>
                                     <li>
                                         <label>Address: </label>
-                                        <ALink href="#">307 Walton Road, Lahore, Pakistan</ALink>
+                                        <ALink href="#">DHA Phase 2 Walton Road, Lahore, Pakistan</ALink>
                                     </li>
                                     <li>
                                         <label>WORKING DAYS / HOURS: </label>
