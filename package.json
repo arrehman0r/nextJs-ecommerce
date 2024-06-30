@@ -34,6 +34,7 @@
     "react-countdown": "^2.3.2",
     "react-countup": "^6.0.0",
     "react-dom": "^18.2.0",
+    "react-facebook-pixel": "^1.0.4",
     "react-helmet": "^6.1.0",
     "react-image-lightbox": "^5.1.4",
     "react-image-magnifiers": "^1.4.0",
