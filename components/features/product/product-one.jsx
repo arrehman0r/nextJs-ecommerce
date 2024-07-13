@@ -54,14 +54,14 @@ function ProductOne(props) {
         <ALink href={`/product/default/${product.id}`}>
           <LazyLoadImage
             alt="product"
-            src={product.images[0].src}
+            src={product.images[0]?.src}
             threshold={500}
             effect="opacity"
             width="300"
             height="338"
           />
 
-          {product.images.length >= 2 ? (
+          {product.images?.length >= 2 ? (
             <LazyLoadImage
               alt="product"
               src={product.images[1].src}
