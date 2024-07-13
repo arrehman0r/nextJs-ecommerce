@@ -11,13 +11,13 @@ import { demoActions } from '~/store/demo';
 import { currentDemo } from '~/server/queries';
 
 import "~/public/sass/style.scss";
-import ReactPixel from 'react-facebook-pixel';
+// import ReactPixel from 'react-facebook-pixel';
 
 const App = ({ Component, pageProps }) => {
     const store = useStore();
 
     useEffect(() => {
-        ReactPixel.init('308078109064492');
+        // ReactPixel.init('308078109064492');
         if (store.getState().demo.current !== currentDemo) {
             store.dispatch(demoActions.refreshStore(currentDemo));
         }
