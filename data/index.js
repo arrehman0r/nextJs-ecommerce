@@ -28,6 +28,7 @@ export async function getStaticProps({ params }) {
       props: {
         categories: [],
         categoryProducts: [],
+        product: null
       },
     };
   }

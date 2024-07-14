@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import Helmet from "react-helmet";
-import OwlCarousel from "~/components/features/owl-carousel";
+// import OwlCarousel from "~/components/features/owl-carousel";
 import MediaOne from "~/components/partials/product/media/media-one";
 import DetailOne from "~/components/partials/product/detail/detail-one";
 import DescOne from "~/components/partials/product/desc/desc-one";
 import RelatedProducts from "~/components/partials/product/related-products";
-import { mainSlider17 } from "~/utils/data/carousel";
+// import { mainSlider17 } from "~/utils/data/carousel";
 import { getProduct } from "~/server/axiosApi";
 import { getAllProducts } from "../../../server/axiosApi";
 
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
   // Fetch a list of all product IDs from your backend (adjust the API endpoint as needed)
   const products = await getAllProducts();
   // Extract IDs from products and convert them to strings
-  const paths = products.map((product) => ({
+  const paths = products?.map((product) => ({
     params: { slug: String(product.id) },
   }));
 
@@ -28,7 +28,7 @@ export async function getStaticProps({ params }) {
     const product = await getProduct(slug);
     // Fetch related products
     const relatedProducts = await Promise.all(
-      product.related_ids.map(async (id) => await getProduct(id))
+      product?.related_ids?.map(async (id) => await getProduct(id))
     );
     return { props: { product, relatedProducts } };
   } catch (error) {
