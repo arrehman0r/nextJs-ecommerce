@@ -20,6 +20,36 @@ This is a Next.js template for building an eCommerce website that fetches produc
 - **Redux Saga:** A middleware library for managing side effects in Redux applications.
 - **Redux Persist:** Persist and rehydrate a Redux store.
 
+## Setup Guide
+
+1. **Clone the Repository**
+2. **Install Dependencies**
+3. **Configure WooCommerce REST API**
+- Log in to your WordPress admin panel
+- Navigate to WooCommerce > Settings > Advanced > REST API
+- Click on "Add Key"
+- Generate new API keys (Consumer Key and Consumer Secret)
+
+4. **Update API Configuration**
+- Go to the `server` folder in the project
+- Open `instance.js`
+- Replace the `username` and `password` in the interceptor with your generated Consumer Key and Consumer Secret:
+  ```javascript
+  const username = "your_consumer_key";
+  const password = "your_consumer_secret";
+  ```
+- Update the `baseURL` to match your WordPress site:
+  ```javascript
+  export const baseURL = "https://your-wordpress-site.com/wp-json/wc/v3/"
+  ```
+
+5. **Customize the Template**
+- Modify SCSS files in the `styles` directory to match your brand
+- Extend and customize components as needed
+- Configure Redux store and sagas according to your requirements
+
+6. **Run the Development Server**
+
 ## Additional Components
 
 - **Owl Carousel:** A responsive carousel plugin for displaying product images or banners.
