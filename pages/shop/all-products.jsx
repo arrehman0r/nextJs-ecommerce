@@ -8,6 +8,7 @@ import OwlCarousel from '~/components/features/owl-carousel';
 // import withApollo from '~/server/apollo';
 
 import ProductOne from '~/components/features/product/product-one';
+import ProductTwo from '~/components/features/product/product-two';
 // import ProductTwo from '~/components/features/product/product-two';
 // import ProductThree from '~/components/features/product/product-three';
 // import ProductFour from '~/components/features/product/product-four';
@@ -58,7 +59,8 @@ console.log("all products",products)
                                     {
                                         products.map( ( item ) =>
                                             <div className="col-md-3 col-6" key={ 'default-' + item.id }>
-                                                <ProductOne product={ item } />
+                                                {/* <ProductOne product={ item } /> */}
+                                                  <ProductTwo product={ item } adClass="" />
                                             </div>
                                         )
                                     }
