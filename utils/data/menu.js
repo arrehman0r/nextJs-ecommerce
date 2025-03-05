@@ -199,7 +199,7 @@ export const mainMenu = {
     "element": [
         {
             "title": "Products",
-            "url": "elements/products"
+            "url": "shop/all-products"
         },
         {
             "title": "Typography",
@@ -298,7 +298,7 @@ export const elementsList = [
         "title": "product categories"
     },
     {
-        "url": "products",
+        "url": "shop/all-products",
         "class": "element-product",
         "title": "products"
     },
@@ -340,7 +340,7 @@ export const headerBorderRemoveList = [
     "/shop/grid/[grid]",
     "/pages/404",
     "/elements",
-    "/elements/products",
+    "/shop/all-products",
     "/elements/typography",
     "/elements/titles",
     "/elements/product-category",

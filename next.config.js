@@ -1,6 +1,8 @@
+// next.config.js
 module.exports = {
     basePath: '',
-  
-    trailingSlash: true
-    // reactStrictMode: true,
+    trailingSlash: true,
+    images: {
+        domains: ['user-images.githubusercontent.com', "admin.partyshope.com"],
+    },
 }

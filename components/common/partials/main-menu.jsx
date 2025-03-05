@@ -68,13 +68,13 @@ function MainMenu() {
 
         <li
           className={`  ${
-            pathname.includes("/elements/products") &&
-            !pathname.includes("/elements/products/")
+            pathname.includes("/shop/all-products") &&
+            !pathname.includes("/shop/all-products")
               ? "active"
               : ""
           }`}
         >
-          <ALink href="/elements/products">Products</ALink>
+          <ALink href="/shop/all-products">Products</ALink>
 
           {/* <div className="megamenu">
                         <div className="row">

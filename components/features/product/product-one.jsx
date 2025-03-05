@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
@@ -52,27 +53,15 @@ function ProductOne(props) {
     <div className={`product shadow-media ${adClass}`}>
       <figure className="product-media">
         <ALink href={`/product/default/${product.id}`}>
-          <LazyLoadImage
-            alt="product"
-            src={product.images[0].src}
-            threshold={500}
-            effect="opacity"
+          <Image
+            alt={product?.name}
+            src={product.images[0]?.src}
+            objectFit="contain"
             width="300"
             height="338"
           />
 
-          {product.images.length >= 2 ? (
-            <LazyLoadImage
-              alt="product"
-              src={product.images[1].src}
-              threshold={500}
-              effect="opacity"
-              width="300"
-              height="338"
-            />
-          ) : (
-            ""
-          )}
+
         </ALink>
 
         <div className="product-label-group">
@@ -147,15 +136,15 @@ function ProductOne(props) {
         <div className="product-cat">
           {product.categories
             ? product.categories.map((item, index) => (
-                <React.Fragment key={item.name + "-" + index}>
-                  <ALink
-                    href={{ pathname: "/shop", query: { category: item.id } }}
-                  >
-                    {item.name}
-                    {index < product.categories.length - 1 ? ", " : ""}
-                  </ALink>
-                </React.Fragment>
-              ))
+              <React.Fragment key={item.name + "-" + index}>
+                <ALink
+                  href={{ pathname: "/shop", query: { category: item.id } }}
+                >
+                  {item.name}
+                  {index < product.categories.length - 1 ? ", " : ""}
+                </ALink>
+              </React.Fragment>
+            ))
             : ""}
         </div>
 
@@ -166,7 +155,7 @@ function ProductOne(props) {
         <div className="product-price">
           {product.sale_price !== product.regular_price ? (
             product.variations.length === 0 ||
-            (product.variations.length > 0 && !product.variations[0].price) ? (
+              (product.variations.length > 0 && !product.variations[0].price) ? (
               <>
                 <ins className="new-price">Rs.{toDecimal(product.price)}</ins>
                 <del className="old-price">
