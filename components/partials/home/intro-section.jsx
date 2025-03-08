@@ -44,7 +44,7 @@ function IntroSection( props ) {
                         </Reveal>
 
                         <Reveal keyframes={ fadeInUpShorter } delay={ 1800 } duration={ 1000 }>
-                            <ALink href="/shop" className="btn btn-dark btn-rounded" >Shop Now<i className="d-icon-arrow-right"></i></ALink>
+                            <ALink href="/shop/all-products" className="btn btn-dark btn-rounded" >Shop Now<i className="d-icon-arrow-right"></i></ALink>
                         </Reveal>
                     </div>
                 </div>

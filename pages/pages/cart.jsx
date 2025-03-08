@@ -200,7 +200,7 @@ function Cart(props) {
                                     <p>Your cart is currently empty.</p>
                                     <i className="cart-empty d-icon-bag"></i>
                                     <p className="return-to-shop mb-0">
-                                        <ALink className="button wc-backward btn btn-dark btn-md" href="/shop">
+                                        <ALink className="button wc-backward btn btn-dark btn-md" href="/shop/all-products">
                                             Return to shop
                                         </ALink>
                                     </p>

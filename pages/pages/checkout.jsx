@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { connect,useStore } from "react-redux";
+import { connect, useDispatch, useStore } from "react-redux";
 import Helmet from "react-helmet";
 
 import Collapse from "react-bootstrap/Collapse";
@@ -12,11 +12,12 @@ import SlideToggle from "react-slide-toggle";
 import { toDecimal, getTotalPrice } from "~/utils";
 import { createOrder } from "~/server/axiosApi";
 import { useRouter } from 'next/navigation';
+import { setLoading } from "~/store/utils";
 
 
 function Checkout(props) {
   const { cartList } = props;
-
+  const dispatch = useDispatch()
   const store = useStore();
   const router = useRouter();
   console.log("this is cart list", cartList);
@@ -40,12 +41,12 @@ function Checkout(props) {
   const handleCreateOrder = async (e) => {
     e.preventDefault();
     const lineItems = cartList.map(item => ({
-        product_id: item.id,
-        // variation_id: item.variationId, // If variationId exists
-        quantity: item.qty,
-      }));
+      product_id: item.id,
+      // variation_id: item.variationId, // If variationId exists
+      quantity: item.qty,
+    }));
 
-const email = customerDetails.email || "info@partyshope.com";
+    const email = customerDetails.email || "info@partyshope.com";
     const orderDetails = {
       payment_method: "bacs",
       payment_method_title: "Cash on Delivery",
@@ -75,34 +76,41 @@ const email = customerDetails.email || "info@partyshope.com";
 
       line_items: lineItems,
 
-    shipping_lines: getTotalPrice(cartList) <= 2000 ? [ // Check if the order amount is less than or equal to 2000 Rs
-      {
-        method_id: "flat_rate",
-        method_title: "Flat Rate",
-        total: "100.00",
-      },
-    ] : [ // If the order amount is greater than 2000 Rs, apply free shipping
-      {
-        method_id: "free_shipping",
-        method_title: "Free Shipping",
-        total: "0.00",
-      },
-    ],
+      shipping_lines: getTotalPrice(cartList) <= 2000 ? [ // Check if the order amount is less than or equal to 2000 Rs
+        {
+          method_id: "flat_rate",
+          method_title: "Flat Rate",
+          total: "100.00",
+        },
+      ] : [ // If the order amount is greater than 2000 Rs, apply free shipping
+        {
+          method_id: "free_shipping",
+          method_title: "Free Shipping",
+          total: "0.00",
+        },
+      ],
     };
 
     try {
       // Call createOrder function with the required data
+      dispatch(setLoading(true))
       const response = await createOrder(orderDetails);
-      console.log("Order created successfully:",response);
-     // You can clear the cart like this:
-     if (response.id){ 
-     store.dispatch({ type: "REFRESH_STORE", payload: { current: 1 } });
-     router.push(`/order/${response.id}`);
-     }
+      console.log("Order created successfully:", response);
+      // You can clear the cart like this:
+      if (response.id) {
+        store.dispatch({ type: "REFRESH_STORE", payload: { current: 1 } });
+        router.push(`/order/${response.id}`);
+      }
       // Handle success response as needed
     } catch (error) {
       console.error("Error creating order:", error);
+      dispatch(setLoading(false))
+
       // Handle error as needed
+    }
+    finally {
+      dispatch(setLoading(false))
+
     }
   };
 
@@ -483,20 +491,20 @@ const email = customerDetails.email || "info@partyshope.com";
                             </tr>
                             <tr className="sumnary-shipping shipping-row-last">
 
-                            {getTotalPrice(cartList)<= 2000?   
-                          (  <>  <td>
-                                <h4 className="summary-subtitle">
-                                  Flat Shipping
-                                </h4>
-                              </td>
+                              {getTotalPrice(cartList) <= 2000 ?
+                                (<>  <td>
+                                  <h4 className="summary-subtitle">
+                                    Flat Shipping
+                                  </h4>
+                                </td>
 
-                              <td>Rs.100</td></>) : (<>  <td>
-                                <h4 className="summary-subtitle">
-                                  Free Shipping
-                                </h4>
-                              </td>
+                                  <td>Rs.100</td></>) : (<>  <td>
+                                    <h4 className="summary-subtitle">
+                                      Free Shipping
+                                    </h4>
+                                  </td>
 
-                              <td>Rs.00</td></>)}
+                                    <td>Rs.00</td></>)}
 
                               {/* <ul> */}
                               {/* <li>
@@ -533,7 +541,7 @@ const email = customerDetails.email || "info@partyshope.com";
                               </td>
                               <td className=" pt-0 pb-0">
                                 <p className="summary-total-price ls-s text-primary">
-                                  Rs.{toDecimal(getTotalPrice(cartList)+ (getTotalPrice(cartList)<= 2000? 100:0))}
+                                  Rs.{toDecimal(getTotalPrice(cartList) + (getTotalPrice(cartList) <= 2000 ? 100 : 0))}
                                 </p>
                               </td>
                             </tr>
@@ -570,7 +578,7 @@ const email = customerDetails.email || "info@partyshope.com";
                                 className="custom-control-label"
                                 htmlFor="local_pickup"
                               >
-                               Cash on Delivery
+                                Cash on Delivery
                               </label>
 
                               {/* <ALink href="#" className={ `text-body text-normal ls-m ${ !isFirst ? 'collapse' : '' }` } onClick={ () => { isFirst && setFirst( !isFirst ) } }>Cash on delivery</ALink> */}
@@ -604,7 +612,7 @@ const email = customerDetails.email || "info@partyshope.com";
                         <button
                           // type="submit"
                           className="btn btn-dark btn-rounded btn-order"
-                          // onClick={() => handleCreateOrder()}
+                        // onClick={() => handleCreateOrder()}
                         >
                           Place Order
                         </button>

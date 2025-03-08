@@ -1,30 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import ALink from '~/components/features/custom-link';
 
-import { toDecimal, getCartSubTotal,formatDate } from '~/utils';
+import { toDecimal, getCartSubTotal, formatDate } from '~/utils';
 import { retrieveOrder } from '~/server/axiosApi';
 import { useParams } from 'next/navigation';
+import { setLoading } from '~/store/utils';
 
 
 
 
 
-function Order( ) {
-  
+function Order() {
+
     const [orderDetails, setOrderDetails] = useState(null);
-  const params= useParams();
-  console.log("params",params)
-  const orderId = params.order;
+    const params = useParams();
+    const dispatch = useDispatch()
+    console.log("params", params)
+    const orderId = params.order;
     useEffect(() => {
         const fetchOrder = async () => {
             try {
+                dispatch(setLoading(true))
                 const order = await retrieveOrder(orderId);
                 setOrderDetails(order);
             } catch (error) {
                 console.error('Error fetching order:', error);
+                dispatch(setLoading(false))
+            }
+            finally {
+                dispatch(setLoading(false))
             }
         };
 
@@ -37,7 +44,7 @@ function Order( ) {
 
 
 
-    
+
     return (
         <main className="main order">
             <Helmet>
@@ -93,7 +100,7 @@ function Order( ) {
                         </div>
                         <div className="overview-item">
                             <span>Total:</span>
-                            <strong>{orderDetails?.total  }</strong>
+                            <strong>{orderDetails?.total}</strong>
                         </div>
                         <div className="overview-item">
                             <span>Payment method:</span>
@@ -114,17 +121,17 @@ function Order( ) {
                             </thead>
                             <tbody>
                                 {
-                                    orderDetails?.line_items?.map( item =>
-                                        <tr key={ 'order-' + item.name }>
-                                            <td className="product-name">{ item.name } <span> <i className="fas fa-times"></i> { item.quantity }</span></td>
-                                            <td className="product-price">Rs.{ toDecimal( item.quantity * item.price ) }</td>
+                                    orderDetails?.line_items?.map(item =>
+                                        <tr key={'order-' + item.name}>
+                                            <td className="product-name">{item.name} <span> <i className="fas fa-times"></i> {item.quantity}</span></td>
+                                            <td className="product-price">Rs.{toDecimal(item.quantity * item.price)}</td>
                                         </tr>
-                                    ) }
+                                    )}
                                 <tr className="summary-subtotal">
                                     <td>
                                         <h4 className="summary-subtitle">Subtotal:</h4>
                                     </td>
-                                    <td className="summary-subtotal-price">Rs.{ toDecimal( getCartSubTotal( orderDetails?.line_items ) ) }</td>
+                                    <td className="summary-subtotal-price">Rs.{toDecimal(getCartSubTotal(orderDetails?.line_items))}</td>
                                 </tr>
                                 <tr className="summary-subtotal">
                                     <td>
@@ -143,7 +150,7 @@ function Order( ) {
                                         <h4 className="summary-subtitle">Total:</h4>
                                     </td>
                                     <td>
-                                        <p className="summary-total-price">Rs.{ toDecimal(orderDetails?.total ) }</p>
+                                        <p className="summary-total-price">Rs.{toDecimal(orderDetails?.total)}</p>
                                     </td>
                                 </tr>
                             </tbody>
@@ -152,13 +159,13 @@ function Order( ) {
                     <h2 className="title title-simple text-left pt-10 mb-2">Shipping Address</h2>
                     <div className="address-info pb-8 mb-6">
                         <p className="address-detail pb-2">
-                           {orderDetails?.billing?.first_name}<br />
-                       {orderDetails?.billing?.phone}<br />
-                       {orderDetails?.billing?.address_1}<br />
-                       {orderDetails?.billing?.address_2}<br />
-                       {orderDetails?.billing?.city}<br />
-                       {orderDetails?.billing?.email}
-                    </p>
+                            {orderDetails?.billing?.first_name}<br />
+                            {orderDetails?.billing?.phone}<br />
+                            {orderDetails?.billing?.address_1}<br />
+                            {orderDetails?.billing?.address_2}<br />
+                            {orderDetails?.billing?.city}<br />
+                            {orderDetails?.billing?.email}
+                        </p>
                         {/* <p className="email"> {orderDetails?.billing?.email}</p> */}
                     </div>
 
@@ -169,10 +176,10 @@ function Order( ) {
     )
 }
 
-function mapStateToProps( state ) {
+function mapStateToProps(state) {
     return {
         cartList: state.cart.data ? state.cart.data : []
     }
 }
 
-export default connect( mapStateToProps )( Order );
+export default connect(mapStateToProps)(Order);
