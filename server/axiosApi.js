@@ -22,3 +22,11 @@ export const retrieveOrder = (id) => {
 export const getAllProducts = () => {
   return makeRequest("get", "products");
 };
+
+export const createCustomer = (body) => {
+  return makeRequest("post", "customers", body)
+}
+
+export const loginCustomer = (body) => {
+  return makeRequest("post", "token", body);
+}
