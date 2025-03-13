@@ -629,7 +629,7 @@ function Checkout(props) {
               <p className="return-to-shop mb-0">
                 <ALink
                   className="button wc-backward btn btn-dark btn-md"
-                  href="/shop"
+                  href="/shop/all-products"
                 >
                   Return to shop
                 </ALink>
