@@ -19,7 +19,7 @@ export async function getStaticPaths() {
   }));
 
   // Set fallback: 'blocking' or 'blocking' to handle missing paths (optional)
-  return { paths, fallback: blocking }; // No fallback generation for missing paths here
+  return { paths, fallback: "blocking" }; // No fallback generation for missing paths here
 }
 
 export async function getStaticProps({ params }) {
