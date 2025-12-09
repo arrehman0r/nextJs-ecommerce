@@ -80,24 +80,25 @@ function Order() {
                         </div>
                     </div>
 
-
-                    <div className="order-results">
-                        <div className="overview-item">
-                            <span>Order number:</span>
-                            <strong>{orderDetails?.number}</strong>
-                        </div>
-                        <div className="overview-item">
-                            <span>Status:</span>
-                            <strong>{orderDetails?.status}</strong>
-                        </div>
-                        <div className="overview-item">
-                            <span>Date:</span>
-                            <strong>{formatDate(orderDetails?.date_created)}</strong>
-                        </div>
-                        <div className="overview-item">
-                            <span>Number:</span>
-                            <strong>{orderDetails?.billing?.phone}</strong>
-                        </div>
+                    {orderDetails ? (
+                        <>
+                            <div className="order-results">
+                                <div className="overview-item">
+                                    <span>Order number:</span>
+                                    <strong>{orderDetails?.number}</strong>
+                                </div>
+                                <div className="overview-item">
+                                    <span>Status:</span>
+                                    <strong>{orderDetails?.status}</strong>
+                                </div>
+                                <div className="overview-item">
+                                    <span>Date:</span>
+                                    <strong>{formatDate(orderDetails?.date_created)}</strong>
+                                </div>
+                                <div className="overview-item">
+                                    <span>Number:</span>
+                                    <strong>{orderDetails?.billing?.phone}</strong>
+                                </div>
                         <div className="overview-item">
                             <span>Total:</span>
                             <strong>{orderDetails?.total}</strong>
@@ -170,6 +171,12 @@ function Order() {
                     </div>
 
                     <ALink href="/shop" className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"><i className="d-icon-arrow-left"></i> Back to List</ALink>
+                        </>
+                    ) : (
+                        <div className="text-center py-8">
+                            <p className="text-body">Loading order details...</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </main>

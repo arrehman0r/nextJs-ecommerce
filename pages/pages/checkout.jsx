@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { connect, useDispatch, useStore } from "react-redux";
 import Helmet from "react-helmet";
+import { useForm } from "react-hook-form";
 
 import Collapse from "react-bootstrap/Collapse";
 
@@ -13,7 +14,27 @@ import { toDecimal, getTotalPrice } from "~/utils";
 import { createOrder } from "~/server/axiosApi";
 import { useRouter } from 'next/navigation';
 import { setLoading } from "~/store/utils";
+import { showToast } from "~/server/instance";
 
+// Error message styling
+const errorMessageStyle = `
+  .form-error-input {
+    border-color: #dc3545 !important;
+    border-width: 2px !important;
+  }
+  
+  .form-error-input::placeholder {
+    color: #dc3545;
+    opacity: 1;
+  }
+`;
+
+
+// Validation patterns
+// Pakistani phone number formats: 03xx, 0923, 3, +92, etc.
+const PHONE_REGEX = /^(\+92|0092|92|0)?[3][0-9]{9}$|^(\+92|0092|92)?[3][0-9]{9}$|^[03][0-9]{9,10}$/;
+const POSTAL_CODE_REGEX = /^[0-9]{4,6}$/; // 4-6 digits for postal codes
+const NAME_REGEX = /^[a-zA-Z\s'-]{2,}$/; // Letters, spaces, hyphens, apostrophes, min 2 chars
 
 function Checkout(props) {
   const { cartList } = props;
@@ -21,56 +42,60 @@ function Checkout(props) {
   const store = useStore();
   const router = useRouter();
   console.log("this is cart list", cartList);
-  const [customerDetails, setCustomerDetails] = useState({
-    firstName: "",
-    lastName: "",
-    address1: "",
-    address2: "",
-    city: "",
-    state: "",
-    zip: "",
-    phone: "",
-    email: "",
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    watch
+  } = useForm({
+    mode: 'onBlur', // Validate on blur for better UX
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      address1: "",
+      address2: "",
+      city: "",
+      state: "",
+      zip: "",
+      phone: "",
+      email: "",
+    }
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setCustomerDetails((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const handleCreateOrder = async (e) => {
-    e.preventDefault();
+  const handleCreateOrder = async (data) => {
     const lineItems = cartList.map(item => ({
       product_id: item.id,
       // variation_id: item.variationId, // If variationId exists
       quantity: item.qty,
     }));
 
-    const email = customerDetails.email || "info@partyshope.com";
+    const email = data.email || "info@partyshope.com";
     const orderDetails = {
       payment_method: "bacs",
       payment_method_title: "Cash on Delivery",
       set_paid: false,
       billing: {
-        first_name: customerDetails?.firstName,
-        last_name: customerDetails?.lastName,
-        address_1: customerDetails?.address1,
-        address_2: customerDetails?.address2,
-        city: customerDetails?.city,
-        state: customerDetails?.state,
-        postcode: customerDetails?.zip,
+        first_name: data.firstName,
+        last_name: data.lastName,
+        address_1: data.address1,
+        address_2: data.address2,
+        city: data.city,
+        state: data.state,
+        postcode: data.zip,
         country: "PK",
         email: email,
-        phone: customerDetails?.phone,
+        phone: data.phone,
       },
       shipping: {
-        first_name: customerDetails?.firstName,
-        last_name: customerDetails?.lastName,
-        address_1: customerDetails?.address1,
-        address_2: customerDetails?.address2,
-        city: customerDetails?.city,
-        state: customerDetails?.state,
-        postcode: customerDetails?.zip,
+        first_name: data.firstName,
+        last_name: data.lastName,
+        address_1: data.address1,
+        address_2: data.address2,
+        city: data.city,
+        state: data.state,
+        postcode: data.zip,
         country: "PK",
       },
 
@@ -98,6 +123,7 @@ function Checkout(props) {
       console.log("Order created successfully:", response);
       // You can clear the cart like this:
       if (response.id) {
+        reset();
         store.dispatch({ type: "REFRESH_STORE", payload: { current: 1 } });
         router.push(`/order/${response.id}`);
       }
@@ -114,11 +140,20 @@ function Checkout(props) {
     }
   };
 
+  const handleFormErrors = (formErrors) => {
+    // Display toast for the first error field
+    const firstErrorField = Object.keys(formErrors)[0];
+    if (firstErrorField && formErrors[firstErrorField]) {
+      showToast("error", formErrors[firstErrorField].message);
+    }
+  };
+
   return (
     <main className="main checkout">
       <Helmet>
         <title>Party Shope Web Store | Checkout</title>
       </Helmet>
+      <style>{errorMessageStyle}</style>
 
       <h1 className="d-none">Party Shope Web Store - Checkout</h1>
 
@@ -251,7 +286,7 @@ function Checkout(props) {
                   </div>
                 </Card>
               </div>
-              <form onSubmit={handleCreateOrder} className="form">
+              <form onSubmit={handleSubmit(handleCreateOrder, handleFormErrors)} className="form">
                 <div className="row">
                   <div className="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
                     <h3 className="title title-simple text-left text-uppercase">
@@ -261,21 +296,41 @@ function Checkout(props) {
                       <div className="col-xs-6">
                         <label>First Name *</label>
                         <input
-                          onChange={handleInputChange}
                           type="text"
-                          className="form-control"
-                          name="firstName"
-                          required
+                          maxLength="50"
+                          className={`form-control ${errors.firstName ? 'form-error-input' : ''}`}
+                          placeholder={errors.firstName ? `⚠️ ${errors.firstName.message}` : ''}
+                          {...register("firstName", {
+                            required: "First Name is required",
+                            pattern: {
+                              value: NAME_REGEX,
+                              message: "First Name must be at least 2 characters (letters, spaces, hyphens only)"
+                            },
+                            minLength: {
+                              value: 2,
+                              message: "First Name must be at least 2 characters"
+                            }
+                          })}
                         />
                       </div>
                       <div className="col-xs-6">
                         <label>Last Name *</label>
                         <input
-                          onChange={handleInputChange}
                           type="text"
-                          className="form-control"
-                          name="lastName"
-                          required
+                          maxLength="50"
+                          className={`form-control ${errors.lastName ? 'form-error-input' : ''}`}
+                          placeholder={errors.lastName ? `⚠️ ${errors.lastName.message}` : ''}
+                          {...register("lastName", {
+                            required: "Last Name is required",
+                            pattern: {
+                              value: NAME_REGEX,
+                              message: "Last Name must be at least 2 characters (letters, spaces, hyphens only)"
+                            },
+                            minLength: {
+                              value: 2,
+                              message: "Last Name must be at least 2 characters"
+                            }
+                          })}
                         />
                       </div>
                     </div>
@@ -292,69 +347,123 @@ function Checkout(props) {
                                             </div> */}
                     <label>Street Address *</label>
                     <input
-                      onChange={handleInputChange}
                       type="text"
-                      className="form-control"
-                      name="address1"
-                      required
-                      placeholder="House number and street name"
+                      maxLength="100"
+                      className={`form-control ${errors.address1 ? 'form-error-input' : ''}`}
+                      placeholder={errors.address1 ? `⚠️ ${errors.address1.message}` : 'House number and street name'}
+                      {...register("address1", {
+                        required: "Street Address is required",
+                        minLength: {
+                          value: 5,
+                          message: "Street Address must be at least 5 characters"
+                        },
+                        maxLength: {
+                          value: 100,
+                          message: "Street Address must not exceed 100 characters"
+                        }
+                      })}
                     />
                     <input
-                      onChange={handleInputChange}
                       type="text"
-                      className="form-control"
-                      name="address2"
-                      placeholder="Apartment, suite, unit, etc. (optional)"
+                      maxLength="100"
+                      className={`form-control ${errors.address2 ? 'form-error-input' : ''}`}
+                      placeholder={errors.address2 ? `⚠️ ${errors.address2.message}` : 'Apartment, suite, unit, etc. (optional)'}
+                      {...register("address2", {
+                        maxLength: {
+                          value: 100,
+                          message: "Address line 2 must not exceed 100 characters"
+                        }
+                      })}
                     />
                     <div className="row">
                       <div className="col-xs-6">
                         <label>Town / City *</label>
                         <input
-                          onChange={handleInputChange}
                           type="text"
-                          className="form-control"
-                          name="city"
-                          required
+                          maxLength="50"
+                          className={`form-control ${errors.city ? 'form-error-input' : ''}`}
+                          placeholder={errors.city ? `⚠️ ${errors.city.message}` : ''}
+                          {...register("city", {
+                            required: "Town / City is required",
+                            minLength: {
+                              value: 2,
+                              message: "City name must be at least 2 characters"
+                            },
+                            maxLength: {
+                              value: 50,
+                              message: "City name must not exceed 50 characters"
+                            }
+                          })}
                         />
                       </div>
                       <div className="col-xs-6">
                         <label>State *</label>
                         <input
-                          onChange={handleInputChange}
                           type="text"
-                          className="form-control"
-                          name="state"
-                          required
+                          maxLength="50"
+                          className={`form-control ${errors.state ? 'form-error-input' : ''}`}
+                          placeholder={errors.state ? `⚠️ ${errors.state.message}` : ''}
+                          {...register("state", {
+                            required: "State is required",
+                            minLength: {
+                              value: 2,
+                              message: "State must be at least 2 characters"
+                            },
+                            maxLength: {
+                              value: 50,
+                              message: "State must not exceed 50 characters"
+                            }
+                          })}
                         />
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-xs-6">
-                        <label>ZIP</label>
+                        <label>ZIP *</label>
                         <input
-                          onChange={handleInputChange}
                           type="text"
-                          className="form-control"
-                          name="zip"
+                          maxLength="6"
+                          className={`form-control ${errors.zip ? 'form-error-input' : ''}`}
+                          placeholder={errors.zip ? `⚠️ ${errors.zip.message}` : ''}
+                          {...register("zip", {
+                            required: "ZIP/Postal Code is required",
+                            pattern: {
+                              value: POSTAL_CODE_REGEX,
+                              message: "ZIP Code must be 4-6 digits"
+                            }
+                          })}
                         />
                       </div>
                       <div className="col-xs-6">
                         <label>Phone *</label>
                         <input
-                          onChange={handleInputChange}
-                          type="text"
-                          className="form-control"
-                          name="phone"
-                          required
+                          type="tel"
+                          maxLength="15"
+                          className={`form-control ${errors.phone ? 'form-error-input' : ''}`}
+                          placeholder={errors.phone ? `⚠️ ${errors.phone.message}` : ''}
+                          {...register("phone", {
+                            required: "Phone number is required",
+                            pattern: {
+                              value: PHONE_REGEX,
+                              message: "Enter a valid Pakistani number (03xx, 0923, +92, etc.)"
+                            }
+                          })}
                         />
                       </div>
                     </div>
-                    <label>Email Address</label>
+                    <label>Email Address *</label>
                     <input
-                      onChange={handleInputChange}
                       type="email"
-                      className="form-control"
-                      name="email"
+                      maxLength="100"
+                      className={`form-control ${errors.email ? 'form-error-input' : ''}`}
+                      placeholder={errors.email ? `⚠️ ${errors.email.message}` : ''}
+                      {...register("email", {
+                        required: "Email Address is required",
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: "Invalid email address"
+                        }
+                      })}
                     />
 
                     {/* <SlideToggle duration={ 300 } collapsed >
@@ -610,9 +719,8 @@ function Checkout(props) {
                           </label>
                         </div>
                         <button
-                          // type="submit"
+                          type="submit"
                           className="btn btn-dark btn-rounded btn-order"
-                        // onClick={() => handleCreateOrder()}
                         >
                           Place Order
                         </button>
