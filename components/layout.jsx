@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/router';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -16,16 +16,43 @@ import VideoModal from '~/components/features/modals/video-modal';
 import MobileMenu from '~/components/common/partials/mobile-menu';
 
 import { modalActions } from '~/store/modal';
+import { setLoading } from '~/store/utils';
 
 import { showScrollTopHandler, scrollTopHandler, stickyHeaderHandler, stickyFooterHandler, resizeHandler } from '~/utils';
 import AppLoader from './common/loader';
 
 function Layout({ children, closeQuickview }) {
     const router = useRouter();
+    const dispatch = useDispatch();
 
     useLayoutEffect(() => {
         document.querySelector('body') && document.querySelector('body').classList.remove('loaded');
     }, [router.pathname])
+
+    useEffect(() => {
+        // Route change handlers - show loader when navigating
+        const handleRouteChangeStart = () => {
+            dispatch(setLoading(true));
+        };
+
+        const handleRouteChangeComplete = () => {
+            dispatch(setLoading(false));
+        };
+
+        const handleRouteChangeError = () => {
+            dispatch(setLoading(false));
+        };
+
+        router.events.on('routeChangeStart', handleRouteChangeStart);
+        router.events.on('routeChangeComplete', handleRouteChangeComplete);
+        router.events.on('routeChangeError', handleRouteChangeError);
+
+        return () => {
+            router.events.off('routeChangeStart', handleRouteChangeStart);
+            router.events.off('routeChangeComplete', handleRouteChangeComplete);
+            router.events.off('routeChangeError', handleRouteChangeError);
+        };
+    }, [router, dispatch]);
 
     useEffect(() => {
         window.addEventListener('scroll', showScrollTopHandler, true);
