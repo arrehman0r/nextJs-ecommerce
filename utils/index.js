@@ -343,3 +343,10 @@ export const formatDate = (dateString) => {
     const options = { month: "long", day: "2-digit", year: "numeric" };
     return new Intl.DateTimeFormat("en-US", options).format(date);
 };
+
+
+
+  export const toBase64 = (str) =>
+    typeof window === "undefined"
+      ? Buffer.from(str).toString("base64")
+      : window.btoa(str);

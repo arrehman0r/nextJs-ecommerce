@@ -428,3 +428,12 @@ export const WhatsApp = () => {
     </svg>
   );
 };
+
+export const ImageShimmer = (w, h) => `
+  <svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    <rect width="${w}" height="${h}" fill="#f6f7f8" />
+    <rect id="r" width="${w}" height="${h}" fill="#eee">
+      <animate attributeName="opacity" values="1;0.4;1" dur="1.5s" repeatCount="indefinite" />
+    </rect>
+  </svg>
+`;
