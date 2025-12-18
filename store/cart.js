@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { takeEvery } from 'redux-saga/effects';
 
 import CartPopup from '~/components/features/product/common/cart-popup';
+import { triggerFacebookPixelAddToCartEvent } from '~/utils/facebookPixel';
 
 const actionTypes = {
     ADD_TO_CART: 'ADD_TO_CART',
@@ -69,6 +70,9 @@ export const cartActions = {
 
 export function* cartSaga() {
     yield takeEvery( actionTypes.ADD_TO_CART, function* saga( e ) {
+        // Trigger Facebook Pixel AddToCart event
+        triggerFacebookPixelAddToCartEvent(e.payload.product, e.payload.product.qty);
+        
         toast( <CartPopup product={ e.payload.product } /> );
     } )
 }

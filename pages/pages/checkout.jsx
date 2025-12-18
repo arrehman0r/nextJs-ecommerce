@@ -15,6 +15,7 @@ import { createOrder } from "~/server/axiosApi";
 import { useRouter } from 'next/navigation';
 import { setLoading } from "~/store/utils";
 import { showToast } from "~/server/instance";
+import { triggerFacebookPixelPurchaseEvent } from "~/utils/facebookPixel";
 
 // Error message styling
 const errorMessageStyle = `
@@ -123,6 +124,10 @@ function Checkout(props) {
       console.log("Order created successfully:", response);
       // You can clear the cart like this:
       if (response.id) {
+        // Trigger Facebook Pixel Purchase event
+        const totalValue = getTotalPrice(cartList) + (getTotalPrice(cartList) <= 2000 ? 100 : 0);
+        triggerFacebookPixelPurchaseEvent(cartList, totalValue, response.id);
+        
         reset();
         store.dispatch({ type: "REFRESH_STORE", payload: { current: 1 } });
         router.push(`/order/${response.id}`);
@@ -555,6 +560,7 @@ function Checkout(props) {
                       className="form-control pb-2 pt-2 mb-0"
                       cols="30"
                       rows="5"
+                      maxLength={80}
                       placeholder="Notes about your order, e.g. special notes for delivery"
                     ></textarea>
                   </div>
