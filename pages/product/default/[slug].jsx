@@ -9,6 +9,7 @@ import RelatedProducts from "~/components/partials/product/related-products";
 import { mainSlider17 } from "~/utils/data/carousel";
 import { getProduct } from "~/server/axiosApi";
 import { getAllProducts } from "../../../server/axiosApi";
+import { triggerFacebookPixelViewContentEvent } from "~/utils/facebookPixel";
 
 export async function getStaticPaths() {
   // Fetch a list of all product IDs from your backend (adjust the API endpoint as needed)
@@ -46,6 +47,7 @@ function ProductDefault({ product, relatedProducts }) {
   useEffect(() => {
     if (product) {
       setLoadingState(false);
+      triggerFacebookPixelViewContentEvent(product);
     }
   }, [product]);
 

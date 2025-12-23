@@ -18,13 +18,6 @@ function Cart(props) {
         setCartItems([...cartList]);
     }, [cartList])
 
-    // Trigger Facebook Pixel InitiateCheckout event when user visits cart page
-    useEffect(() => {
-        if (cartList.length > 0 && !hasTriggeredPixel.current) {
-            triggerFacebookPixelInitiateCheckoutEvent(cartList, getTotalPrice(cartList));
-            hasTriggeredPixel.current = true;
-        }
-    }, [cartList])
 
     const onChangeQty = (name, qty) => {
         setCartItems(cartItems.map(item => {

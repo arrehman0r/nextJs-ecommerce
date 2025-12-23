@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { connect, useDispatch, useStore } from "react-redux";
 import Helmet from "react-helmet";
 import { useForm } from "react-hook-form";
@@ -43,7 +43,14 @@ function Checkout(props) {
   const store = useStore();
   const router = useRouter();
   console.log("this is cart list", cartList);
-  
+      // Trigger Facebook Pixel InitiateCheckout event when user visits cart page
+    useEffect(() => {
+        if (cartList.length > 0 && !hasTriggeredPixel.current) {
+            triggerFacebookPixelInitiateCheckoutEvent(cartList, getTotalPrice(cartList));
+            hasTriggeredPixel.current = true;
+        }
+    }, [cartList])
+
   const {
     register,
     handleSubmit,
