@@ -1,0 +1,14 @@
+# robots.txt for Party Shope Web Store
+# https://partyshope.com
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private pages
+Disallow: /api/
+Disallow: /pages/account/
+Disallow: /pages/checkout/
+Disallow: /order/
+
+# Sitemap location
+Sitemap: https://partyshope.com/api/sitemap

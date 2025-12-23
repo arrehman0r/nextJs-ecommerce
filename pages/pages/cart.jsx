@@ -12,7 +12,7 @@ import { triggerFacebookPixelInitiateCheckoutEvent } from '~/utils/facebookPixel
 function Cart(props) {
     const { cartList, removeFromCart, updateCart } = props;
     const [cartItems, setCartItems] = useState([]);
-    const hasTriggeredPixel = useRef(false);
+   
 
     useEffect(() => {
         setCartItems([...cartList]);

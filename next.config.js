@@ -5,4 +5,12 @@ module.exports = {
     images: {
         domains: ['user-images.githubusercontent.com', "admin.partyshope.com"],
     },
+    async rewrites() {
+        return [
+            {
+                source: '/sitemap.xml',
+                destination: '/api/sitemap',
+            },
+        ];
+    },
 }

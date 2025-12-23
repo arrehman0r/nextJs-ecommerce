@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { connect, useDispatch, useStore } from "react-redux";
 import Helmet from "react-helmet";
 import { useForm } from "react-hook-form";
@@ -15,7 +15,7 @@ import { createOrder } from "~/server/axiosApi";
 import { useRouter } from 'next/navigation';
 import { setLoading } from "~/store/utils";
 import { showToast } from "~/server/instance";
-import { triggerFacebookPixelPurchaseEvent } from "~/utils/facebookPixel";
+import { triggerFacebookPixelInitiateCheckoutEvent, triggerFacebookPixelPurchaseEvent } from "~/utils/facebookPixel";
 
 // Error message styling
 const errorMessageStyle = `
@@ -43,6 +43,7 @@ function Checkout(props) {
   const store = useStore();
   const router = useRouter();
   console.log("this is cart list", cartList);
+   const hasTriggeredPixel = useRef(false);
       // Trigger Facebook Pixel InitiateCheckout event when user visits cart page
     useEffect(() => {
         if (cartList.length > 0 && !hasTriggeredPixel.current) {
