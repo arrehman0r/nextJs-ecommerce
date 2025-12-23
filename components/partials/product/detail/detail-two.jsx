@@ -16,6 +16,7 @@ import { wishlistActions } from '~/store/wishlist';
 import { cartActions } from '~/store/cart';
 
 import { toDecimal } from '~/utils';
+import { triggerFacebookPixelViewContentEvent } from "~/utils/facebookPixel";
 
 function DetailOne( props ) {
     let router = useRouter();
@@ -45,6 +46,12 @@ function DetailOne( props ) {
             } );
         }
     }
+
+    useEffect( () => {
+        if ( typeof window !== 'undefined' && product && product.data ) {
+            triggerFacebookPixelViewContentEvent( product.data );
+        }
+    }, [ product ] )
 
     useEffect( () => {
         if ( document.querySelector( '.product-form .btn-cart' ) ) {
