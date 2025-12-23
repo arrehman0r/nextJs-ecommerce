@@ -15,6 +15,7 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import ShippingTime from "~/components/features/shipping";
 import FreeReturn from "~/components/features/free-returns";
+import { triggerFacebookPixelViewContentEvent } from "~/utils/facebookPixel";
 
 function DetailOne(props) {
   let router = useRouter();
@@ -32,6 +33,12 @@ function DetailOne(props) {
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQauntity] = useState(1);
   // let product = data && product;
+
+  useEffect(() => {
+    if (product) {
+      triggerFacebookPixelViewContentEvent(product);
+    }
+  }, [product]);
 
   // decide if the product is wishlisted
   let isWishlisted,
