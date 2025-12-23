@@ -12,7 +12,7 @@ export const triggerFacebookPixelAddToCartEvent = (product, quantity = 1) => {
     if (typeof window !== 'undefined' && window.fbq) {
         window.fbq('track', 'AddToCart', {
             content_name: product.name,
-            content_ids: [product.id],
+            content_ids: [String(product.id)],
             content_type: 'product',
             value: parseFloat(product.price || product.sale_price || 0) * quantity,
             currency: 'PKR', // Your currency
@@ -29,7 +29,7 @@ export const triggerFacebookPixelAddToCartEvent = (product, quantity = 1) => {
  */
 export const triggerFacebookPixelPurchaseEvent = (cartList, totalValue, orderId) => {
     if (typeof window !== 'undefined' && window.fbq) {
-        const contentIds = cartList.map(item => item.id);
+        const contentIds = cartList.map(item => String(item.id));
         const contentNames = cartList.map(item => item.name);
 
         window.fbq('track', 'Purchase', {
@@ -46,12 +46,14 @@ export const triggerFacebookPixelPurchaseEvent = (cartList, totalValue, orderId)
 
 /**
  * Trigger ViewContent event on Facebook Pixel
+ * Only fires on product detail pages
  * @param {Object} product - Product object
  */
 export const triggerFacebookPixelViewContentEvent = (product) => {
     if (typeof window !== 'undefined' && window.fbq) {
+
         window.fbq('track', 'ViewContent', {
-            content_ids: [product.id],
+            content_ids: [String(product.id)],
             content_name: product.name,
             content_type: 'product',
             value: parseFloat(product.price || product.sale_price || 0),
@@ -67,7 +69,7 @@ export const triggerFacebookPixelViewContentEvent = (product) => {
  */
 export const triggerFacebookPixelInitiateCheckoutEvent = (cartList, totalValue) => {
     if (typeof window !== 'undefined' && window.fbq) {
-        const contentIds = cartList.map(item => item.id);
+        const contentIds = cartList.map(item => String(item.id));
 
         window.fbq('track', 'InitiateCheckout', {
             content_ids: contentIds,

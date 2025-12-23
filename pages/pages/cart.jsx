@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import ALink from '~/components/features/custom-link';
 import Quantity from '~/components/features/quantity';
@@ -7,13 +7,23 @@ import Quantity from '~/components/features/quantity';
 import { cartActions } from '~/store/cart';
 
 import { toDecimal, getTotalPrice } from '~/utils';
+import { triggerFacebookPixelInitiateCheckoutEvent } from '~/utils/facebookPixel';
 
 function Cart(props) {
     const { cartList, removeFromCart, updateCart } = props;
     const [cartItems, setCartItems] = useState([]);
+    const hasTriggeredPixel = useRef(false);
 
     useEffect(() => {
         setCartItems([...cartList]);
+    }, [cartList])
+
+    // Trigger Facebook Pixel InitiateCheckout event when user visits cart page
+    useEffect(() => {
+        if (cartList.length > 0 && !hasTriggeredPixel.current) {
+            triggerFacebookPixelInitiateCheckoutEvent(cartList, getTotalPrice(cartList));
+            hasTriggeredPixel.current = true;
+        }
     }, [cartList])
 
     const onChangeQty = (name, qty) => {
