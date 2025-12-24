@@ -40,8 +40,10 @@ const App = ({ Component, pageProps }) => {
                     value={{
                         revalidateOnFocus: false,
                         revalidateOnReconnect: false,
-                        dedupingInterval: 60000, // Cache for 60 seconds
+                        revalidateIfStale: false, // Don't refetch stale data automatically
+                        dedupingInterval: 300000, // 5 minutes - dedupe requests
                         errorRetryCount: 2,
+                        keepPreviousData: true, // Keep showing old data while fetching
                     }}
                 >
                     <Helmet>

@@ -3,6 +3,7 @@ import { instance } from '~/server/instance';
 
 // Fetcher function for SWR
 const fetcher = async (url) => {
+  console.log('🔄 SWR FETCHING:', url); // Debug log - remove in production
   const response = await instance.get(url);
   return {
     products: response.data,
@@ -12,13 +13,15 @@ const fetcher = async (url) => {
 };
 
 // Hook for fetching category products with caching
-export function useCategoryProducts(categoryId, page = 1, perPage = 12) {
+export function useCategoryProducts(categoryId, page = 1, perPage = 12, fallbackData = null) {
   const { data, error, isLoading, mutate } = useSWR(
     categoryId ? `products?category=${categoryId}&page=${page}&per_page=${perPage}` : null,
     fetcher,
     {
+      fallbackData: fallbackData, // Use SSR data as fallback - prevents refetch!
       revalidateOnFocus: false, // Don't refetch when window regains focus
       revalidateOnReconnect: false, // Don't refetch on reconnect
+      revalidateOnMount: !fallbackData, // Only fetch on mount if no fallback data
       dedupingInterval: 60000, // Dedupe requests within 60 seconds
       keepPreviousData: true, // Keep showing old data while fetching new
     }
@@ -35,13 +38,15 @@ export function useCategoryProducts(categoryId, page = 1, perPage = 12) {
 }
 
 // Hook for fetching all products with caching
-export function useAllProducts(page = 1, perPage = 12) {
+export function useAllProducts(page = 1, perPage = 12, fallbackData = null) {
   const { data, error, isLoading, mutate } = useSWR(
     `products?page=${page}&per_page=${perPage}`,
     fetcher,
     {
+      fallbackData: fallbackData, // Use SSR data as fallback
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
+      revalidateOnMount: !fallbackData, // Only fetch on mount if no fallback data
       dedupingInterval: 60000,
       keepPreviousData: true,
     }
@@ -58,15 +63,19 @@ export function useAllProducts(page = 1, perPage = 12) {
 }
 
 // Hook for fetching a single product
-export function useProduct(productId) {
+export function useProduct(productId, fallbackData = null) {
   const { data, error, isLoading } = useSWR(
     productId ? `products/${productId}` : null,
     async (url) => {
+      console.log('🔄 SWR FETCHING PRODUCT:', url);
       const response = await instance.get(url);
       return response.data;
     },
     {
+      fallbackData: fallbackData,
       revalidateOnFocus: false,
+      revalidateOnMount: !fallbackData, // Don't fetch if we have fallback
+      revalidateIfStale: false,
       dedupingInterval: 300000, // Cache product for 5 minutes
     }
   );
@@ -79,10 +88,11 @@ export function useProduct(productId) {
 }
 
 // Hook for fetching related products with caching
-export function useRelatedProducts(relatedIds = []) {
+export function useRelatedProducts(relatedIds = [], fallbackData = null) {
   const { data, error, isLoading } = useSWR(
     relatedIds.length > 0 ? `related-${relatedIds.join('-')}` : null,
     async () => {
+      console.log('🔄 SWR FETCHING RELATED:', relatedIds);
       const products = await Promise.all(
         relatedIds.slice(0, 6).map(async (id) => {
           try {
@@ -96,7 +106,10 @@ export function useRelatedProducts(relatedIds = []) {
       return products.filter(Boolean);
     },
     {
+      fallbackData: fallbackData,
       revalidateOnFocus: false,
+      revalidateOnMount: !fallbackData, // Don't fetch if we have fallback
+      revalidateIfStale: false,
       dedupingInterval: 300000, // Cache for 5 minutes
     }
   );

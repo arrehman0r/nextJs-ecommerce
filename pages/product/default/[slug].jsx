@@ -61,13 +61,18 @@ function ProductDefault({ initialProduct, initialRelatedProducts, productId }) {
   const router = useRouter();
   const [loaded, setLoadingState] = useState(true);
 
-  // SWR for client-side caching - uses initial data from SSG, then caches subsequent requests
-  const { product: swrProduct, isLoading: productLoading } = useProduct(productId);
+  // SWR for client-side caching - uses initial data from SSG as fallback
+  // This prevents refetching when navigating back to this page!
+  const { product: swrProduct, isLoading: productLoading } = useProduct(
+    productId, 
+    initialProduct // Pass SSG data as fallback
+  );
   const { relatedProducts: swrRelatedProducts } = useRelatedProducts(
-    (swrProduct || initialProduct)?.related_ids || []
+    (swrProduct || initialProduct)?.related_ids || [],
+    initialRelatedProducts // Pass SSG data as fallback
   );
 
-  // Use SWR data if available, otherwise fall back to initial SSG data
+  // Use SWR data (which includes fallback from SSG)
   const product = swrProduct || initialProduct;
   const relatedProducts = swrRelatedProducts.length > 0 ? swrRelatedProducts : initialRelatedProducts;
 
