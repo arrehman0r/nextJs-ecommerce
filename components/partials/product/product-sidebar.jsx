@@ -1,8 +1,8 @@
-import { useQuery } from "@apollo/react-hooks";
+// import { useQuery } from "@apollo/react-hooks";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import withApollo from '~/server/apollo';
-import { GET_SHOP_SIDEBAR_DATA } from '~/server/queries';
+// import withApollo from '~/server/apollo';
+// import { GET_SHOP_SIDEBAR_DATA } from '~/server/queries';
 
 import ALink from '~/components/features/custom-link';
 import OwlCarousel from '~/components/features/owl-carousel';
@@ -13,7 +13,7 @@ import { mainSlider7 } from '~/utils/data/carousel';
 
 function ProductsSidebar( props ) {
     const { adClass = '', type = "right" } = props;
-    const { data, loading, error } = useQuery( GET_SHOP_SIDEBAR_DATA, { variables: { featured: true } } );
+    // const { data, loading, error } = useQuery( GET_SHOP_SIDEBAR_DATA, { variables: { featured: true } } );
     const featured = data && data.shopSidebarData.featured;
 
     const toggleSidebarHandler = ( e ) => {
@@ -129,4 +129,4 @@ function ProductsSidebar( props ) {
     );
 }
 
-export default withApollo( { ssr: typeof window === "undefined" } )( ProductsSidebar );
+export default ProductsSidebar;

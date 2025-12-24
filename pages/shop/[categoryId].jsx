@@ -1,45 +1,96 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { Helmet } from "react-helmet";
 
 import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
-import { getCategoryProducts } from "~/server/axiosApi";
+import { getCategoryProducts, getAllCategories } from "~/server/axiosApi";
+import { useCategoryProducts } from "~/hooks/useProducts";
 
-export async function getServerSideProps({ params, query }) {
+// Generate static paths for all categories
+export async function getStaticPaths() {
+  try {
+    const categories = await getAllCategories();
+    const paths = (categories || []).map((cat) => ({
+      params: { categoryId: String(cat.id) },
+    }));
+    return { paths, fallback: 'blocking' };
+  } catch (error) {
+    console.error("Error fetching categories for paths:", error);
+    return { paths: [], fallback: 'blocking' };
+  }
+}
+
+// Static generation with ISR - only for page 1 (SEO)
+export async function getStaticProps({ params }) {
   try {
     const categoryId = params?.categoryId;
-    const page = parseInt(query?.page) || 1;
-    const perPage = parseInt(query?.per_page) || 12;
+    const perPage = 12;
 
-    const result = categoryId
-      ? await getCategoryProducts(categoryId, page, perPage)
-      : { products: [], totalProducts: 0, totalPages: 1, currentPage: 1 };
+    if (categoryId) {
+      const result = await getCategoryProducts(categoryId, 1, perPage);
+      return {
+        props: {
+          initialProducts: result.products,
+          initialTotalProducts: result.totalProducts,
+          initialTotalPages: result.totalPages,
+          categoryId,
+          perPage,
+        },
+        revalidate: 3600, // Revalidate every hour
+      };
+    }
 
     return {
       props: {
-        categoryProducts: result.products,
-        totalProducts: result.totalProducts,
-        totalPages: result.totalPages,
-        currentPage: result.currentPage,
-        categoryId,
+        initialProducts: [],
+        initialTotalProducts: 0,
+        initialTotalPages: 0,
+        categoryId: null,
+        perPage: 12,
       },
+      revalidate: 3600,
     };
   } catch (error) {
     console.error("Error fetching category products:", error);
     return {
       props: {
-        categoryProducts: [],
-        totalProducts: 0,
-        totalPages: 1,
-        currentPage: 1,
+        initialProducts: [],
+        initialTotalProducts: 0,
+        initialTotalPages: 0,
         categoryId: params?.categoryId || null,
+        perPage: 12,
       },
+      revalidate: 60, // Retry sooner on error
     };
   }
 }
 
-function Shop({ categoryProducts, totalProducts, totalPages, currentPage }) {
+function Shop({ initialProducts, initialTotalProducts, initialTotalPages, categoryId, perPage }) {
+  const router = useRouter();
+  const page = parseInt(router.query?.page) || 1;
+
+  // Prepare fallback data ONLY for page 1 (from SSR)
+  // Other pages will be fetched by SWR and cached
+  const fallbackData = (page === 1 && initialProducts.length > 0) ? {
+    products: initialProducts,
+    totalProducts: initialTotalProducts,
+    totalPages: initialTotalPages,
+  } : null;
+
+  // SWR for client-side caching - uses initial data from SSR for page 1
+  // All subsequent pages are fetched by SWR and cached
+  const { products, totalProducts, totalPages, isLoading } = useCategoryProducts(
+    categoryId,
+    page,
+    perPage,
+    fallbackData
+  );
+
+  // Show loading state only when SWR is fetching and we have no cached data
+  const showLoading = isLoading && products.length === 0;
+
   return (
     <main className="main">
       <Helmet>
@@ -56,12 +107,20 @@ function Shop({ categoryProducts, totalProducts, totalPages, currentPage }) {
             {/* <SidebarFilterOne /> */}
 
             <div className="col-lg-9 main-content">
-              <ProductListOne 
-                products={categoryProducts} 
-                totalProducts={totalProducts}
-                totalPages={totalPages}
-                currentPage={currentPage}
-              />
+              {showLoading ? (
+                <div className="row product-wrapper cols-2 cols-sm-3">
+                  {[1, 2, 3, 4].map((item) => (
+                    <div className="product-loading-overlay" key={'skel-' + item}></div>
+                  ))}
+                </div>
+              ) : (
+                <ProductListOne 
+                  products={products} 
+                  totalProducts={totalProducts}
+                  totalPages={totalPages}
+                  currentPage={page}
+                />
+              )}
             </div>
           </div>
         </div>

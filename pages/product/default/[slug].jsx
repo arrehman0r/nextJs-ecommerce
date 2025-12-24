@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import Helmet from "react-helmet";
 import OwlCarousel from "~/components/features/owl-carousel";
@@ -10,6 +11,7 @@ import { mainSlider17 } from "~/utils/data/carousel";
 import { getProduct } from "~/server/axiosApi";
 import { getAllProducts } from "../../../server/axiosApi";
 import { triggerFacebookPixelViewContentEvent } from "~/utils/facebookPixel";
+import { useProduct, useRelatedProducts } from "~/hooks/useProducts";
 
 export async function getStaticPaths() {
   // Fetch a list of all product IDs from your backend (adjust the API endpoint as needed)
@@ -30,20 +32,49 @@ export async function getStaticProps({ params }) {
     const product = await getProduct(slug);
     // Fetch related products
     const relatedProducts = await Promise.all(
-      product.related_ids.map(async (id) => await getProduct(id))
+      (product.related_ids || []).slice(0, 6).map(async (id) => {
+        try {
+          return await getProduct(id);
+        } catch (e) {
+          return null;
+        }
+      })
     );
-    return { props: { product, relatedProducts } };
+    return { 
+      props: { 
+        initialProduct: product, 
+        initialRelatedProducts: relatedProducts.filter(Boolean),
+        productId: slug
+      },
+      revalidate: 3600, // Revalidate every hour
+    };
   } catch (error) {
     console.error("Error fetching product:", error);
     return {
-      props: { product: null },
+      props: { initialProduct: null, initialRelatedProducts: [], productId: slug },
       notFound: true,
     };
   }
 }
 
-function ProductDefault({ product, relatedProducts }) {
+function ProductDefault({ initialProduct, initialRelatedProducts, productId }) {
+  const router = useRouter();
   const [loaded, setLoadingState] = useState(true);
+
+  // SWR for client-side caching - uses initial data from SSG as fallback
+  // This prevents refetching when navigating back to this page!
+  const { product: swrProduct, isLoading: productLoading } = useProduct(
+    productId, 
+    initialProduct // Pass SSG data as fallback
+  );
+  const { relatedProducts: swrRelatedProducts } = useRelatedProducts(
+    (swrProduct || initialProduct)?.related_ids || [],
+    initialRelatedProducts // Pass SSG data as fallback
+  );
+
+  // Use SWR data (which includes fallback from SSG)
+  const product = swrProduct || initialProduct;
+  const relatedProducts = swrRelatedProducts.length > 0 ? swrRelatedProducts : initialRelatedProducts;
 
   useEffect(() => {
     if (product) {
@@ -55,7 +86,7 @@ function ProductDefault({ product, relatedProducts }) {
   return (
     <main className="main mt-6 single-product">
       <Helmet>
-        <title>Party Shope Web Store | Product Default</title>
+        <title>{product?.name || "Product"} | Party Shope Web Store</title>
       </Helmet>
 
       <h1 className="d-none">Party Shope Web Store - Product Default</h1>
@@ -72,7 +103,7 @@ function ProductDefault({ product, relatedProducts }) {
                 <DetailOne product={product} />
               </div>
             </div>
-            {console.log("this is single product", product)}
+
             <DescOne product={product} />
 
             <RelatedProducts products={relatedProducts} />
@@ -93,23 +124,8 @@ function ProductDefault({ product, relatedProducts }) {
           <div className="skel-pro-tabs"></div>
         </div>
       )}
-      {/* <section className="pt-3 mt-4">
-                    <h2 className="title justify-content-center">Related Products</h2>
-
-                    <OwlCarousel adClass="owl-carousel owl-theme owl-nav-full" options={ mainSlider17 }>
-                        {
-                          relatedProducts.map( ( item ) =>
-                                <div className="product-loading-overlay" key={ 'popup-skel-' + item }>
-
-                                  {item.name}
-                                </div>
-                            )
-                        }
-                    </OwlCarousel>
-                </section>  */}
     </main>
   );
 }
 
-// export default withApollo( { ssr: typeof window === 'undefined' } )( ProductDefault );
 export default ProductDefault;

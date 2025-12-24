@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
-import { useLazyQuery } from '@apollo/react-hooks';
+// import { useLazyQuery } from '@apollo/react-hooks';
 
 // Import Apollo Server and Query
-import withApollo from '~/server/apollo';
-import { GET_POSTS } from '~/server/queries';
+// import withApollo from '~/server/apollo';
+// import { GET_POSTS } from '~/server/queries';
 
 import OwlCarousel from '~/components/features/owl-carousel';
 import Breadcrumb from '~/components/features/breadcrumb';
@@ -19,7 +19,7 @@ import ElementsList from '~/components/partials/elements/elements-list';
 import { mainSlider5, mainSlider13, mainSlider14 } from '~/utils/data/carousel';
 
 function BlogPosts () {
-    const [ getPosts, { data, loading, error } ] = useLazyQuery( GET_POSTS );
+    // const [ getPosts, { data, loading, error } ] = useLazyQuery( GET_POSTS );
     const posts = data && data.posts.data;
 
     useEffect( () => {
@@ -201,4 +201,4 @@ function BlogPosts () {
     )
 }
 
-export default withApollo( { ssr: typeof window === "undefined" } )( BlogPosts );
+export default BlogPosts;

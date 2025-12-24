@@ -1,8 +1,8 @@
-import { useQuery } from "@apollo/react-hooks";
+// import { useQuery } from "@apollo/react-hooks";
 import { useRouter } from 'next/router';
 import StickyBox from 'react-sticky-box';
 
-import withApollo from '~/server/apollo';
+// import withApollo from '~/server/apollo';
 import { GET_POST_SIDEBAR_DATA } from '~/server/queries';
 
 import ALink from '~/components/features/custom-link';
@@ -11,7 +11,7 @@ import Card from '~/components/features/accordion/card';
 import PostTwo from '~/components/features/post/post-two';
 
 function BlogSidebar() {
-    const { data, loading, error } = useQuery( GET_POST_SIDEBAR_DATA );
+    // const { data, loading, error } = useQuery( GET_POST_SIDEBAR_DATA );
     const categories = data && data.postSidebarData.categories;
     const recent = data && data.postSidebarData.recent;
     const router = useRouter();
@@ -124,4 +124,4 @@ function BlogSidebar() {
     );
 }
 
-export default withApollo( { ssr: typeof window === "undefined" } )( BlogSidebar );
+export default BlogSidebar ;

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
-import { useLazyQuery } from '@apollo/react-hooks';
+// import { useLazyQuery } from '@apollo/react-hooks';
 import { useRouter } from 'next/router';
 
 // Import Apollo Server and Query
-import withApollo from '~/server/apollo';
-import { GET_POSTS } from '~/server/queries';
+// import withApollo from '~/server/apollo';
+// import { GET_POSTS } from '~/server/queries';
 
 import ALink from '~/components/features/custom-link';
 import Pagination from '~/components/features/pagination';
@@ -20,7 +20,7 @@ function Classic () {
     const [ isFirst, setFirst ] = useState( true );
     const query = router.query;
     const showingCount = 8;
-    const [ getPosts, { data, loading, error } ] = useLazyQuery( GET_POSTS );
+    // const [ getPosts, { data, loading, error } ] = useLazyQuery( GET_POSTS );
     const [ perPage, setPerPage ] = useState( showingCount );
     const posts = data && data.posts.data;
     const totalPage = data ? parseInt( data.posts.total / perPage ) + ( data.posts.total % perPage ? 1 : 0 ) : 1;
@@ -97,4 +97,4 @@ function Classic () {
     )
 }
 
-export default withApollo( { ssr: typeof window === "undefined" } )( Classic );
+export default Classic;

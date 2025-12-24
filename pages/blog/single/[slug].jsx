@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/react-hooks';
+// import { useQuery } from '@apollo/react-hooks';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Helmet from 'react-helmet';
 
-import withApollo from '~/server/apollo';
-import { GET_POST } from '~/server/queries';
+// import withApollo from '~/server/apollo';
+// import { GET_POST } from '~/server/queries';
 
 import ALink from '~/components/features/custom-link';
 import OwlCarousel from '~/components/features/owl-carousel';
@@ -22,7 +22,7 @@ function PostSingle() {
 
     if ( !slug ) return '';
 
-    const { data, loading, error } = useQuery( GET_POST, { variables: { slug } } );
+    // const { data, loading, error } = useQuery( GET_POST, { variables: { slug } } );
     const post = data && data.post.data;
 
     const related = data && data.post.related;
@@ -329,4 +329,4 @@ function PostSingle() {
     )
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( PostSingle );
+export default PostSingle;
