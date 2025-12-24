@@ -14,16 +14,16 @@ const fetcher = async (url) => {
 
 // Hook for fetching category products with caching
 export function useCategoryProducts(categoryId, page = 1, perPage = 12, fallbackData = null) {
+  const cacheKey = categoryId ? `products?category=${categoryId}&page=${page}&per_page=${perPage}` : null;
+  
   const { data, error, isLoading, mutate } = useSWR(
-    categoryId ? `products?category=${categoryId}&page=${page}&per_page=${perPage}` : null,
+    cacheKey,
     fetcher,
     {
-      fallbackData: fallbackData, // Use SSR data as fallback - prevents refetch!
-      revalidateOnFocus: false, // Don't refetch when window regains focus
-      revalidateOnReconnect: false, // Don't refetch on reconnect
-      revalidateOnMount: !fallbackData, // Only fetch on mount if no fallback data
-      dedupingInterval: 60000, // Dedupe requests within 60 seconds
-      keepPreviousData: true, // Keep showing old data while fetching new
+      fallbackData: fallbackData,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      dedupingInterval: 300000,
     }
   );
 

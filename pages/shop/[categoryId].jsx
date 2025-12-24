@@ -109,7 +109,7 @@ function Shop({ initialProducts, initialTotalProducts, initialTotalPages, catego
             <div className="col-lg-9 main-content">
               {showLoading ? (
                 <div className="row product-wrapper cols-2 cols-sm-3">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => (
+                  {[1, 2, 3, 4].map((item) => (
                     <div className="product-loading-overlay" key={'skel-' + item}></div>
                   ))}
                 </div>
