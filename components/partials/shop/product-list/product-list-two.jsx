@@ -14,8 +14,8 @@ function ProductListTwo( props ) {
     const router = useRouter();
     const query = router.query;
     const [ products, setProducts ] = useState( [] );
-    const [ getInitData, { data, loading, error } ] = useLazyQuery( GET_PRODUCTS );
-    const [ loadMoreProducts, { data: newData } ] = useLazyQuery( GET_PRODUCTS, { fetchPolicy: 'no-cache' } );
+    // const [ getInitData, { data, loading, error } ] = useLazyQuery( GET_PRODUCTS );
+    // const [ loadMoreProducts, { data: newData } ] = useLazyQuery( GET_PRODUCTS, { fetchPolicy: 'no-cache' } );
     const perPage = query.per_page ? parseInt( query.per_page ) : 12;
     const [ loadedCount, setLoadedCount ] = useState( perPage );
     const totalCount = data && data.products.total;
@@ -129,4 +129,4 @@ function ProductListTwo( props ) {
     )
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( ProductListTwo );
+export default ProductListTwo;

@@ -22,7 +22,7 @@ function SidebarFilterOne ( props ) {
     const { type = "left", isFeatured = false } = props;
     const router = useRouter();
     const query = router.query;
-    const { data, loading, error } = useQuery( GET_SHOP_SIDEBAR_DATA, { variables: { demo: 1, featured: true } } );
+    // const { data, loading, error } = useQuery( GET_SHOP_SIDEBAR_DATA, { variables: { demo: 1, featured: true } } );
     let tmpPrice = { max: query.max_price ? parseInt( query.max_price ) : 1000, min: query.min_price ? parseInt( query.min_price ) : 0 };
     const [ filterPrice, setPrice ] = useState( tmpPrice );
     const [ isFirst, setFirst ] = useState( true );

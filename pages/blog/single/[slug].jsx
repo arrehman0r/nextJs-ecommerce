@@ -22,7 +22,7 @@ function PostSingle() {
 
     if ( !slug ) return '';
 
-    const { data, loading, error } = useQuery( GET_POST, { variables: { slug } } );
+    // const { data, loading, error } = useQuery( GET_POST, { variables: { slug } } );
     const post = data && data.post.data;
 
     const related = data && data.post.related;
@@ -329,4 +329,4 @@ function PostSingle() {
     )
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( PostSingle );
+export default PostSingle;

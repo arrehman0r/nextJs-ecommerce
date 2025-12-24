@@ -19,7 +19,7 @@ function PostMasonry( { router } ) {
     const currentCategory = router.query.category ? router.query.category : null;
     const query = router.query;
     const showingCount = 8;
-    const [ getPosts, { data, loading, error } ] = useLazyQuery( GET_POSTS );
+    // const [ getPosts, { data, loading, error } ] = useLazyQuery( GET_POSTS );
     const [ perPage, setPerPage ] = useState( showingCount );
     const posts = data && data.posts.data;
     const totalPage = data ? parseInt( data.posts.total / perPage ) + ( data.posts.total % perPage ? 1 : 0 ) : 1;
@@ -135,4 +135,4 @@ function PostMasonry( { router } ) {
     )
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( withRouter( PostMasonry ) );
+export default withRouter( PostMasonry );

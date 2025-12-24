@@ -21,7 +21,7 @@ function ProductGrid() {
 
     if ( !slug ) return '';
 
-    const { data, loading, error } = useQuery( GET_PRODUCT, { variables: { slug } } );
+    // const { data, loading, error } = useQuery( GET_PRODUCT, { variables: { slug } } );
     const [ loaded, setLoadingState ] = useState( false );
     const product = data && data.product.data;
     const related = data && data.product.related;
@@ -96,4 +96,4 @@ function ProductGrid() {
     )
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( ProductGrid );
+export default ProductGrid;
