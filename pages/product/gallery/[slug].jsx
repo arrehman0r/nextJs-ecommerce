@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/react-hooks';
+// import { useQuery } from '@apollo/react-hooks';
 import Helmet from 'react-helmet';
 import imagesLoaded from 'imagesloaded';
 
-import withApollo from '~/server/apollo';
-import { GET_PRODUCT } from '~/server/queries';
+// import withApollo from '~/server/apollo';
+// import { GET_PRODUCT } from '~/server/queries';
 
 import ALink from '~/components/features/custom-link';
 import OwlCarousel from '~/components/features/owl-carousel';

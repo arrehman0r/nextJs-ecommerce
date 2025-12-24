@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { useRouter } from 'next/router';
 import StickyBox from 'react-sticky-box';
 
-import withApollo from '~/server/apollo';
+// import withApollo from '~/server/apollo';
 import { GET_POST_SIDEBAR_DATA } from '~/server/queries';
 
 import ALink from '~/components/features/custom-link';
@@ -124,4 +124,4 @@ function BlogSidebar() {
     );
 }
 
-export default withApollo( { ssr: typeof window === "undefined" } )( BlogSidebar );
+export default BlogSidebar ;

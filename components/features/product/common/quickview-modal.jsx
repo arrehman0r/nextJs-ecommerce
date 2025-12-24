@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useQuery } from '@apollo/react-hooks';
 import { Magnifier } from 'react-image-magnifiers';
 import Modal from 'react-modal';
 import imagesLoaded from 'imagesloaded';
 
-import { GET_PRODUCT } from '~/server/queries';
-import withApollo from '~/server/apollo';
+import { instance } from '~/server/instance';
 
 import OwlCarousel from '~/components/features/owl-carousel';
 
@@ -36,13 +34,28 @@ function Quickview( props ) {
     if ( !isOpen ) return <div></div>;
 
     const [ loaded, setLoadingState ] = useState( false );
+    const [ product, setProduct ] = useState( null );
+    const [ loading, setLoading ] = useState( true );
 
-    const { data, loading } = useQuery( GET_PRODUCT, { variables: { slug, onlyData: true } } );
-    const product = data && data.product;
+    // Fetch product using axios instead of Apollo
+    useEffect( () => {
+        if ( slug && isOpen ) {
+            setLoading( true );
+            instance.get( `products/${ slug }` )
+                .then( response => {
+                    setProduct( response.data );
+                    setLoading( false );
+                } )
+                .catch( error => {
+                    console.error( 'Error fetching product:', error );
+                    setLoading( false );
+                } );
+        }
+    }, [ slug, isOpen ] );
 
     useEffect( () => {
         setTimeout( () => {
-            if ( !loading && data && isOpen && document.querySelector( '.quickview-modal' ) )
+            if ( !loading && product && isOpen && document.querySelector( '.quickview-modal' ) )
                 imagesLoaded( '.quickview-modal' ).on( 'done', function () {
                     setLoadingState( true );
                     window.jQuery( '.quickview-modal .product-single-carousel' ).trigger( 'refresh.owl.carousel' );
@@ -50,9 +63,9 @@ function Quickview( props ) {
                     setLoadingState( false );
                 } );
         }, 200 );
-    }, [ data, isOpen ] );
+    }, [ product, isOpen, loading ] );
 
-    if ( slug === '' || !product || !product.data ) return '';
+    if ( slug === '' || !product ) return '';
 
     const closeQuick = () => {
         document.querySelector( ".ReactModal__Overlay" ).classList.add( 'removed' );
@@ -77,12 +90,12 @@ function Quickview( props ) {
                     <div className="col-md-6">
                         <div className="product-gallery mb-md-0 pb-0">
                             <div className="product-label-group">
-                                { product.data.is_new ? <label className="product-label label-new">New</label> : '' }
-                                { product.data.is_top ? <label className="product-label label-top">Top</label> : '' }
+                                { product.is_new ? <label className="product-label label-new">New</label> : '' }
+                                { product.is_top ? <label className="product-label label-top">Top</label> : '' }
                                 {
-                                    product.data.discount > 0 ?
-                                        product.data.variants.length === 0 ?
-                                            <label className="product-label label-sale">{ product.data.discount }% OFF</label>
+                                    product.discount > 0 ?
+                                        (product.variations?.length || 0) === 0 ?
+                                            <label className="product-label label-sale">{ product.discount }% OFF</label>
                                             : <label className="product-label label-sale">Sale</label>
                                         : ''
                                 }
@@ -90,12 +103,12 @@ function Quickview( props ) {
 
                             <OwlCarousel adClass="product-single-carousel owl-theme owl-nav-inner" options={ mainSlider3 }>
                                 {
-                                    product && product.data && product.data.large_pictures.map( ( item, index ) =>
+                                    product && product.images && product.images.map( ( item, index ) =>
                                         <Magnifier
                                             key={ 'quickview-image-' + index }
-                                            imageSrc={   item.url }
+                                            imageSrc={ item.src }
                                             imageAlt="magnifier"
-                                            largeImageSrc={   item.url }
+                                            largeImageSrc={ item.src }
                                             dragToMove={ false }
                                             mouseActivation="hover"
                                             cursorStyleActive="crosshair"
@@ -108,7 +121,7 @@ function Quickview( props ) {
                     </div>
 
                     <div className="col-md-6">
-                        <DetailOne data={ data } adClass="scrollable pr-3" isNav={ false } />
+                        <DetailOne product={ product } adClass="scrollable pr-3" isNav={ false } />
                     </div>
                 </div>
 
@@ -137,4 +150,4 @@ function mapStateToProps( state ) {
     }
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( connect( mapStateToProps, { closeQuickview: modalActions.closeQuickview } )( Quickview ) );
+export default connect( mapStateToProps, { closeQuickview: modalActions.closeQuickview } )( Quickview );

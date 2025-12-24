@@ -1,10 +1,10 @@
 import { useEffect, useState, useLayoutEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useLazyQuery } from '@apollo/react-hooks';
+// import { useLazyQuery } from '@apollo/react-hooks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import withApollo from '~/server/apollo';
-import { GET_PRODUCTS } from '~/server/queries';
+// import withApollo from '~/server/apollo';
+// import { GET_PRODUCTS } from '~/server/queries';
 
 import ToolBox from '~/components/partials/shop/toolbox';
 import ProductTwo from '~/components/features/product/product-two';

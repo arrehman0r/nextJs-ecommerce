@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useLazyQuery } from '@apollo/react-hooks';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import ALink from '~/components/features/custom-link';
-
-import { GET_PRODUCTS } from '~/server/queries';
-import withApollo from '~/server/apollo';
+import { instance } from '~/server/instance';
 
 import { toDecimal } from '~/utils';
 
 function SearchForm() {
     const router = useRouter();
     const [ search, setSearch ] = useState( "" );
-    const [ searchProducts, { data } ] = useLazyQuery( GET_PRODUCTS );
+    const [ searchResults, setSearchResults ] = useState( [] );
     const [ timer, setTimer ] = useState( null );
+    const [ isLoading, setIsLoading ] = useState( false );
 
     useEffect( () => {
         document.querySelector( "body" ).addEventListener( "click", onBodyClick );
@@ -26,17 +24,28 @@ function SearchForm() {
 
     useEffect( () => {
         setSearch( "" );
+        setSearchResults( [] );
     }, [ router.query.slug ] )
 
     useEffect( () => {
         if ( search.length > 2 ) {
             if ( timer ) clearTimeout( timer );
-            let timerId = setTimeout( () => {
-                searchProducts( { variables: { search: search } } );
-                setTimer( null );;
+            let timerId = setTimeout( async () => {
+                setIsLoading( true );
+                try {
+                    const response = await instance.get( 'products', { params: { search: search, per_page: 10 } } );
+                    setSearchResults( response.data || [] );
+                } catch ( error ) {
+                    console.error( 'Search error:', error );
+                    setSearchResults( [] );
+                }
+                setIsLoading( false );
+                setTimer( null );
             }, 500 );
 
             setTimer( timerId );
+        } else {
+            setSearchResults( [] );
         }
     }, [ search ] )
 
@@ -107,21 +116,21 @@ function SearchForm() {
                 </button>
 
                 <div className="live-search-list bg-white scrollable">
-                    { search.length > 2 && data && data.products.data.map( ( product, index ) => (
+                    { search.length > 2 && searchResults && searchResults.map( ( product, index ) => (
                         <ALink href={ `/product/default/${ product.id }` } className="autocomplete-suggestion" key={ `search-result-${ index }` }>
-                            <LazyLoadImage effect="opacity" src={    product.images[ 0 ].src } width={ 40 } height={ 40 } alt="product" />
+                            <LazyLoadImage effect="opacity" src={ product.images?.[0]?.src } width={ 40 } height={ 40 } alt="product" />
                             <div className="search-name" dangerouslySetInnerHTML={ removeXSSAttacks( matchEmphasize( product.name ) ) }></div>
                             <span className="search-price">
                                 {
-                                    product.sale_price !== product.regular_price ?
-                                        product.variants.length === 0 ?
+                                    product.sale_price && product.sale_price !== product.regular_price ?
+                                        product.variations?.length === 0 ?
                                             <>
                                                 <span className="new-price mr-1">Rs.{ toDecimal( product.sale_price ) }</span>
                                                 <span className="old-price">Rs.{ toDecimal( product.regular_price ) }</span>
                                             </>
                                             :
-                                            < span className="new-price">Rs.{ toDecimal( product.sale_price ) } – Rs.{ toDecimal( product.regular_price ) }</span>
-                                        : <span className="new-price">Rs.{ toDecimal( product.sale_price ) }</span>
+                                            <span className="new-price">Rs.{ toDecimal( product.sale_price ) } – Rs.{ toDecimal( product.regular_price ) }</span>
+                                        : <span className="new-price">Rs.{ toDecimal( product.regular_price || product.price ) }</span>
                                 }
                             </span>
                         </ALink>
@@ -133,4 +142,4 @@ function SearchForm() {
     );
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( SearchForm );
+export default SearchForm;

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
-import { useLazyQuery } from '@apollo/react-hooks';
+// import { useLazyQuery } from '@apollo/react-hooks';
 
 // Import Apollo Server and Query
-import withApollo from '~/server/apollo';
-import { GET_POSTS } from '~/server/queries';
+// import withApollo from '~/server/apollo';
+// import { GET_POSTS } from '~/server/queries';
 
 import OwlCarousel from '~/components/features/owl-carousel';
 import Breadcrumb from '~/components/features/breadcrumb';

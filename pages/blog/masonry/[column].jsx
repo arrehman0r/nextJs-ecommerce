@@ -1,11 +1,11 @@
 import { withRouter } from 'next/router';
 import React, { useState, useEffect, useRef } from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
+// import { useLazyQuery } from '@apollo/react-hooks';
 import Helmet from 'react-helmet';
 import imagesLoaded from 'imagesloaded';
 
-import withApollo from '~/server/apollo';
-import { GET_POSTS } from '~/server/queries';
+// import withApollo from '~/server/apollo';
+// import { GET_POSTS } from '~/server/queries';
 
 import ALink from '~/components/features/custom-link';
 import Pagination from '~/components/features/pagination';

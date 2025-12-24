@@ -1,8 +1,8 @@
-import { useQuery } from "@apollo/react-hooks";
+// import { useQuery } from "@apollo/react-hooks";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import withApollo from '~/server/apollo';
-import { GET_SHOP_SIDEBAR_DATA } from '~/server/queries';
+// import withApollo from '~/server/apollo';
+// import { GET_SHOP_SIDEBAR_DATA } from '~/server/queries';
 
 import ALink from '~/components/features/custom-link';
 import OwlCarousel from '~/components/features/owl-carousel';

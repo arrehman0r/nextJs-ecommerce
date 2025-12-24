@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/react-hooks';
+// import { useQuery } from '@apollo/react-hooks';
 import InputRange from 'react-input-range';
 
 
@@ -10,8 +10,8 @@ import OwlCarousel from '~/components/features/owl-carousel';
 
 import SmallProduct from '~/components/features/product/product-sm';
 
-import withApollo from '../../../../server/apollo';
-import { GET_SHOP_SIDEBAR_DATA } from '../../../../server/queries';
+// import withApollo from '../../../../server/apollo';
+// import { GET_SHOP_SIDEBAR_DATA } from '../../../../server/queries';
 
 import SlideToggle from 'react-slide-toggle';
 
@@ -297,4 +297,4 @@ function SidebarFilterOne ( props ) {
     )
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( SidebarFilterOne );
+export default SidebarFilterOne;

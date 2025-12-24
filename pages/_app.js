@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
 import Helmet from "react-helmet";
+import { SWRConfig } from 'swr';
 
 import { wrapper } from "../store/index.js";
 import Layout from '~/components/layout';
@@ -35,21 +36,30 @@ const App = ({ Component, pageProps }) => {
                         <div className="bounce4"></div>
                     </div>
                 </div>}>
-                <Helmet>
-                    <meta charSet="UTF-8" />
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+                <SWRConfig 
+                    value={{
+                        revalidateOnFocus: false,
+                        revalidateOnReconnect: false,
+                        dedupingInterval: 60000, // Cache for 60 seconds
+                        errorRetryCount: 2,
+                    }}
+                >
+                    <Helmet>
+                        <meta charSet="UTF-8" />
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-                    <title>Party - Online Party Store</title>
+                        <title>Party - Online Party Store</title>
 
-                    <meta name="keywords" content="Party Shope" />
-                    <meta name="description" content="Party Shop Web Store" />
-                    <meta name="author" content="Abdul Rehman" />
-                </Helmet>
+                        <meta name="keywords" content="Party Shope" />
+                        <meta name="description" content="Party Shop Web Store" />
+                        <meta name="author" content="Abdul Rehman" />
+                    </Helmet>
 
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </SWRConfig>
             </PersistGate>
         </Provider>
     );
