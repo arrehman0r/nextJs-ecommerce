@@ -17,6 +17,9 @@ function ProductEight( props ) {
     let isWishlisted;
     isWishlisted = wishlist.findIndex( item => item.id === product.id ) > -1 ? true : false;
 
+    // Use variations instead of variants (WooCommerce API structure)
+    const variations = product.variations || [];
+
     const showQuickviewHandler = () => {
         openQuickview( product.id );
     }
@@ -37,16 +40,16 @@ function ProductEight( props ) {
 
     const addToCartHandler = ( e ) => {
         e.preventDefault();
-        addToCart( { ...product, qty: 1, price: product.sale_price } );
+        addToCart( { ...product, qty: 1, price: product.sale_price || product.regular_price } );
     }
 
     return (
-        <div className={ `product product-list ${ adClass } ${ product.variants.length > 0 ? 'product-variable' : '' }` }>
+        <div className={ `product product-list ${ adClass } ${ variations.length > 0 ? 'product-variable' : '' }` }>
             <figure className="product-media">
                 <ALink href={ `/product/default/${ product.id }` }>
                     <LazyLoadImage
                         alt="product"
-                        src={    product.images[ 0 ].src }
+                        src={ product?.images?.[0]?.src }
                         threshold={ 500 }
                         effect="opacity"
                         width="300"
@@ -54,10 +57,10 @@ function ProductEight( props ) {
                     />
 
                     {
-                        product.images.length >= 2 ?
+                        product.images?.length >= 2 ?
                             <LazyLoadImage
                                 alt="product"
-                                src={   product.images[ 1 ].url }
+                                src={ product.images[1].src }
                                 threshold={ 500 }
                                 width="300"
                                 height="338"
@@ -73,7 +76,7 @@ function ProductEight( props ) {
                     { product.is_top ? <label className="product-label label-top">Top</label> : '' }
                     {
                         product.discount > 0 ?
-                            product.variants.length === 0 ?
+                            variations.length === 0 ?
                                 <label className="product-label label-sale">{ product.discount }% OFF</label>
                                 : <label className="product-label label-sale">Sale</label>
                             : ''
@@ -102,36 +105,36 @@ function ProductEight( props ) {
 
                 <div className="product-price">
                     {
-                        product.sale_price !== product.regular_price ?
-                            product.variants.length === 0 || ( product.variants.length > 0 && !product.variants[ 0 ].price ) ?
+                        product.sale_price && product.sale_price !== product.regular_price ?
+                            variations.length === 0 || ( variations.length > 0 && !variations[0]?.price ) ?
                                 <>
                                     <ins className="new-price">Rs.{ toDecimal( product.sale_price ) }</ins>
                                     <del className="old-price">Rs.{ toDecimal( product.regular_price ) }</del>
                                 </>
                                 :
-                                < del className="new-price">Rs.{ toDecimal( product.sale_price ) } – Rs.{ toDecimal( product.regular_price ) }</del>
-                            : <ins className="new-price">Rs.{ toDecimal( product.sale_price ) }</ins>
+                                <del className="new-price">Rs.{ toDecimal( product.sale_price ) } – Rs.{ toDecimal( product.regular_price ) }</del>
+                            : <ins className="new-price">Rs.{ toDecimal( product.regular_price || product.price ) }</ins>
                     }
                 </div>
 
                 <div className="ratings-container">
                     <div className="ratings-full">
-                        <span className="ratings" style={ { width: 20 * product.ratings + '%' } }></span>
-                        <span className="tooltiptext tooltip-top">{ toDecimal( product.ratings ) }</span>
+                        <span className="ratings" style={ { width: 20 * (product.average_rating || product.ratings || 0) + '%' } }></span>
+                        <span className="tooltiptext tooltip-top">{ toDecimal( product.average_rating || product.ratings || 0 ) }</span>
                     </div>
 
-                    <ALink href={ `/product/default/${ product.id }` } className="rating-reviews">( { product.reviews } reviews )</ALink>
+                    <ALink href={ `/product/default/${ product.id }` } className="rating-reviews">( { product.rating_count || product.reviews || 0 } reviews )</ALink>
                 </div>
 
-                <p className="product-short-desc">{ product.short_description }</p>
+                <p className="product-short-desc" dangerouslySetInnerHTML={{ __html: product.short_description || '' }}></p>
 
                 <div className="product-action">
                     {
-                        product.variants.length > 0 ?
-                            <ALink href={ `/product/default/${ product.id }` } className="btn-product btn-cart" title="Go to product">
+                        variations.length > 0 ?
+                            <ALink href={ `/product/default/${ product.id }` } className="btn-product btn-cart" title="Go to product" style={{ minWidth: '160px' }}>
                                 <span>Select Options</span>
                             </ALink> :
-                            <a href="#" className="btn-product btn-cart" title="Add to cart" onClick={ addToCartHandler }>
+                            <a href="#" className="btn-product btn-cart" title="Add to cart" onClick={ addToCartHandler } style={{ minWidth: '160px' }}>
                                 <i className="d-icon-bag"></i><span>Add to cart</span>
                             </a>
                     }
@@ -139,7 +142,7 @@ function ProductEight( props ) {
                         <i className={ isWishlisted ? "d-icon-heart-full" : "d-icon-heart" }></i>
                     </a>
 
-                    <ALink href="#" className="btn-product-icon btn-quickview" title="Quick View" onClick={ showQuickviewHandler }><i className="d-icon-search"></i></ALink>
+                    <ALink href={ `/product/default/${ product.id }` } className="btn-product-icon btn-quickview" title="Quick View"><i className="d-icon-search"></i></ALink>
                 </div>
             </div>
         </div >

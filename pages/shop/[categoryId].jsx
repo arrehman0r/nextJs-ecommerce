@@ -4,21 +4,42 @@ import { Helmet } from "react-helmet";
 import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
-import { getStaticProps } from "~/data/index";
-import { getAllCategories } from "~/server/axiosApi";
+import { getCategoryProducts } from "~/server/axiosApi";
 
-export async function getStaticPaths() {
-  const categories = await getAllCategories(); // Implement this function to fetch category IDs
+export async function getServerSideProps({ params, query }) {
+  try {
+    const categoryId = params?.categoryId;
+    const page = parseInt(query?.page) || 1;
+    const perPage = parseInt(query?.per_page) || 12;
 
-  // Generate the paths based on the category IDs
-  const paths = categories.map(({ id }) => ({
-    params: { categoryId: String(id) },
-  }));
+    const result = categoryId
+      ? await getCategoryProducts(categoryId, page, perPage)
+      : { products: [], totalProducts: 0, totalPages: 1, currentPage: 1 };
 
-  return { paths, fallback: false }; // Set fallback to false if you know all possible categories
+    return {
+      props: {
+        categoryProducts: result.products,
+        totalProducts: result.totalProducts,
+        totalPages: result.totalPages,
+        currentPage: result.currentPage,
+        categoryId,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching category products:", error);
+    return {
+      props: {
+        categoryProducts: [],
+        totalProducts: 0,
+        totalPages: 1,
+        currentPage: 1,
+        categoryId: params?.categoryId || null,
+      },
+    };
+  }
 }
 
-function Shop({ categoryProducts }) {
+function Shop({ categoryProducts, totalProducts, totalPages, currentPage }) {
   return (
     <main className="main">
       <Helmet>
@@ -35,7 +56,12 @@ function Shop({ categoryProducts }) {
             {/* <SidebarFilterOne /> */}
 
             <div className="col-lg-9 main-content">
-              <ProductListOne products={categoryProducts} />
+              <ProductListOne 
+                products={categoryProducts} 
+                totalProducts={totalProducts}
+                totalPages={totalPages}
+                currentPage={currentPage}
+              />
             </div>
           </div>
         </div>
@@ -43,5 +69,5 @@ function Shop({ categoryProducts }) {
     </main>
   );
 }
-export { getStaticProps };
+
 export default Shop;

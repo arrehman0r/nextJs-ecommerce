@@ -11,7 +11,15 @@ import Pagination from '~/components/features/pagination';
 // import { GET_PRODUCTS } from '~/server/queries';
 
 function ProductListOne( props ) {
-    const { itemsPerRow = 3, type = "left", isToolbox = true, products } = props;
+    const { 
+        itemsPerRow = 3, 
+        type = "left", 
+        isToolbox = true, 
+        products,
+        totalProducts = 0,
+        totalPages = 1,
+        currentPage = 1
+    } = props;
     const router = useRouter();
     const query = router.query;
     // const [ getProducts, { data, loading, error } ] = useLazyQuery( GET_PRODUCTS );
@@ -24,14 +32,8 @@ function ProductListOne( props ) {
         7: "cols-2 cols-sm-3 cols-md-4 cols-lg-5 cols-xl-7",
         8: "cols-2 cols-sm-3 cols-md-4 cols-lg-5 cols-xl-8"
     }
-    // const perPage = query.per_page ? parseInt( query.per_page ) : 12;
-    // const totalPage = data ? parseInt( data.products.total / perPage ) + ( data.products.total % perPage ? 1 : 0 ) : 1;
-    // const page = query.page ? query.page : 1;
-    const perPage = query.per_page ? parseInt(query.per_page) : 12;
-    const page = query.page ? query.page : 1;
-
-    // Calculate totalPage based on the total number of products and perPage
-    const totalPage = Math.ceil(products.length / perPage);
+    const perPage = query.per_page ? parseInt( query.per_page ) : 12;
+    const page = currentPage;
 
     const gridType = query.type ? query.type : 'grid';
 
@@ -103,8 +105,8 @@ function ProductListOne( props ) {
 {
     products && products.length > 0 ?
         <div className="toolbox toolbox-pagination">
-            <p className="show-info">Showing <span>{perPage * (page - 1) + 1} - {Math.min(perPage * page, products.length)} of {products.length}</span> Products</p>
-            <Pagination totalPage={totalPage} />
+            <p className="show-info">Showing <span>{perPage * (page - 1) + 1} - {Math.min(perPage * page, totalProducts)} of {totalProducts}</span> Products</p>
+            <Pagination totalPage={totalPages} />
         </div> : ''
 }
         </>

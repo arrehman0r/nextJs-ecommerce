@@ -13,14 +13,15 @@ import { triggerFacebookPixelViewContentEvent } from "~/utils/facebookPixel";
 
 export async function getStaticPaths() {
   // Fetch a list of all product IDs from your backend (adjust the API endpoint as needed)
-  const products = await getAllProducts();
+  const result = await getAllProducts(1, 100); // Fetch up to 100 products for static paths
+  const products = result.products || [];
   // Extract IDs from products and convert them to strings
   const paths = products.map((product) => ({
     params: { slug: String(product.id) },
   }));
 
-  // Set fallback: 'blocking' or 'blocking' to handle missing paths (optional)
-  return { paths, fallback: "blocking" }; // No fallback generation for missing paths here
+  // Set fallback: 'blocking' to handle products not pre-rendered at build time
+  return { paths, fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {

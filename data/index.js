@@ -12,13 +12,15 @@ export async function getStaticProps({ params }) {
 
     const categoryId = params?.categoryId;
     const categoryProducts = categoryId
-      ? await getCategoryProducts(categoryId)
-      : [];
-    console.log("categories data ", categories);
+      ? await getCategoryProducts(categoryId, 1, 12)
+      : { products: [], totalProducts: 0, totalPages: 1, currentPage: 1 };
+
     return {
       props: {
         categories,
-        categoryProducts,
+        categoryProducts: categoryProducts.products || [],
+        totalProducts: categoryProducts.totalProducts || 0,
+        totalPages: categoryProducts.totalPages || 1,
         product,
       },
     };
@@ -28,6 +30,8 @@ export async function getStaticProps({ params }) {
       props: {
         categories: [],
         categoryProducts: [],
+        totalProducts: 0,
+        totalPages: 1,
       },
     };
   }

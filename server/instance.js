@@ -123,14 +123,17 @@ instance.interceptors.request.use(
 // Set up response interceptor to handle data and errors
 instance.interceptors.response.use(
   function (response) {
-    return response.data;
+    // Return full response to preserve headers for pagination
+    return response;
   },
   function (error) {
     if (error?.response?.status === 401) {
       showToast("error", "Your session has expired. Please log in again.");
       // Clear user data and redirect to login
-      window.localStorage.clear();
-      window.location.href = "/";
+      if (typeof window !== 'undefined') {
+        window.localStorage.clear();
+        window.location.href = "/";
+      }
     }
     return Promise.reject(error);
   }
