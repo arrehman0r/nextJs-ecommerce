@@ -3,6 +3,30 @@ import { useEffect } from "react";
 import ALink from "~/components/features/custom-link";
 
 import FooterSearchBox from "~/components/common/partials/footer-search-box";
+import { WhatsappIcon } from "~/public/images/svg";
+
+// WhatsApp Button Styles
+const whatsappButtonStyle = {
+  position: "fixed",
+  right: "24px",
+  bottom: "24px",
+  zIndex: 9999,
+  width: "64px",
+  height: "64px",
+  borderRadius: "50%",
+  backgroundColor: "#25D366",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  boxShadow: "0 4px 16px rgba(0,0,0,0.18)",
+  cursor: "pointer",
+  transition: "box-shadow 0.2s"
+};
+
+const whatsappIconStyle = {
+  color: "#fff",
+  fontSize: "2.2rem",
+};
 
 export default function StickyFooter() {
   let tmp = 0;
@@ -92,8 +116,24 @@ export default function StickyFooter() {
     message
   )}`;
 
+
+
   return (
-    <div className="sticky-footer sticky-content fix-bottom">
+    <>
+      {/* Sticky WhatsApp Button */}
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+        style={whatsappButtonStyle}
+        className="whatsapp-sticky-btn"
+      >
+      <WhatsappIcon width={32} height={32} />
+
+      </a>
+     
+      <div className="sticky-footer sticky-content fix-bottom">
       <ALink href="/" className="sticky-link active">
         <i className="d-icon-home"></i>
         <span>Home</span>
@@ -117,6 +157,6 @@ export default function StickyFooter() {
       </ALink>
 
       <FooterSearchBox />
-    </div>
-  );
+      </div>
+    </>)
 }
