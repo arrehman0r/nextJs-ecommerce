@@ -3,7 +3,7 @@ module.exports = {
     basePath: '',
     trailingSlash: true,
     images: {
-        domains: ['user-images.githubusercontent.com', "admin.partyshope.com"],
+        domains: ['user-images.githubusercontent.com', "admin.partyshope.com","cms.partyshope.com"],
     },
     async rewrites() {
         return [

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify"; // Import toast from react-toastify
 
-export const baseURL = "https://admin.partyshope.com/wp-json/wc/v3/";
+export const baseURL = "https://cms.partyshope.com/wp-json/wc/v3/";
 
 export const instance = axios.create({
   baseURL: baseURL,
