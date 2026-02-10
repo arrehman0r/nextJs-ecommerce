@@ -1,8 +1,10 @@
 // import { useQuery } from '@apollo/react-hooks';
 import Helmet from 'react-helmet';
+import { useRouter } from 'next/router';
 
 import Breadcrumb from '~/components/features/breadcrumb';
 import OwlCarousel from '~/components/features/owl-carousel';
+import Pagination from '~/components/features/pagination';
 
 // import { GET_PRODUCTS } from '~/server/queries';
 // import withApollo from '~/server/apollo';
@@ -21,23 +23,62 @@ import ProductTwo from '~/components/features/product/product-two';
 
 // import { mainSlider1, mainSlider7, mainSlider19 } from '~/utils/data/carousel';
 import { getAllProducts } from '~/server/axiosApi';
+import { useAllProducts } from '~/hooks/useProducts';
 
 
+const DEFAULT_PER_PAGE = 12;
 
 export async function getStaticProps() {
     try {
-      const products = await getAllProducts();
-      return { props: { products } };
+      const result = await getAllProducts(1, DEFAULT_PER_PAGE);
+      return { 
+        props: { 
+          initialProducts: result.products,
+          initialTotalProducts: result.totalProducts,
+          initialTotalPages: result.totalPages,
+          perPage: DEFAULT_PER_PAGE,
+        },
+        revalidate: 3600,
+      };
     } catch (error) {
       console.error('Error fetching products:', error);
-      return { props: { products: [] } };
+      return { 
+        props: { 
+          initialProducts: [],
+          initialTotalProducts: 0,
+          initialTotalPages: 0,
+          perPage: DEFAULT_PER_PAGE,
+        },
+        revalidate: 60,
+      };
     }
   }
   
-function Products({products}) {
-   
+function Products({ initialProducts, initialTotalProducts, initialTotalPages, perPage }) {
+    const router = useRouter();
+    const page = parseInt(router.query?.page) || 1;
+    // Use per_page from URL if provided, otherwise fall back to props
+    const currentPerPage = parseInt(router.query?.per_page) || perPage;
+
+    // Prepare fallback data ONLY for page 1 with default perPage (from SSR)
+    const fallbackData = (page === 1 && currentPerPage === perPage && initialProducts.length > 0) ? {
+      products: initialProducts,
+      totalProducts: initialTotalProducts,
+      totalPages: initialTotalPages,
+    } : null;
+
+    // SWR for client-side caching
+    const { products, totalProducts, totalPages, isLoading } = useAllProducts(
+      page,
+      currentPerPage,
+      fallbackData
+    );
+
+    // Show loading state only when SWR is fetching and we have no cached data
+    const showLoading = isLoading && products.length === 0;
+
     // const products = data ? data.products.data : [];
-console.log("all products",products)
+console.log("all products", { products, totalProducts, totalPages, page })
     return (
         <main className="skeleton-body">
             <Helmet>
@@ -54,7 +95,15 @@ console.log("all products",products)
                         <h2 className="title title-center">All Products</h2>
 
                         {
-                            products ?
+                            showLoading ?
+                                <div className="row product-wrapper">
+                                    {
+                                        [ 1, 2, 3, 4, 5, 6, 7, 8 ].map( ( item ) =>
+                                            <div className="col-md-3 col-6 product-loading-overlay" key={ 'default-skel-' + item }></div>
+                                        )
+                                    }
+                                </div> :
+                            products && products.length > 0 ?
                                 <div className="row product-wrapper">
                                     {
                                         products.map( ( item ) =>
@@ -65,14 +114,18 @@ console.log("all products",products)
                                         )
                                     }
                                 </div> :
-                                <div className="row product-wrapper">
-                                    {
-                                        [ 1, 2, 3, 4 ].map( ( item ) =>
-                                            <div className="col-md-3 col-6 product-loading-overlay" key={ 'default-skel-' + item }></div>
-                                        )
-                                    }
-                                </div>
-}
+                                <p className="ml-1">No products were found.</p>
+                        }
+
+                        {
+                            products && products.length > 0 && !showLoading ?
+                                <div className="toolbox toolbox-pagination mt-6">
+                                    <p className="show-info">
+                                        Showing <span>{currentPerPage * (page - 1) + 1} - {Math.min(currentPerPage * page, totalProducts)} of {totalProducts}</span> Products
+                                    </p>
+                                    <Pagination totalPage={totalPages} />
+                                </div> : ''
+                        }
                     </section>
 
                     {/* <section className="mt-8">

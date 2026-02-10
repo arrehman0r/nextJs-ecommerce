@@ -11,6 +11,11 @@ module.exports = {
                 source: '/sitemap.xml',
                 destination: '/api/sitemap',
             },
+            // Proxy WooCommerce API requests to avoid CORS issues
+            {
+                source: '/api/wc/:path*',
+                destination: 'https://cms.partyshope.com/wp-json/wc/v3/:path*',
+            },
         ];
     },
 }

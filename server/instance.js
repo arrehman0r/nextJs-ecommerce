@@ -1,7 +1,11 @@
 import axios from "axios";
 import { toast } from "react-toastify"; // Import toast from react-toastify
 
-export const baseURL = "https://cms.partyshope.com/wp-json/wc/v3/";
+// Use direct URL on server, proxied URL on client to avoid CORS
+const isServer = typeof window === 'undefined';
+export const baseURL = isServer 
+  ? "https://cms.partyshope.com/wp-json/wc/v3/" 
+  : "/api/wc/";
 
 export const instance = axios.create({
   baseURL: baseURL,
