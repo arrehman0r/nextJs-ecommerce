@@ -24,38 +24,42 @@ function DetailOne(props) {
     adClass = "",
     isNav = true,
     product,
+    variations = [], // WooCommerce variations array
   } = props;
   const { toggleWishlist, addToCart, wishlist } = props;
-  const [curColor, setCurColor] = useState("null");
-  const [curSize, setCurSize] = useState("null");
+  const [selectedAttributes, setSelectedAttributes] = useState({});
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQauntity] = useState(1);
-  // let product = data && product;
-
 
   // decide if the product is wishlisted
-  let isWishlisted,
-    colors = [],
-    sizes = [];
+  let isWishlisted;
   isWishlisted =
     wishlist.findIndex((item) => item.id === product.id) > -1 ? true : false;
 
-  if (product && product.variations.length > 0) {
-    if (product.variations[0].size)
-      product.variations.forEach((item) => {
-        if (sizes.findIndex((size) => size.name === item.size.name) === -1) {
-          sizes.push({ name: item.size.name, value: item.size.size });
+  // Extract unique attributes from variations (WooCommerce structure)
+  const attributeOptions = React.useMemo(() => {
+    const attrs = {};
+    if (variations && variations.length > 0) {
+      variations.forEach((variation) => {
+        if (variation.attributes) {
+          variation.attributes.forEach((attr) => {
+            if (!attrs[attr.name]) {
+              attrs[attr.name] = new Set();
+            }
+            attrs[attr.name].add(attr.option);
+          });
         }
       });
-
-    if (product.variations[0].color) {
-      product.variations.forEach((item) => {
-        if (colors.findIndex((color) => color.name === item.color.name) === -1)
-          colors.push({ name: item.color.name, value: item.color.color });
-      });
     }
-  }
+    // Convert Sets to arrays
+    Object.keys(attrs).forEach((key) => {
+      attrs[key] = Array.from(attrs[key]);
+    });
+    return attrs;
+  }, [variations]);
+
+  const attributeNames = Object.keys(attributeOptions);
 
   useEffect(() => {
     return () => {
@@ -64,40 +68,38 @@ function DetailOne(props) {
     };
   }, [product]);
 
+  // Find matching variation based on selected attributes
   useEffect(() => {
-    if (product.variations.length > 0) {
-      if (
-        (curSize !== "null" && curColor !== "null") ||
-        (curSize === "null" &&
-          product.variations[0].size === null &&
-          curColor !== "null") ||
-        (curColor === "null" &&
-          product.variations[0].color === null &&
-          curSize !== "null")
-      ) {
-        setCartActive(true);
-        setCurIndex(
-          product.variations.findIndex(
-            (item) =>
-              (item.size !== null &&
-                item.color !== null &&
-                item.color.name === curColor &&
-                item.size.name === curSize) ||
-              (item.size === null && item.color.name === curColor) ||
-              (item.color === null && item.size.name === curSize)
-          )
-        );
+    if (variations.length > 0) {
+      const selectedCount = Object.keys(selectedAttributes).filter(
+        (key) => selectedAttributes[key] !== "null"
+      ).length;
+      
+      // Only activate cart when all attributes are selected
+      if (selectedCount === attributeNames.length && attributeNames.length > 0) {
+        // Find the variation that matches all selected attributes
+        const matchIndex = variations.findIndex((variation) => {
+          return variation.attributes.every((attr) => {
+            return selectedAttributes[attr.name] === attr.option;
+          });
+        });
+        
+        if (matchIndex > -1) {
+          setCurIndex(matchIndex);
+          setCartActive(variations[matchIndex].purchasable !== false && (variations[matchIndex].stock_status === 'instock' || variations[matchIndex].stock_quantity > 0));
+        } else {
+          setCurIndex(-1);
+          setCartActive(false);
+        }
       } else {
         setCartActive(false);
+        setCurIndex(-1);
       }
     } else {
-      setCartActive(true);
+      // No variations - simple product
+      setCartActive(product.stock_quantity > 0);
     }
-
-    if (product.stock === 0) {
-      setCartActive(false);
-    }
-  }, [curColor, curSize, product]);
+  }, [selectedAttributes, variations, attributeNames, product]);
 
   const wishlistHandler = (e) => {
     e.preventDefault();
@@ -115,45 +117,41 @@ function DetailOne(props) {
     }
   };
 
-  const setColorHandler = (e) => {
-    setCurColor(e.target.value);
-  };
-
-  const setSizeHandler = (e) => {
-    setCurSize(e.target.value);
+  const handleAttributeChange = (attrName, value) => {
+    setSelectedAttributes((prev) => ({
+      ...prev,
+      [attrName]: value,
+    }));
   };
 
   const addToCartHandler = () => {
-    if (product.stock_quantity > 0 && cartActive) {
-      if (product.variations.length > 0) {
-        let tmpName = product.name,
-          tmpPrice;
-        tmpName += curColor !== "null" ? "-" + curColor : "";
-        tmpName += curSize !== "null" ? "-" + curSize : "";
-
-        if (product.sale_price === product.regular_price) {
-          tmpPrice = product.sale_price;
-        } else if (
-          !product.variations[0].sale_price &&
-          product.regular_price > 0
-        ) {
-          tmpPrice = product.sale_price;
-        } else {
-          tmpPrice = product.variations[curIndex].regular_price
-            ? product.variations[curIndex].regular_price
-            : product.variations[curIndex].sale_price;
-        }
-
+    if (cartActive) {
+      if (variations.length > 0 && curIndex > -1) {
+        // Variable product - include variation info
+        const selectedVariation = variations[curIndex];
+        const attrString = selectedVariation.attributes
+          .map((attr) => attr.option)
+          .join(" - ");
+        
         addToCart({
           ...product,
-          name: tmpName,
+          name: `${product.name} - ${attrString}`,
           qty: quantity,
-          sale_price: tmpPrice,
+          price: selectedVariation.price,
+          sale_price: selectedVariation.sale_price || selectedVariation.price,
+          regular_price: selectedVariation.regular_price || selectedVariation.price,
+          variation_id: selectedVariation.id,
+          variation: selectedVariation,
+          selected_attributes: selectedAttributes,
+          // Use variation image if available
+          images: selectedVariation.image ? [selectedVariation.image] : product.images,
         });
       } else {
+        // Simple product
         addToCart({
           ...product,
           qty: quantity,
+          price: product.price,
           sale_price: product.sale_price,
         });
       }
@@ -161,32 +159,28 @@ function DetailOne(props) {
   };
 
   const resetValueHandler = (e) => {
-    setCurColor("null");
-    setCurSize("null");
+    setSelectedAttributes({});
   };
 
-  function isDisabled(color, size) {
-    if (color === "null" || size === "null") return false;
-
-    if (sizes.length === 0) {
-      return (
-        product.variations.findIndex((item) => item.color.name === curColor) ===
-        -1
+  // Check if an option is available based on other selections
+  function isOptionAvailable(attrName, optionValue) {
+    // Find variations that have this option
+    return variations.some((variation) => {
+      const hasOption = variation.attributes.some(
+        (attr) => attr.name === attrName && attr.option === optionValue
       );
-    }
-
-    if (colors.length === 0) {
-      return (
-        product.dvariations.findIndex((item) => item.size.name === curSize) ===
-        -1
-      );
-    }
-
-    return (
-      product.variations.findIndex(
-        (item) => item.color.name === color && item.size.name === size
-      ) === -1
-    );
+      if (!hasOption) return false;
+      
+      // Check if other selected attributes match
+      for (const [key, value] of Object.entries(selectedAttributes)) {
+        if (key === attrName || value === "null") continue;
+        const matches = variation.attributes.some(
+          (attr) => attr.name === key && attr.option === value
+        );
+        if (!matches) return false;
+      }
+      return true;
+    });
   }
 
   function changeQty(qty) {
@@ -234,27 +228,36 @@ function DetailOne(props) {
       </div> */}
       <FreeReturn />
       <div className="product-price mb-2">
-        {product.sale_price !== product.regular_price ? (
-          product.variations.length === 0 ||
-          (product.variations.length > 0 &&
-            !product.variations[0].sale_price) ? (
+        {curIndex > -1 && variations[curIndex] ? (
+          // Show selected variation price
+          variations[curIndex].on_sale ? (
             <>
-              <ins className="new-price">Rs.{product.sale_price}</ins>
-              <del className="old-price">Rs.{product.regular_price}</del>
+              <ins className="new-price">Rs.{toDecimal(variations[curIndex].sale_price)}</ins>
+              <del className="old-price">Rs.{toDecimal(variations[curIndex].regular_price)}</del>
             </>
           ) : (
-            <del className="new-price">
-              Rs.{toDecimal(product.sale_price)} – Rs.
-              {toDecimal(product.regular_price)}
-            </del>
+            <ins className="new-price">Rs.{toDecimal(variations[curIndex].price)}</ins>
           )
+        ) : variations.length > 0 ? (
+          // Show price range for variable product
+          <span className="new-price">
+            Rs.{toDecimal(Math.min(...variations.map(v => parseFloat(v.price) || 0)))} – Rs.
+            {toDecimal(Math.max(...variations.map(v => parseFloat(v.price) || 0)))}
+          </span>
+        ) : product.sale_price !== product.regular_price ? (
+          // Simple product with sale
+          <>
+            <ins className="new-price">Rs.{product.sale_price}</ins>
+            <del className="old-price">Rs.{product.regular_price}</del>
+          </>
         ) : (
+          // Simple product regular price
           <ins className="new-price">Rs.{toDecimal(product.sale_price)}</ins>
         )}
       </div>
 
       {product.sale_price !== product.regular_price &&
-      product.variations.length === 0 ? (
+      variations.length === 0 ? (
         <Countdown type={2} />
       ) : (
         ""
@@ -283,117 +286,113 @@ function DetailOne(props) {
         dangerouslySetInnerHTML={{ __html: product.short_description }}
       />
 
-      {product && product.variations.length > 0 ? (
+      {variations && variations.length > 0 ? (
         <>
-          {product.variations[0].color ? (
-            <div className="product-form product-variations product-color">
-              <label>Color:</label>
-              <div className="select-box">
-                <select
-                  name="color"
-                  className="form-control select-color"
-                  onChange={setColorHandler}
-                  value={curColor}
-                >
-                  <option value="null">Choose an option</option>
-                  {colors.map((item) =>
-                    !isDisabled(item.name, curSize) ? (
-                      <option value={item.name} key={"color-" + item.name}>
-                        {item.name}
-                      </option>
-                    ) : (
-                      ""
-                    )
-                  )}
-                </select>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-
-          {product.variations[0].size ? (
-            <div className="product-form product-variations product-size mb-0 pb-2">
-              <label>Size:</label>
-              <div className="product-form-group">
-                <div className="select-box">
-                  <select
-                    name="size"
-                    className="form-control select-size"
-                    onChange={setSizeHandler}
-                    value={curSize}
-                  >
-                    <option value="null">Choose an option</option>
-                    {sizes.map((item) =>
-                      !isDisabled(curColor, item.name) ? (
-                        <option value={item.name} key={"size-" + item.name}>
-                          {item.name}
-                        </option>
-                      ) : (
-                        ""
-                      )
-                    )}
-                  </select>
+          {/* Dynamic attribute selectors for WooCommerce variations */}
+          {attributeNames.map((attrName, index) => (
+            <div 
+              key={attrName} 
+              className={`product-form product-variations ${index === attributeNames.length - 1 ? 'mb-0 pb-2' : ''}`}
+            >
+              <label>{attrName}:</label>
+              <div className={index === attributeNames.length - 1 ? "product-form-group" : ""}>
+                <div className="variation-buttons d-flex flex-wrap gap-2">
+                  {attributeOptions[attrName].map((option) => {
+                    const isAvailable = isOptionAvailable(attrName, option);
+                    const isSelected = selectedAttributes[attrName] === option;
+                    // Find the variation that matches this option to get its image
+                    const matchingVariation = variations.find((v) => 
+                      v.attributes.some((attr) => attr.name === attrName && attr.option === option)
+                    );
+                    const variationImage = matchingVariation?.image?.src;
+                    
+                    return (
+                      <button
+                        type="button"
+                        key={`${attrName}-${option}`}
+                        className={`variation btn btn-variation ${isSelected ? 'selected-variation-btn' : 'btn-outline-primary'} ${!isAvailable ? 'disabled btn-outline-secondary' : ''}`}
+                        onClick={() => isAvailable && handleAttributeChange(attrName, isSelected ? "null" : option)}
+                        disabled={!isAvailable}
+                        style={{
+                          minWidth: variationImage ? '80px' : '60px',
+                          padding: variationImage ? '6px 10px' : '8px 16px',
+                          marginRight: '8px',
+                          marginBottom: '8px',
+                          cursor: isAvailable ? 'pointer' : 'not-allowed',
+                          opacity: isAvailable ? 1 : 0.5,
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          gap: '4px',
+                        }}
+                      >
+                        {variationImage && (
+                          <img 
+                            src={variationImage} 
+                            alt={option}
+                            style={{
+                              width: '40px',
+                              height: '40px',
+                              objectFit: 'cover',
+                              borderRadius: '4px',
+                            }}
+                          />
+                        )}
+                        <span>{option}</span>
+                      </button>
+                    );
+                  })}
                 </div>
 
-                <Collapse in={"null" !== curColor || "null" !== curSize}>
-                  <div className="card-wrapper overflow-hidden reset-value-button w-100 mb-0">
-                    <ALink
-                      href="#"
-                      className="product-variation-clean"
-                      onClick={resetValueHandler}
-                    >
-                      Clean All
-                    </ALink>
-                  </div>
-                </Collapse>
+                {index === attributeNames.length - 1 && (
+                  <Collapse in={Object.values(selectedAttributes).some(v => v !== "null" && v !== undefined)}>
+                    <div className="card-wrapper overflow-hidden reset-value-button w-100 mb-0">
+                      <ALink
+                        href="#"
+                        className="product-variation-clean"
+                        onClick={resetValueHandler}
+                      >
+                        Clean All
+                      </ALink>
+                    </div>
+                  </Collapse>
+                )}
               </div>
             </div>
-          ) : (
-            ""
-          )}
+          ))}
 
+          {/* Selected variation price display */}
           <div className="product-variation-price">
             <Collapse in={cartActive && curIndex > -1}>
               <div className="card-wrapper">
-                {curIndex > -1 ? (
+                {curIndex > -1 && variations[curIndex] ? (
                   <div className="single-product-price">
-                    {product.variations[curIndex].sale_price ? (
-                      product.variations[curIndex].regular_price ? (
-                        <div className="product-price mb-0">
-                          <ins className="new-price">
-                            $
-                            {toDecimal(
-                              product.variations[curIndex].regular_price
-                            )}
-                          </ins>
-                          <del className="old-price">
-                            $
-                            {toDecimal(product.variations[curIndex].sale_price)}
-                          </del>
-                        </div>
-                      ) : (
-                        <div className="product-price mb-0">
-                          <ins className="new-price">
-                            $
-                            {toDecimal(product.variations[curIndex].sale_price)}
-                          </ins>
-                        </div>
-                      )
-                    ) : (
-                      ""
+                    {variations[curIndex].on_sale ? (
+                      <div className="product-price mb-0">
+                        <ins className="new-price">
+                          Rs.{toDecimal(variations[curIndex].sale_price)}
+                        </ins>
+                        <del className="old-price">
+                          Rs.{toDecimal(variations[curIndex].regular_price)}
+                        </del>
+                      </div>
+                    ) : variations[curIndex].price ? (
+                      <div className="product-price mb-0">
+                        <ins className="new-price">
+                          Rs.{toDecimal(variations[curIndex].price)}
+                        </ins>
+                      </div>
+                    ) : null}
+                    {variations[curIndex].stock_status === 'outofstock' && (
+                      <p className="stock-status text-danger">Out of Stock</p>
                     )}
                   </div>
-                ) : (
-                  ""
-                )}
+                ) : null}
               </div>
             </Collapse>
           </div>
         </>
-      ) : (
-        ""
-      )}
+      ) : null}
 
       <hr className="product-divider"></hr>
 
@@ -404,7 +403,7 @@ function DetailOne(props) {
               <figure className="product-image">
                 <ALink href={"/product/default/" + product.id}>
                   <img
-                    src={product.images[0].src}
+                    src={curIndex > -1 && variations[curIndex]?.image?.src ? variations[curIndex].image.src : product.images[0]?.src}
                     width="90"
                     height="90"
                     alt="Product"
@@ -419,55 +418,38 @@ function DetailOne(props) {
                 </h4>
                 <div className="product-info">
                   <div className="product-price mb-0">
-                    {curIndex > -1 && product.variations[0] ? (
-                      product.variations[curIndex].sale_price ? (
-                        product.variations[curIndex].regular_price ? (
-                          <>
-                            <ins className="new-price">
-                              $
-                              {toDecimal(
-                                product.variations[curIndex].regular_price
-                              )}
-                            </ins>
-                            <del className="old-price">
-                              $
-                              {toDecimal(
-                                product.variations[curIndex].sale_price
-                              )}
-                            </del>
-                          </>
-                        ) : (
-                          <>
-                            <ins className="new-price">
-                              $
-                              {toDecimal(
-                                product.variations[curIndex].sale_price
-                              )}
-                            </ins>
-                          </>
-                        )
-                      ) : (
-                        ""
-                      )
-                    ) : product.sale_price !== product.regular_price ? (
-                      product.variations.length === 0 ? (
+                    {curIndex > -1 && variations[curIndex] ? (
+                      variations[curIndex].on_sale ? (
                         <>
                           <ins className="new-price">
-                            ${toDecimal(product.sale_price)}
+                            Rs.{toDecimal(variations[curIndex].sale_price)}
                           </ins>
                           <del className="old-price">
-                            ${toDecimal(product.regular_price)}
+                            Rs.{toDecimal(variations[curIndex].regular_price)}
                           </del>
                         </>
                       ) : (
-                        <del className="new-price">
-                          ${toDecimal(product.sale_price)} – $
-                          {toDecimal(product.regular_price)}
-                        </del>
+                        <ins className="new-price">
+                          Rs.{toDecimal(variations[curIndex].price)}
+                        </ins>
                       )
+                    ) : variations.length > 0 ? (
+                      <span className="new-price">
+                        Rs.{toDecimal(Math.min(...variations.map(v => parseFloat(v.price) || 0)))} – Rs.
+                        {toDecimal(Math.max(...variations.map(v => parseFloat(v.price) || 0)))}
+                      </span>
+                    ) : product.sale_price !== product.regular_price ? (
+                      <>
+                        <ins className="new-price">
+                          Rs.{toDecimal(product.sale_price)}
+                        </ins>
+                        <del className="old-price">
+                          Rs.{toDecimal(product.regular_price)}
+                        </del>
+                      </>
                     ) : (
                       <ins className="new-price">
-                        ${toDecimal(product.sale_price)}
+                        Rs.{toDecimal(product.sale_price)}
                       </ins>
                     )}
                   </div>
@@ -494,7 +476,7 @@ function DetailOne(props) {
               <label className="d-none">QTY:</label>
               <div className="product-form-group">
                 <Quantity
-                  max={product.stock_quantity}
+                  max={curIndex > -1 && variations[curIndex] ? variations[curIndex].stock_quantity : product.stock_quantity}
                   product={product}
                   onChangeQty={changeQty}
                 />
@@ -515,7 +497,7 @@ function DetailOne(props) {
           <label className="d-none">QTY:</label>
           <div className="product-form-group">
             <Quantity
-              max={product.stock_quantity}
+              max={curIndex > -1 && variations[curIndex] ? variations[curIndex].stock_quantity : product.stock_quantity}
               product={product}
               onChangeQty={changeQty}
             />

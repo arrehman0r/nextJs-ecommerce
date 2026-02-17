@@ -288,7 +288,9 @@ export const getTotalPrice = cartItems => {
     let total = 0;
     if ( cartItems ) {
         for ( let i = 0; i < cartItems.length; i++ ) {
-            total += cartItems[ i ].price * parseInt( cartItems[ i ].qty, 10 );
+            // Use sale_price for variations, fallback to price
+            const itemPrice = cartItems[ i ].sale_price || cartItems[ i ].price || 0;
+            total += parseFloat(itemPrice) * parseInt( cartItems[ i ].qty, 10 );
         }
     }
     return total;

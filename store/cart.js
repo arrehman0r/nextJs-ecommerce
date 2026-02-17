@@ -21,20 +21,27 @@ function cartReducer( state = initialState, action ) {
     switch ( action.type ) {
         case actionTypes.ADD_TO_CART:
             let tmpProduct = { ...action.payload.product };
+            
+            // Create unique cart item key using product ID and variation ID
+            const getCartItemKey = (item) => {
+                return item.variation_id 
+                    ? `${item.id}-${item.variation_id}` 
+                    : `${item.id}`;
+            };
+            
+            const newItemKey = getCartItemKey(tmpProduct);
+            const existingIndex = state.data.findIndex(item => getCartItemKey(item) === newItemKey);
 
-            if ( state.data.findIndex( item => item.name === action.payload.product.name ) > -1 ) {
-                let tmpData = state.data.reduce( ( acc, cur ) => {
-                    if ( cur.name === tmpProduct.name ) {
-                        acc.push( {
+            if ( existingIndex > -1 ) {
+                let tmpData = state.data.map((cur, index) => {
+                    if ( index === existingIndex ) {
+                        return {
                             ...cur,
                             qty: parseInt( cur.qty ) + parseInt( tmpProduct.qty )
-                        } );
-                    } else {
-                        acc.push( cur );
+                        };
                     }
-
-                    return acc;
-                }, [] )
+                    return cur;
+                });
 
                 return { ...state, data: tmpData };
             } else {
@@ -42,12 +49,16 @@ function cartReducer( state = initialState, action ) {
             }
 
         case actionTypes.REMOVE_FROM_CART:
-            let cart = state.data.reduce( ( cartAcc, product ) => {
-                if ( product.name !== action.payload.product.name ) {
-                    cartAcc.push( product );
-                }
-                return cartAcc;
-            }, [] );
+            const removeItemKey = action.payload.product.variation_id 
+                ? `${action.payload.product.id}-${action.payload.product.variation_id}`
+                : `${action.payload.product.id}`;
+            
+            let cart = state.data.filter(product => {
+                const itemKey = product.variation_id 
+                    ? `${product.id}-${product.variation_id}`
+                    : `${product.id}`;
+                return itemKey !== removeItemKey;
+            });
 
             return { ...state, data: cart };
 

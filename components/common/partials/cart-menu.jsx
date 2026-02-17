@@ -52,10 +52,10 @@ function CartMenu( props ) {
                             <div className="products scrollable">
                                 {
                                     cartList.map( ( item, index ) =>
-                                        <div className="product product-cart" key={ 'cart-menu-product-' + index }>
+                                        <div className="product product-cart" key={ 'cart-menu-product-' + (item.variation_id ? `${item.id}-${item.variation_id}` : item.id) }>
                                             <figure className="product-media pure-media">
                                                 <ALink href={ '/product/default/' + item.id }>
-                                                    <img src={  item.images[0].src } alt="product" width="80"
+                                                    <img src={ item.images?.[0]?.src } alt="product" width="80"
                                                         height="88" />
                                                 </ALink>
                                                 <button className="btn btn-link btn-close" onClick={ () => { removeCart( item ) } }>
@@ -66,7 +66,7 @@ function CartMenu( props ) {
                                                 <ALink href={ '/product/default/' + item.id } className="product-name">{ item.name }</ALink>
                                                 <div className="price-box">
                                                     <span className="product-quantity">{ item.qty }</span>
-                                                    <span className="product-price">Rs.{ toDecimal( item.price ) }</span>
+                                                    <span className="product-price">Rs.{ toDecimal( item.sale_price || item.price ) }</span>
                                                 </div>
                                             </div>
                                         </div>

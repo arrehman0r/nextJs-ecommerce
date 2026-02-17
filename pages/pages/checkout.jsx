@@ -74,11 +74,17 @@ function Checkout(props) {
   });
 
   const handleCreateOrder = async (data) => {
-    const lineItems = cartList.map(item => ({
-      product_id: item.id,
-      // variation_id: item.variationId, // If variationId exists
-      quantity: item.qty,
-    }));
+    const lineItems = cartList.map(item => {
+      const lineItem = {
+        product_id: item.id,
+        quantity: item.qty,
+      };
+      // Add variation_id if this is a product variation
+      if (item.variation_id) {
+        lineItem.variation_id = item.variation_id;
+      }
+      return lineItem;
+    });
 
     const email = data.email || "info@partyshope.com";
     const orderDetails = {

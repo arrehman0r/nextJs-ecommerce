@@ -13,15 +13,21 @@ function Cart(props) {
     const { cartList, removeFromCart, updateCart } = props;
     const [cartItems, setCartItems] = useState([]);
    
+    // Helper to get unique cart item key
+    const getCartItemKey = (item) => {
+        return item.variation_id 
+            ? `${item.id}-${item.variation_id}` 
+            : `${item.id}`;
+    };
 
     useEffect(() => {
         setCartItems([...cartList]);
     }, [cartList])
 
 
-    const onChangeQty = (name, qty) => {
+    const onChangeQty = (itemKey, qty) => {
         setCartItems(cartItems.map(item => {
-            return item.name === name ? { ...item, qty: qty } : item
+            return getCartItemKey(item) === itemKey ? { ...item, qty: qty } : item
         }));
     }
 
@@ -38,6 +44,19 @@ function Cart(props) {
     const update = () => {
         updateCart(cartItems);
     }
+    
+    // Get item price (use sale_price for variations)
+    const getItemPrice = (item) => {
+        return item.sale_price || item.price || 0;
+    };
+    
+    // Get stock quantity (use variation stock if available)
+    const getStockQuantity = (item) => {
+        if (item.variation && item.variation.stock_quantity) {
+            return item.variation.stock_quantity;
+        }
+        return item.stock_quantity;
+    };
  
     return (
         <div className="main cart">
@@ -67,11 +86,11 @@ function Cart(props) {
                                             <tbody>
                                                 {
                                                     cartItems.map(item =>
-                                                        <tr key={'cart' + item.name}>
+                                                        <tr key={'cart-' + getCartItemKey(item)}>
                                                             <td className="product-thumbnail">
                                                                 <figure>
                                                                     <ALink href={'/product/default/' + item.id}>
-                                                                        <img src={item.images[0].src} width="100" height="100"
+                                                                        <img src={item.images[0]?.src} width="100" height="100"
                                                                             alt="product" />
                                                                     </ALink>
                                                                 </figure>
@@ -82,14 +101,14 @@ function Cart(props) {
                                                                 </div>
                                                             </td>
                                                             <td className="product-subtotal">
-                                                                <span className="amount">Rs.{toDecimal(item.price)}</span>
+                                                                <span className="amount">Rs.{toDecimal(getItemPrice(item))}</span>
                                                             </td>
 
                                                             <td className="product-quantity">
-                                                                <Quantity qty={item.qty} max={item.stock_quantity} onChangeQty={qty => onChangeQty(item.name, qty)} />
+                                                                <Quantity qty={item.qty} max={getStockQuantity(item)} onChangeQty={qty => onChangeQty(getCartItemKey(item), qty)} />
                                                             </td>
                                                             <td className="product-price">
-                                                                <span className="amount">Rs.{toDecimal(item.price * item.qty)}</span>
+                                                                <span className="amount">Rs.{toDecimal(getItemPrice(item) * item.qty)}</span>
                                                             </td>
                                                             <td className="product-close">
                                                                 <ALink href="#" className="product-remove" title="Remove this product" onClick={() => removeFromCart(item)}>

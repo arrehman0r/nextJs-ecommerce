@@ -8,10 +8,10 @@ import DetailOne from "~/components/partials/product/detail/detail-one";
 import DescOne from "~/components/partials/product/desc/desc-one";
 import RelatedProducts from "~/components/partials/product/related-products";
 import { mainSlider17 } from "~/utils/data/carousel";
-import { getProduct } from "~/server/axiosApi";
+import { getProduct, getProductVariations } from "~/server/axiosApi";
 import { getAllProducts } from "../../../server/axiosApi";
 import { triggerFacebookPixelViewContentEvent } from "~/utils/facebookPixel";
-import { useProduct, useRelatedProducts } from "~/hooks/useProducts";
+import { useProduct, useRelatedProducts, useProductVariations } from "~/hooks/useProducts";
 
 export async function getStaticPaths() {
   // Fetch a list of all product IDs from your backend (adjust the API endpoint as needed)
@@ -30,6 +30,17 @@ export async function getStaticProps({ params }) {
   const slug = params.slug;
   try {
     const product = await getProduct(slug);
+    
+    // Fetch variations if product has them (variable product)
+    let variations = [];
+    if (product.variations && product.variations.length > 0) {
+      try {
+        variations = await getProductVariations(slug);
+      } catch (e) {
+        console.error("Error fetching variations:", e);
+      }
+    }
+    
     // Fetch related products
     const relatedProducts = await Promise.all(
       (product.related_ids || []).slice(0, 6).map(async (id) => {
@@ -44,6 +55,7 @@ export async function getStaticProps({ params }) {
       props: { 
         initialProduct: product, 
         initialRelatedProducts: relatedProducts.filter(Boolean),
+        initialVariations: variations,
         productId: slug
       },
       revalidate: 3600, // Revalidate every hour
@@ -51,13 +63,13 @@ export async function getStaticProps({ params }) {
   } catch (error) {
     console.error("Error fetching product:", error);
     return {
-      props: { initialProduct: null, initialRelatedProducts: [], productId: slug },
+      props: { initialProduct: null, initialRelatedProducts: [], initialVariations: [], productId: slug },
       notFound: true,
     };
   }
 }
 
-function ProductDefault({ initialProduct, initialRelatedProducts, productId }) {
+function ProductDefault({ initialProduct, initialRelatedProducts, initialVariations, productId }) {
   const router = useRouter();
   const [loaded, setLoadingState] = useState(true);
 
@@ -76,13 +88,21 @@ function ProductDefault({ initialProduct, initialRelatedProducts, productId }) {
   const product = swrProduct || initialProduct;
   const relatedProducts = swrRelatedProducts.length > 0 ? swrRelatedProducts : initialRelatedProducts;
 
+  // Fetch variations if product has variation IDs
+  const { variations: swrVariations } = useProductVariations(
+    productId,
+    product?.variations || [],
+    initialVariations
+  );
+  const variations = swrVariations.length > 0 ? swrVariations : initialVariations;
+
   useEffect(() => {
     if (product) {
       setLoadingState(false);
       triggerFacebookPixelViewContentEvent(product);
     }
   }, [product]);
-
+console.log("Product data:", product);
   return (
     <main className="main mt-6 single-product">
       <Helmet>
@@ -100,7 +120,7 @@ function ProductDefault({ initialProduct, initialRelatedProducts, productId }) {
               </div>
 
               <div className="col-md-6">
-                <DetailOne product={product} />
+                <DetailOne product={product} variations={variations} />
               </div>
             </div>
 

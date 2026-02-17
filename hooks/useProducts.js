@@ -120,3 +120,31 @@ export function useRelatedProducts(relatedIds = [], fallbackData = null) {
     isError: error,
   };
 }
+
+// Hook for fetching product variations with caching
+export function useProductVariations(productId, variationIds = [], fallbackData = null) {
+  // Only fetch if product has variation IDs (is a variable product)
+  const shouldFetch = productId && variationIds && variationIds.length > 0;
+  
+  const { data, error, isLoading } = useSWR(
+    shouldFetch ? `products/${productId}/variations` : null,
+    async (url) => {
+      console.log('🔄 SWR FETCHING VARIATIONS:', url);
+      const response = await instance.get(url, { params: { per_page: 100 } });
+      return response.data;
+    },
+    {
+      fallbackData: fallbackData,
+      revalidateOnFocus: false,
+      revalidateOnMount: !fallbackData,
+      revalidateIfStale: false,
+      dedupingInterval: 300000, // Cache variations for 5 minutes
+    }
+  );
+
+  return {
+    variations: data || [],
+    isLoading,
+    isError: error,
+  };
+}

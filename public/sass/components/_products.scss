@@ -178,13 +178,13 @@
   position: relative;
   margin-bottom: 0;
 
-    &:not(.pure-media)::before {
-        content: '';
-        display: block;
-        padding-top: 100%;
-        // padding-top: calc( 900% / 8 );
-        background-color: #f4f4f4;
-    }
+  &:not(.pure-media)::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+    // padding-top: calc( 900% / 8 );
+    background-color: #f4f4f4;
+  }
 
   img {
     display: block;
@@ -225,14 +225,24 @@
   &:before {
     padding-top: 155%;
     background-repeat: no-repeat;
-    background-image: linear-gradient(#f4f4f4 105%, transparent 0),
+    background-image:
+      linear-gradient(#f4f4f4 105%, transparent 0),
       linear-gradient(#f4f4f4 12px, transparent 0),
       linear-gradient(#f4f4f4 16px, transparent 0),
       linear-gradient(#f4f4f4 12px, transparent 0),
       linear-gradient(#f4f4f4 16px, transparent 0);
-    background-size: 100% 73%, 50% 12px, 73% 16px, 50% 12px, 40% 16px;
-    background-position: left 0, left calc(73% + 20px), left calc(73% + 44px),
-      left calc(73% + 66px), left calc(73% + 92px);
+    background-size:
+      100% 73%,
+      50% 12px,
+      73% 16px,
+      50% 12px,
+      40% 16px;
+    background-position:
+      left 0,
+      left calc(73% + 20px),
+      left calc(73% + 44px),
+      left calc(73% + 66px),
+      left calc(73% + 92px);
   }
 
   &:after {
@@ -296,7 +306,10 @@
     size: 1.6rem;
     weight: 700;
   }
-  transition: border-color 0.3s, color 0.3s, background-color 0.3s;
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    background-color 0.3s;
 
   &.btn-wishlist i {
     margin-top: 0.3rem;
@@ -378,7 +391,9 @@
   position: absolute;
   top: 15px;
   right: 15px;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition:
+    opacity 0.3s,
+    visibility 0.3s;
   opacity: 0;
   visibility: hidden;
 
@@ -397,7 +412,9 @@
   align-items: center;
   background-color: transparent;
   z-index: 10;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition:
+    opacity 0.3s,
+    visibility 0.3s;
   opacity: 0;
   a {
     width: 100%;
@@ -502,7 +519,7 @@
   }
 
   &::before {
-    content: "\e955 ""\e955 ""\e955 ""\e955 ""\e955";
+    content: "\e955 " "\e955 " "\e955 " "\e955 " "\e955";
     color: rgba(0, 0, 0, 0.16);
     font-family: "riode";
   }
@@ -522,7 +539,7 @@
   overflow: hidden;
 
   &::before {
-    content: "\e955 ""\e955 ""\e955 ""\e955 ""\e955";
+    content: "\e955 " "\e955 " "\e955 " "\e955 " "\e955";
     @include css(color, product, rating, _star-color);
     font-family: "riode";
   }
@@ -544,7 +561,24 @@
 // Product Variables
 .product-variations {
   display: flex;
+  flex-direction: column;
 
+  .btn-variation {
+    border: get(product, variation, _color-border);
+    background-color: transparent;
+    color: get(product, variation, color);
+    transition: get(product, variation, transition);
+    
+    &:hover {
+      border-color: $primary-color;
+      color: $primary-color;
+      border: 2px solid $primary-color;
+    }
+  }
+
+  .selected-variation-btn {
+    border: 2px solid $primary-color;
+  }
   // issue element-products
   .ratings-container + & {
     margin-top: -5px;
@@ -613,7 +647,10 @@
     flex: 1;
     height: 4.2rem;
     font-size: 1.3rem;
-    transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+    transition:
+      color 0.3s,
+      background-color 0.3s,
+      border-color 0.3s;
     z-index: 1;
   }
   .btn-quickview {
@@ -625,7 +662,10 @@
     border: 0;
     background-color: transparent;
     color: #222;
-    transition: color 0.3s, background-color 0.3s, visibility 0.3s;
+    transition:
+      color 0.3s,
+      background-color 0.3s,
+      visibility 0.3s;
     i {
       font-size: 1.8rem;
     }
@@ -683,13 +723,23 @@
     transform: translateX(-200%);
     opacity: 0;
     visibility: hidden;
-    transition: transform 0.3s, opacity 0.3s, visibility 0.3s, color 0.3s,
-      background-color 0.3s, border-color 0.3s;
+    transition:
+      transform 0.3s,
+      opacity 0.3s,
+      visibility 0.3s,
+      color 0.3s,
+      background-color 0.3s,
+      border-color 0.3s;
   }
 
   .btn-quickview {
-    transition: transform 0.5s, opacity 0.5s, visibility 0.5s, color 0.3s,
-      background-color 0.3s, border-color 0.3s;
+    transition:
+      transform 0.5s,
+      opacity 0.5s,
+      visibility 0.5s,
+      color 0.3s,
+      background-color 0.3s,
+      border-color 0.3s;
   }
 
   &:hover {
@@ -727,7 +777,11 @@
   .btn-quickview {
     opacity: 0;
     visibility: hidden;
-    transition: transform 0.4s, opacity 0.3s, visibility 0.3s, color 0.3s,
+    transition:
+      transform 0.4s,
+      opacity 0.3s,
+      visibility 0.3s,
+      color 0.3s,
       background-color 0.3s;
   }
 
@@ -762,7 +816,11 @@
   .btn-quickview {
     opacity: 0;
     visibility: hidden;
-    transition: transform 0.4s, opacity 0.3s, visibility 0.3s, color 0.3s,
+    transition:
+      transform 0.4s,
+      opacity 0.3s,
+      visibility 0.3s,
+      color 0.3s,
       background-color 0.3s;
   }
 
@@ -865,12 +923,20 @@
     transform: translateX(-200%);
     opacity: 0;
     visibility: hidden;
-    transition: transform 0.3s, opacity 0.3s, visibility 0.3s, color 0.3s,
+    transition:
+      transform 0.3s,
+      opacity 0.3s,
+      visibility 0.3s,
+      color 0.3s,
       background-color 0.3s;
   }
 
   .btn-quickview {
-    transition: transform 0.5s, opacity 0.5s, visibility 0.5s, color 0.3s,
+    transition:
+      transform 0.5s,
+      opacity 0.5s,
+      visibility 0.5s,
+      color 0.3s,
       background-color 0.3s;
   }
   .ratings-container {
@@ -991,7 +1057,10 @@
     .btn-cart {
       padding: 0;
       border-color: #ccc;
-      transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+      transition:
+        background-color 0.3s,
+        border-color 0.3s,
+        color 0.3s;
       &:hover,
       &:focus,
       &:active {
@@ -1036,7 +1105,9 @@
       border: none;
       background: #f4f4f4;
       cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
       &:hover {
         background-color: $primary-color;
         color: #fff;

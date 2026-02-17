@@ -65,3 +65,10 @@ export const loginCustomer = async (body) => {
   const response = await makeRequest("post", "token", body);
   return response?.data || response;
 }
+
+export const getProductVariations = async (productId) => {
+  const response = await makeRequest("get", `products/${productId}/variations`, {
+    per_page: 100 // Get all variations
+  });
+  return response?.data || [];
+}
