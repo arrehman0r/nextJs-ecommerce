@@ -105,15 +105,14 @@ function ProductEight( props ) {
 
                 <div className="product-price">
                     {
-                        product.sale_price && product.sale_price !== product.regular_price ?
-                            variations.length === 0 || ( variations.length > 0 && !variations[0]?.price ) ?
-                                <>
-                                    <ins className="new-price">Rs.{ toDecimal( product.sale_price ) }</ins>
-                                    <del className="old-price">Rs.{ toDecimal( product.regular_price ) }</del>
-                                </>
-                                :
-                                <del className="new-price">Rs.{ toDecimal( product.sale_price ) } – Rs.{ toDecimal( product.regular_price ) }</del>
-                            : <ins className="new-price">Rs.{ toDecimal( product.regular_price || product.price ) }</ins>
+                        product.type === 'variable' || (variations && variations.length > 0) ?
+                            <ins className="new-price">Rs.{ toDecimal( product.price ) }</ins>
+                        : product.sale_price && product.sale_price !== product.regular_price ?
+                            <>
+                                <ins className="new-price">Rs.{ toDecimal( product.sale_price ) }</ins>
+                                <del className="old-price">Rs.{ toDecimal( product.regular_price ) }</del>
+                            </>
+                        : <ins className="new-price">Rs.{ toDecimal( product.price || product.regular_price ) }</ins>
                     }
                 </div>
 
