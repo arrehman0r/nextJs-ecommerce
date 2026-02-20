@@ -232,7 +232,7 @@ function AboutUs() {
 
                                             <div className="overlay social-links">
                                                 <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                                <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
+                                                <ALink href="#" className="social-link social-instagram fab fa-twitter"></ALink>
                                                 <ALink href="#" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
                                             </div>
                                         </figure>
@@ -256,7 +256,7 @@ function AboutUs() {
 
                                             <div className="overlay social-links">
                                                 <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                                <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
+                                                <ALink href="#" className="social-link social-instagram fab fa-twitter"></ALink>
                                                 <ALink href="#" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
                                             </div>
                                         </figure>
@@ -280,7 +280,7 @@ function AboutUs() {
 
                                             <div className="overlay social-links">
                                                 <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                                <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
+                                                <ALink href="#" className="social-link social-instagram fab fa-twitter"></ALink>
                                                 <ALink href="#" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
                                             </div>
                                         </figure>
@@ -304,7 +304,7 @@ function AboutUs() {
 
                                             <div className="overlay social-links">
                                                 <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                                <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
+                                                <ALink href="#" className="social-link social-instagram fab fa-twitter"></ALink>
                                                 <ALink href="#" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
                                             </div>
                                         </figure>

@@ -1,9 +1,10 @@
 import React from 'react';
 import Reveal from 'react-awesome-reveal';
-
-import OwlCarousel from '~/components/features/owl-carousel';
+import dynamic from 'next/dynamic';
 
 import ProductTwo from '~/components/features/product/product-two';
+
+const SwiperCarousel = dynamic(() => import('~/components/features/swiper-carousel'), { ssr: false });
 
 import { productSlider } from '~/utils/data/carousel';
 import { fadeIn } from '~/utils/data/keyframes';
@@ -18,15 +19,15 @@ function BestCollection ( props ) {
 
                 {
                     loading ?
-                        <OwlCarousel adClass="owl-theme owl-nav-full" options={ productSlider }>
+                        <SwiperCarousel adClass="swiper-theme swiper-nav-full" options={ productSlider }>
                             {
                                 [ 1, 2, 3, 4, 5 ].map( ( item ) =>
                                     <div className="product-loading-overlay" key={ 'best-selling-skel-' + item }></div>
                                 )
                             }
-                        </OwlCarousel>
+                        </SwiperCarousel>
                         :
-                        <OwlCarousel adClass="owl-theme owl-nav-full" options={ productSlider }>
+                        <SwiperCarousel adClass="swiper-theme swiper-nav-full" options={ productSlider }>
                             {
                                 products && products.map( ( item, index ) =>
                                     <ProductTwo
@@ -35,7 +36,7 @@ function BestCollection ( props ) {
                                     />
                                 )
                             }
-                        </OwlCarousel>
+                        </SwiperCarousel>
                 }
             </section>
         </Reveal>

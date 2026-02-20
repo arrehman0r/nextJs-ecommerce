@@ -55,7 +55,7 @@ function ComingSoon () {
                             </form>
                             <div className="social-links">
                                 <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
+                                <ALink href="#" className="social-link social-instagram fab fa-twitter"></ALink>
                                 <ALink href="#" className="social-link social-instagram fab fa-instagram"></ALink>
                                 <ALink href="#" className="social-link social-pinterest fab fa-pinterest-p"></ALink>
                                 <ALink href="#" className="social-link social-email far fa-envelope"></ALink>

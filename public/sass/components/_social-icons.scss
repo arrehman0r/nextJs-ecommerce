@@ -40,9 +40,9 @@
         background: $social-facebook;
         border-color: $social-facebook;
     }
-    &.social-twitter:hover {
-        background: $social-twitter;
-        border-color: $social-twitter;
+    &.social-instagram:hover {
+        background: $social-instagram;
+        border-color: $social-instagram;
     }
     &.social-linkedin:hover {
         background: $social-linkedin;
@@ -120,8 +120,8 @@ Other Styles
         &.social-facebook:hover {
             color: $social-facebook;
         }
-        &.social-twitter:hover {
-            color: $social-twitter;
+        &.social-instagram:hover {
+            color: $social-instagram;
         }
         &.social-linkedin:hover {
             color: $social-linkedin;

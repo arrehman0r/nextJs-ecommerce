@@ -268,7 +268,7 @@ function Checkout(props) {
                         ></ALink>
                         <ALink
                           href="#"
-                          className="social-link social-twitter fab fa-twitter"
+                          className="social-link social-instagram fab fa-twitter"
                         ></ALink>
                       </div>
                     </div>

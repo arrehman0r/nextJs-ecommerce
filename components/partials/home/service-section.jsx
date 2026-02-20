@@ -1,17 +1,39 @@
 import React from 'react';
-import Reveal from "react-awesome-reveal";
+import dynamic from 'next/dynamic';
 
-import OwlCarousel from '~/components/features/owl-carousel';
+const SwiperCarousel = dynamic(() => import('~/components/features/swiper-carousel'), {
+    ssr: false,
+    loading: () => null
+});
 
-import { serviceSlider } from '~/utils/data/carousel';
+const Reveal = dynamic(() => import('react-awesome-reveal').then(mod => mod.Reveal), {
+    ssr: false,
+    loading: () => ({ children }) => <>{children}</>
+});
+
 import { fadeInRightShorter } from '~/utils/data/keyframes';
 
-function ServiceBox ( props ) {
+// Swiper options for service slider
+const serviceSliderOptions = {
+    items: 3,
+    nav: false,
+    dots: false,
+    margin: 0,
+    loop: false,
+    autoplay: false,
+    responsive: {
+        0: { items: 1 },
+        576: { items: 2 },
+        768: { items: 3 }
+    }
+};
+
+function ServiceBox(props) {
     return (
         <div className="container mt-6">
             <div className="service-list">
-                <OwlCarousel adClass="owl-theme" options={ serviceSlider }>
-                    <Reveal keyframes={ fadeInRightShorter } delay={ 300 } duration={ 1200 } triggerOnce>
+                <SwiperCarousel adClass="" options={serviceSliderOptions}>
+                    <Reveal keyframes={fadeInRightShorter} delay={300} duration={1200} triggerOnce>
                         <div className="icon-box icon-box-side icon-box1">
                             <i className="icon-box-icon d-icon-truck"></i>
 
@@ -23,7 +45,7 @@ function ServiceBox ( props ) {
                         </div>
                     </Reveal>
 
-                    <Reveal keyframes={ fadeInRightShorter } delay={ 400 } duration={ 1200 } triggerOnce>
+                    <Reveal keyframes={fadeInRightShorter} delay={400} duration={1200} triggerOnce>
                         <div className="icon-box icon-box-side icon-box2">
                             <i className="icon-box-icon d-icon-service"></i>
 
@@ -35,7 +57,7 @@ function ServiceBox ( props ) {
                         </div>
                     </Reveal>
 
-                    <Reveal keyframes={ fadeInRightShorter } delay={ 500 } duration={ 1200 } triggerOnce>
+                    <Reveal keyframes={fadeInRightShorter} delay={500} duration={1200} triggerOnce>
                         <div className="icon-box icon-box-side icon-box3">
                             <i className="icon-box-icon d-icon-secure"></i>
 
@@ -46,10 +68,10 @@ function ServiceBox ( props ) {
                             </div>
                         </div>
                     </Reveal>
-                </OwlCarousel>
+                </SwiperCarousel>
             </div>
         </div>
     )
 }
 
-export default React.memo( ServiceBox );
+export default React.memo(ServiceBox);

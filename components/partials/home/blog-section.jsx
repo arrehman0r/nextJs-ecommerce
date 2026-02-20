@@ -1,9 +1,10 @@
 import React from 'react';
 import Reveal from 'react-awesome-reveal';
-
-import OwlCarousel from '~/components/features/owl-carousel';
+import dynamic from 'next/dynamic';
 
 import PostEight from '~/components/features/post/post-eight';
+
+const SwiperCarousel = dynamic(() => import('~/components/features/swiper-carousel'), { ssr: false });
 
 import { fadeIn, fadeInRightShorter } from '~/utils/data/keyframes';
 import { mainSlider6 } from '~/utils/data/carousel';
@@ -17,7 +18,7 @@ function BlogSection ( props ) {
                 <div className="container">
                     <h2 className="title title-center">Featured Articles</h2>
 
-                    <OwlCarousel adClass="owl-theme post-slider" options={ mainSlider6 }>
+                    <SwiperCarousel adClass="swiper-theme post-slider" options={ mainSlider6 }>
                         {
                             posts && posts.length ?
                                 posts.slice( 15, 18 ).map( ( post, index ) => (
@@ -28,7 +29,7 @@ function BlogSection ( props ) {
                                     </React.Fragment>
                                 ) ) : ''
                         }
-                    </OwlCarousel>
+                    </SwiperCarousel>
                 </div>
             </Reveal>
         </section>

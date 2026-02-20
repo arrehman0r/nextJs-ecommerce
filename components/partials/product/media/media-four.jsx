@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { Magnifier } from 'react-image-magnifiers';
-
-import OwlCarousel from '~/components/features/owl-carousel';
 
 import MediaLightBox from '~/components/partials/product/light-box';
 
 import { mainSlider18 } from '~/utils/data/carousel';
+
+const SwiperCarousel = dynamic(() => import('~/components/features/swiper-carousel'), { ssr: false });
 
 export default function MediaFour( props ) {
     const { product } = props;
@@ -48,7 +49,7 @@ export default function MediaFour( props ) {
                 }
             </div>
 
-            <OwlCarousel adClass="product-gallery-carousel owl-nav-full owl-theme"
+            <SwiperCarousel adClass="product-gallery-carousel swiper-nav-full swiper-theme"
                 options={ mainSlider18 }
             >
                 {
@@ -68,7 +69,7 @@ export default function MediaFour( props ) {
                             <a href="#" className="product-image-full" onClick={ openLightBox } index={ index }><i className="d-icon-zoom"></i></a>
                         </div>
                     ) }
-            </OwlCarousel>
+            </SwiperCarousel>
 
             <MediaLightBox images={ lgImages } isOpen={ isOpen } changeOpenState={ changeOpenState } index={ index } product={ product } />
         </div>
