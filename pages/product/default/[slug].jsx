@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import Helmet from "react-helmet";
+import Head from "next/head";
 import MediaOne from "~/components/partials/product/media/media-one";
 import DetailOne from "~/components/partials/product/detail/detail-one";
 import DescOne from "~/components/partials/product/desc/desc-one";
@@ -104,9 +104,10 @@ function ProductDefault({ initialProduct, initialRelatedProducts, initialVariati
 console.log("Product data:", product);
   return (
     <main className="main mt-6 single-product">
-      <Helmet>
-        <title>{product?.name || "Product"} | Party Shope Web Store</title>
-      </Helmet>
+      <Head>
+        <title>{product?.name || "Product"} | Party Shope</title>
+        <meta name="description" content={product?.short_description?.replace(/<[^>]*>/g, '').slice(0, 160) || 'Shop at Party Shope'} />
+      </Head>
 
       <h1 className="d-none">Party Shope Web Store - Product Default</h1>
 

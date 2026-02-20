@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 
 // import { useQuery } from "@apollo/react-hooks";
 
@@ -35,9 +35,9 @@ import { getStaticProps } from './../data/index';
 
     return (
         <div className="main home">
-            <Helmet>
-                <title>Party Shope Web Store - Home</title>
-            </Helmet>
+            <Head>
+                <title>Party Shope - Online Party Store</title>
+            </Head>
 
 
             <h1 className="d-none">Party Shope Web Store - Home</h1>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Helmet } from "react-helmet";
+import Head from "next/head";
 
 import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
@@ -93,9 +93,9 @@ function Shop({ initialProducts, initialTotalProducts, initialTotalPages, catego
 
   return (
     <main className="main">
-      <Helmet>
-        <title>Party Shope Web Store - Shop Page</title>
-      </Helmet>
+      <Head>
+        <title>Shop | Party Shope</title>
+      </Head>
 
       <h1 className="d-none">Party Shope Web Store - Shop Page</h1>
 

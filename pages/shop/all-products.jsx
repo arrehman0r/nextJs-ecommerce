@@ -1,5 +1,5 @@
 // import { useQuery } from '@apollo/react-hooks';
-import Helmet from 'react-helmet';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import Breadcrumb from '~/components/features/breadcrumb';
@@ -81,9 +81,9 @@ function Products({ initialProducts, initialTotalProducts, initialTotalPages, pe
 console.log("all products", { products, totalProducts, totalPages, page })
     return (
         <main className="skeleton-body">
-            <Helmet>
-                <title>Party Shope Web Store | Products</title>
-            </Helmet>
+            <Head>
+                <title>All Products | Party Shope</title>
+            </Head>
 
             <h1 className="d-none">Party Shope Web Store - Products</h1>
 

@@ -1,4 +1,4 @@
-import Helmet from 'react-helmet';
+import Head from 'next/head';
 import React, { useEffect } from 'react';
 
 import ALink from '~/components/features/custom-link';
@@ -14,9 +14,9 @@ function Error404() {
 
     return (
         <main className="main">
-            <Helmet>
-                <title>Party Shope Web Store | 404</title>
-            </Helmet>
+            <Head>
+                <title>Party Shope | 404</title>
+            </Head>
 
             <h1 className="d-none">Party Shope Web Store - 404</h1>
 

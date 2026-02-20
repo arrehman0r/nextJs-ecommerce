@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
-import Helmet from "react-helmet";
+import Head from "next/head";
 import { SWRConfig } from 'swr';
 
 import { wrapper } from "../store/index.js";
@@ -44,17 +44,17 @@ const App = ({ Component, pageProps }) => {
                         errorRetryCount: 2,
                     }}
                 >
-                    <Helmet>
+                    <Head>
                         <meta charSet="UTF-8" />
-                        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-                        <title>Party - Online Party Store</title>
+                        <title>Party Shope - Online Party Store</title>
 
                         <meta name="keywords" content="Party Shope" />
                         <meta name="description" content="Party Shop Web Store" />
                         <meta name="author" content="Abdul Rehman" />
-                    </Helmet>
+                    </Head>
 
                     <Layout>
                         <Component {...pageProps} />
