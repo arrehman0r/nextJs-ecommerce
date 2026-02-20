@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { Magnifier } from 'react-image-magnifiers';
 
 import ALink from '~/components/features/custom-link';
-import OwlCarousel from '~/components/features/owl-carousel';
 
 import ThumbOne from '~/components/partials/product/thumb/thumb-one';
 import ThumbTwo from '~/components/partials/product/thumb/thumb-two';
@@ -10,21 +10,23 @@ import MediaLightBox from '~/components/partials/product/light-box';
 
 import { mainSlider3 } from '~/utils/data/carousel';
 
+const SwiperCarousel = dynamic(() => import('~/components/features/swiper-carousel'), { ssr: false });
+
 export default function MediaOne ( props ) {
     const { product } = props;
     const [ index, setIndex ] = useState( 0 );
     const [ isOpen, setOpenState ] = useState( false );
-    const [ mediaRef, setMediaRef ] = useState( null );
+    const mediaRef = useRef( null );
 
     let lgImages = product.images || [];
 
     useEffect( () => {
         setIndex( 0 );
-    }, [ window.location.pathname ] )
+    }, [ typeof window !== 'undefined' ? window.location.pathname : '' ] )
 
     useEffect( () => {
-        if ( mediaRef !== null && mediaRef.current !== null && index >= 0 ) {
-            mediaRef.current.$car.to( index, 300, true );
+        if ( mediaRef.current && index >= 0 ) {
+            mediaRef.current.slideTo( index, 300 );
         }
     }, [ index ] )
 
@@ -36,7 +38,7 @@ export default function MediaOne ( props ) {
 
     const changeRefHandler = ( carRef ) => {
         if ( carRef.current !== undefined ) {
-            setMediaRef( carRef );
+            mediaRef.current = carRef.current;
         }
     }
 
@@ -48,12 +50,13 @@ export default function MediaOne ( props ) {
         setOpenState( true );
     }
 
-    let events = {
-        onTranslate: function ( e ) {
-            if ( !e.target ) return;
-            if ( document.querySelector( '.product-thumbs' ) ) {
-                document.querySelector( '.product-thumbs' ).querySelector( '.product-thumb.active' ).classList.remove( 'active' );
-                document.querySelector( '.product-thumbs' ).querySelectorAll( '.product-thumb' )[ e.item.index ].classList.add( 'active' );
+    const handleSlideChange = ( swiper ) => {
+        if ( document.querySelector( '.product-thumbs' ) ) {
+            const activeThumbs = document.querySelectorAll( '.product-thumbs .product-thumb.active' );
+            activeThumbs.forEach( thumb => thumb.classList.remove( 'active' ) );
+            const allThumbs = document.querySelectorAll( '.product-thumbs .product-thumb' );
+            if ( allThumbs[ swiper.realIndex ] ) {
+                allThumbs[ swiper.realIndex ].classList.add( 'active' );
             }
         }
     }
@@ -83,11 +86,11 @@ export default function MediaOne ( props ) {
                     }
                 </div>
 
-                <OwlCarousel adClass="product-single-carousel owl-theme owl-nav-inner"
+                <SwiperCarousel adClass="product-single-carousel swiper-theme swiper-nav-inner"
                     options={ mainSlider3 }
                     onChangeIndex={ setIndexHandler }
                     onChangeRef={ changeRefHandler }
-                    events={ events }
+                    onSlideChange={ handleSlideChange }
                 >
                     {
                         lgImages.map( ( image, index ) =>
@@ -103,7 +106,7 @@ export default function MediaOne ( props ) {
                                 />
                             </div>
                         ) }
-                </OwlCarousel>
+                </SwiperCarousel>
 
                 <ALink href="#" className="product-image-full" onClick={ openLightBox }><i className="d-icon-zoom"></i></ALink>
 

@@ -1,119 +1,126 @@
-import ALink from '~/components/features/custom-link';
-import { Logo } from '~/public/images/svg';
-import paymentImage from "./../../public/images/banners/payment.png"
-import Image from 'next/image';
-import shoplogo from "./../../public/images/banners/shoplogo.png"
-export default function Footer () {
-    return (
-        <footer className="footer">
-            <div className="container">
-                <div className="footer-top">
-                    <div className="row align-items-center">
-                        <div className="col-lg-3">
-                            <ALink href="/" className="logo-footer">
-                                {/* <img src="./images/logo-footer.png" alt="logo-footer" width="154" height="43" /> */}
-                                <Logo color="#ffffff"/>
-                            </ALink>
-
-                        </div>
-                        <div className="col-lg-9">
-                            <div className="widget widget-newsletter form-wrapper form-wrapper-inline">
-                                <div className="newsletter-info mx-auto mr-lg-2 ml-lg-4">
-                                    <h4 className="widget-title">Subscribe to our Newsletter</h4>
-                                    <p>Get all the latest information, Sales and Offers.</p>
-                                </div>
-                                <form action="#" className="input-wrapper input-wrapper-inline">
-                                    <input type="email" className="form-control" name="email" id="email"
-                                        placeholder="Email address here..." required />
-                                    <button className="btn btn-primary btn-rounded btn-md ml-2" type="submit">subscribe<i
-                                        className="d-icon-arrow-right"></i></button>
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
+import ALink from "~/components/features/custom-link";
+import { Logo } from "~/public/images/svg";
+import paymentImage from "./../../public/images/banners/payment.png";
+import Image from "next/image";
+import shoplogo from "./../../public/images/banners/shoplogo.png";
+export default function Footer() {
+  return (
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-top">
+          <div className="row align-items-center">
+            <div className="col-lg-3">
+              <ALink href="/" className="logo-footer">
+                {/* <img src="./images/logo-footer.png" alt="logo-footer" width="154" height="43" /> */}
+                <Logo color="#ffffff" />
+              </ALink>
+            </div>
+            <div className="col-lg-9">
+              <div className="widget widget-newsletter form-wrapper form-wrapper-inline">
+                <div className="newsletter-info mx-auto mr-lg-2 ml-lg-4">
+                  <h4 className="widget-title">Subscribe to our Newsletter</h4>
+                  <p>Get all the latest information, Sales and Offers.</p>
                 </div>
+                <form action="#" className="input-wrapper input-wrapper-inline">
+                  <input
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    id="email"
+                    placeholder="Email address here..."
+                    required
+                  />
+                  <button
+                    className="btn btn-primary btn-rounded btn-md ml-2"
+                    type="submit"
+                  >
+                    subscribe<i className="d-icon-arrow-right"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                <div className="footer-middle">
-                    <div className="row">
-                        <div className="col-lg-3 col-md-6">
-                            <div className="widget widget-info">
-                                <h4 className="widget-title">Contact Info</h4>
-                                <ul className="widget-body">
-                                    <li>
-                                        <label>Phone: </label>
-                                        <ALink href="tel:#">Call 03025243420</ALink>
-                                    </li>
-                                    <li>
-                                        <label>Email: </label>
-                                        <ALink href="mailto:mail@party.com">info@partyshope.com</ALink>
-                                    </li>
-                                    <li>
-                                        <label>Address: </label>
-                                        <ALink href="#">DHA Phase 2, Lahore, Pakistan</ALink>
-                                    </li>
-                                    <li>
-                                        <label>WORKING DAYS / HOURS: </label>
-                                    </li>
-                                    <li>
-                                        <ALink href="#">Mon - Sun / 9:00 AM - 8:00 PM</ALink>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <div className="col-lg-3 col-md-6">
-                            <div className="widget ml-lg-4">
-                                <h4 className="widget-title">My Account</h4>
-                                <ul className="widget-body">
-                                    <li>
-                                        <ALink href="/pages/about-us">About Us</ALink>
-                                    </li>
-                                    <li>
-                                        <ALink href="#">Order History</ALink>
-                                    </li>
-                                    <li>
-                                        <ALink href="#">Returns</ALink>
-                                    </li>
-                                    <li>
-                                        <ALink href="#">Custom Service</ALink>
-                                    </li>
-                                    <li>
-                                        <ALink href="#">Terms &amp; Condition</ALink>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <div className="col-lg-3 col-md-6">
-                            <div className="widget ml-lg-4">
-                                <h4 className="widget-title">Contact Info</h4>
-                                <ul className="widget-body">
-                                    <li>
-                                        <ALink href="/pages/login">Sign in</ALink>
-                                    </li>
-                                    <li>
-                                        <ALink href="/pages/cart">View Cart</ALink>
-                                    </li>
-                                    <li>
-                                        <ALink href="/pages/wishlist">My Wishlist</ALink>
-                                    </li>
-                                    <li>
-                                        <ALink href="#">Track My Order</ALink>
-                                    </li>
-                                    <li>
-                                        <ALink href="#">Help</ALink>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <div className="col-lg-3 col-md-6">
-                            <div className="widget widget-instagram">
-                                <h4 className="widget-title">About</h4>
-                                <figure className="widget-body row">
-                                    <Image src={shoplogo} alt=''/>
-                                    {/* <div className="col-3">
+        <div className="footer-middle">
+          <div className="row">
+            <div className="col-lg-3 col-md-6">
+              <div className="widget widget-info">
+                <h4 className="widget-title">Contact Info</h4>
+                <ul className="widget-body">
+                  <li>
+                    <label>Phone: </label>
+                    <ALink href="tel:#">Call 03025243420</ALink>
+                  </li>
+                  <li>
+                    <label>Email: </label>
+                    <ALink href="mailto:mail@party.com">
+                      info@partyshope.com
+                    </ALink>
+                  </li>
+                  <li>
+                    <label>Address: </label>
+                    <ALink href="#">DHA Phase 2, Lahore, Pakistan</ALink>
+                  </li>
+                  <li>
+                    <label>WORKING DAYS / HOURS: </label>
+                  </li>
+                  <li>
+                    <ALink href="#">Mon - Sun / 9:00 AM - 8:00 PM</ALink>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6">
+              <div className="widget ml-lg-4">
+                <h4 className="widget-title">My Account</h4>
+                <ul className="widget-body">
+                  <li>
+                    <ALink href="/pages/about-us">About Us</ALink>
+                  </li>
+                  <li>
+                    <ALink href="#">Order History</ALink>
+                  </li>
+                  <li>
+                    <ALink href="#">Returns</ALink>
+                  </li>
+                  <li>
+                    <ALink href="#">Custom Service</ALink>
+                  </li>
+                  <li>
+                    <ALink href="#">Terms &amp; Condition</ALink>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6">
+              <div className="widget ml-lg-4">
+                <h4 className="widget-title">Contact Info</h4>
+                <ul className="widget-body">
+                  <li>
+                    <ALink href="/pages/login">Sign in</ALink>
+                  </li>
+                  <li>
+                    <ALink href="/pages/cart">View Cart</ALink>
+                  </li>
+                  <li>
+                    <ALink href="/pages/wishlist">My Wishlist</ALink>
+                  </li>
+                  <li>
+                    <ALink href="#">Track My Order</ALink>
+                  </li>
+                  <li>
+                    <ALink href="#">Help</ALink>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6">
+              <div className="widget widget-instagram">
+                <h4 className="widget-title">About</h4>
+                <figure className="widget-body row">
+                  <Image src={shoplogo} alt="" />
+                  {/* <div className="col-3">
                                         <img src="./images/instagram/01.jpg" alt="instagram 1" width="64" height="64" />
                                     </div>
                                     <div className="col-3">
@@ -137,30 +144,43 @@ export default function Footer () {
                                     <div className="col-3">
                                         <img src="./images/instagram/08.jpg" alt="instagram 8" width="64" height="64" />
                                     </div> */}
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-             
-                <div className="footer-bottom">
-                    <div className="footer-left">
-                        <figure className="payment">
-                        <Image src={paymentImage} alt="payment" width="200" height="150"  />
-                        </figure>
-                    </div>
-                    <div className="footer-center">
-                        <p className="copyright ls-normal">Party Shope &copy; 2024. All Rights Reserved</p>
-                    </div>
-                    <div className="footer-right">
-                        <div className="social-links">
-                            <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                            <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
-                            <ALink href="#" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
-                        </div>
-                    </div>
-                </div>
+                </figure>
+              </div>
             </div>
-        </footer>
-    )
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <div className="footer-left">
+            <figure className="payment">
+              <Image
+                src={paymentImage}
+                alt="payment"
+                width="200"
+                height="150"
+              />
+            </figure>
+          </div>
+          <div className="footer-center">
+            <p className="copyright ls-normal">
+              Party Shope &copy; 2026. All Rights Reserved
+            </p>
+          </div>
+          <div className="footer-right">
+            <div className="social-links">
+              <ALink
+                href="https://www.facebook.com/onlinepartyshope"
+                className="social-link social-facebook fab fa-facebook-f"
+              ></ALink>
+              <ALink
+                href="https://www.instagram.com/partyshope_/"
+                className="social-link social-instagram fab fa-instagram"
+              ></ALink>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }

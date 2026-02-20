@@ -7,7 +7,8 @@ import imagesLoaded from 'imagesloaded';
 // import withApollo from '~/server/apollo';
 // import { GET_PRODUCT } from '~/server/queries';
 
-import OwlCarousel from '~/components/features/owl-carousel';
+import dynamic from 'next/dynamic';
+const SwiperCarousel = dynamic(() => import('~/components/features/swiper-carousel'), { ssr: false });
 
 import MediaFive from '~/components/partials/product/media/media-five';
 import DetailThree from '~/components/partials/product/detail/detail-three';
@@ -97,13 +98,13 @@ function ProductRightSidebar() {
                                 <section className="pt-3 mt-4">
                                     <h2 className="title justify-content-center">Related Products</h2>
 
-                                    <OwlCarousel adClass="owl-carousel owl-theme owl-nav-full" options={ mainSlider17 }>
+                                    <SwiperCarousel adClass="swiper-carousel swiper-theme swiper-nav-full" options={ mainSlider17 }>
                                         {
                                             [ 1, 2, 3, 4, 5, 6 ].map( ( item ) =>
                                                 <div className="product-loading-overlay" key={ 'popup-skel-' + item }></div>
                                             )
                                         }
-                                    </OwlCarousel>
+                                    </SwiperCarousel>
                                 </section>
                             </div>
                         </div>

@@ -107,7 +107,7 @@ function Wishlist(props) {
                                     <h5 className="text-uppercase font-weight-bold mb-0 mr-4 ls-s">Share on:</h5>
                                     <ALink href="#" className="social-link social-icon social-facebook"
                                         title="Facebook"><i className="fab fa-facebook-f"></i></ALink>
-                                    <ALink href="#" className="social-link social-icon social-twitter"
+                                    <ALink href="#" className="social-link social-icon social-instagram"
                                         title="Twitter"><i className="fab fa-twitter"></i></ALink>
                                     <ALink href="#" className="social-link social-icon social-pinterest"
                                         title="Pinterest"><i className="fab fa-pinterest-p"></i></ALink>

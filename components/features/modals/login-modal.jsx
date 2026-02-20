@@ -88,7 +88,7 @@ function LoginModal() {
                                                 <div className="social-links">
                                                     <ALink href="#" className="social-link social-google fab fa-google border-no"></ALink>
                                                     <ALink href="#" className="social-link social-facebook fab fa-facebook-f border-no"></ALink>
-                                                    <ALink href="#" className="social-link social-twitter fab fa-twitter border-no"></ALink>
+                                                    <ALink href="#" className="social-link social-instagram fab fa-twitter border-no"></ALink>
                                                 </div>
                                             </div>
                                         </TabPanel>
@@ -117,7 +117,7 @@ function LoginModal() {
                                                 <div className="social-links">
                                                     <ALink href="#" className="social-link social-google fab fa-google border-no"></ALink>
                                                     <ALink href="#" className="social-link social-facebook fab fa-facebook-f border-no"></ALink>
-                                                    <ALink href="#" className="social-link social-twitter fab fa-twitter border-no"></ALink>
+                                                    <ALink href="#" className="social-link social-instagram fab fa-twitter border-no"></ALink>
                                                 </div>
                                             </div>
                                         </TabPanel>

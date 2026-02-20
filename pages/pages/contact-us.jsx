@@ -113,7 +113,7 @@ function ContactUs () {
                                             <ALink href="#">Phone: (123) 456-7890</ALink>
                                             <div className="social-links mt-1">
                                                 <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                                <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
+                                                <ALink href="#" className="social-link social-instagram fab fa-twitter"></ALink>
                                                 <ALink href="#" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
                                             </div>
                                         </div>
@@ -135,7 +135,7 @@ function ContactUs () {
                                             <ALink href="tel:#">Phone: 03025243420</ALink>
                                             <div className="social-links mt-1">
                                                 <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                                <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
+                                                <ALink href="#" className="social-link social-instagram fab fa-twitter"></ALink>
                                                 <ALink href="#" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
                                             </div>
                                         </div>
@@ -157,7 +157,7 @@ function ContactUs () {
                                             <ALink href="tel:#">Phone: (123) 456-7890</ALink>
                                             <div className="social-links mt-1">
                                                 <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                                <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
+                                                <ALink href="#" className="social-link social-instagram fab fa-twitter"></ALink>
                                                 <ALink href="#" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
                                             </div>
                                         </div>
@@ -179,7 +179,7 @@ function ContactUs () {
                                             <ALink href="tel:#">Phone: (123) 456-7890</ALink>
                                             <div className="social-links mt-1">
                                                 <ALink href="#" className="social-link social-facebook fab fa-facebook-f"></ALink>
-                                                <ALink href="#" className="social-link social-twitter fab fa-twitter"></ALink>
+                                                <ALink href="#" className="social-link social-instagram fab fa-twitter"></ALink>
                                                 <ALink href="#" className="social-link social-linkedin fab fa-linkedin-in"></ALink>
                                             </div>
                                         </div>

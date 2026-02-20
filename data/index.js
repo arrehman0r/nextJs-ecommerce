@@ -7,8 +7,10 @@ import {
 export async function getStaticProps({ params }) {
   try {
     const categories = await getAllCategories();
+    
+    // Only fetch product if productId is defined
     const productId = params?.productId;
-    const product = await getProduct(productId);
+    const product = productId ? await getProduct(productId) : null;
 
     const categoryId = params?.categoryId;
     const categoryProducts = categoryId
@@ -32,6 +34,7 @@ export async function getStaticProps({ params }) {
         categoryProducts: [],
         totalProducts: 0,
         totalPages: 1,
+        product: null,
       },
     };
   }

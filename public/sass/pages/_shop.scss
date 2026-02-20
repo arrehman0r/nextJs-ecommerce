@@ -397,16 +397,9 @@
 	top: 50%;
 	transform: translateY(-50%);
 	left: -2.7rem;
-	font-size: .7em;
-	font-weight: 900;
-	font-family: 'Font Awesome 5 Free';
-	text-align: center;
-	text-indent: 1px; // issue
-	line-height: 1.7em;
-
-	@include only-for-retina(1.5) {
-		text-indent: 0;
-	}
+	background-size: 10px 10px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 // .sticky-sidebar-wrapper .widget:first-child {

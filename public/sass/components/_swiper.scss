@@ -1,0 +1,103 @@
+/* Swiper Carousel Custom Styles */
+/* Replaces owl-carousel styling */
+
+.swiper-carousel {
+    position: relative;
+    width: 100%;
+}
+
+/* Navigation arrows */
+.swiper-carousel .swiper-button-next,
+.swiper-carousel .swiper-button-prev {
+    color: #333;
+    width: 3rem;
+    height: 3rem;
+   padding: 1%;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.swiper-carousel .swiper-button-next:hover,
+.swiper-carousel .swiper-button-prev:hover {
+    background: var(--primary-color, #336699);
+    color: #fff;
+    
+   
+}
+
+.swiper-carousel .swiper-button-next::after,
+.swiper-carousel .swiper-button-prev::after {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+/* Hide nav on mobile by default */
+@media (max-width: 767px) {
+    .swiper-carousel .swiper-button-next,
+    .swiper-carousel .swiper-button-prev {
+        display: none;
+    }
+}
+
+/* Pagination dots */
+.swiper-carousel .swiper-pagination {
+    position: relative;
+    margin-top: 1.5rem;
+    bottom: auto;
+}
+
+.swiper-carousel .swiper-pagination-bullet {
+    width: 1rem;
+    height: 1rem;
+    background: #ccc;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.swiper-carousel .swiper-pagination-bullet-active {
+    background: var(--primary-color, #336699);
+    transform: scale(1.2);
+}
+
+/* Intro slider specific */
+.intro-slider {
+    overflow: hidden;
+}
+
+.intro-slider .swiper-pagination {
+    position: absolute;
+    bottom: 20px;
+    margin-top: 0;
+}
+
+.intro-slider .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.intro-slider .swiper-pagination-bullet-active {
+    background: #fff;
+}
+
+/* Product carousel */
+.product-single-carousel .swiper-button-next,
+.product-single-carousel .swiper-button-prev {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-single-carousel:hover .swiper-button-next,
+.product-single-carousel:hover .swiper-button-prev {
+    opacity: 1;
+}
+
+/* Service slider */
+.service-list .swiper-slide {
+    height: auto;
+}
+
+/* Ensure slides have full width content */
+.swiper-slide > * {
+    width: 100%;
+}

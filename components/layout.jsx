@@ -1,25 +1,39 @@
 import { useEffect, useLayoutEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import 'react-toastify/dist/ReactToastify.min.css';
-import 'react-image-lightbox/style.css';
-import 'react-input-range/lib/css/index.css';
 
 import ALink from '~/components/features/custom-link';
-
 import Header from '~/components/common/header';
 import Footer from '~/components/common/footer';
 import StickyFooter from '~/components/common/sticky-footer';
-import Quickview from '~/components/features/product/common/quickview-modal';
-import VideoModal from '~/components/features/modals/video-modal';
 import MobileMenu from '~/components/common/partials/mobile-menu';
+import AppLoader from './common/loader';
 
 import { modalActions } from '~/store/modal';
 import { setLoading } from '~/store/utils';
-
 import { showScrollTopHandler, scrollTopHandler, stickyHeaderHandler, stickyFooterHandler, resizeHandler } from '~/utils';
-import AppLoader from './common/loader';
+
+// Dynamic imports for heavy components - only load when needed
+const Quickview = dynamic(() => import('~/components/features/product/common/quickview-modal'), {
+    ssr: false,
+    loading: () => null
+});
+
+const VideoModal = dynamic(() => import('~/components/features/modals/video-modal'), {
+    ssr: false,
+    loading: () => null
+});
+
+// Lazy load ToastContainer - not needed at initial paint
+const ToastContainer = dynamic(
+    () => import('react-toastify').then(mod => {
+        // Import CSS only when component loads
+        import('react-toastify/dist/ReactToastify.min.css');
+        return mod.ToastContainer;
+    }),
+    { ssr: false, loading: () => null }
+);
 
 function Layout({ children, closeQuickview }) {
     const router = useRouter();

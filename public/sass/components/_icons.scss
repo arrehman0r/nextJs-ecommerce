@@ -86,3 +86,35 @@
 		transition: transform .4s;
 	}
 }
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+.social-facebook::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  display: block;
+  background-color: currentColor;
+  -webkit-mask: url("/icons/facebook.svg") no-repeat center;
+  mask: url("/icons/facebook.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.social-instagram::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  display: block;
+  background-color: currentColor;
+  -webkit-mask: url("/icons/instagram.svg") no-repeat center;
+  mask: url("/icons/instagram.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}

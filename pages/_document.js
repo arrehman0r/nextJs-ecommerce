@@ -50,26 +50,40 @@ class MyDocument extends Document {
           </noscript>
 
           <link rel="icon" href="/images/icons/favicon.png" />
+          
+          {/* Preconnect to external domains for faster resource loading */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://connect.facebook.net" />
+          
+          {/* Google Fonts with font-display: swap to prevent FOIT */}
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           />
-          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          
+          {/* Critical icon fonts - preload for LCP */}
+          <link
+            rel="preload"
+            href="/vendor/riode-fonts/riode-fonts.css"
+            as="style"
+          />
           <link
             rel="stylesheet"
             type="text/css"
             href="/vendor/riode-fonts/riode-fonts.css"
           />
+          
+          {/* Non-critical CSS - load with lower priority */}
           <link
             rel="stylesheet"
             type="text/css"
             href="/vendor/fontawesome-free/css/all.min.css"
+            media="print"
+            onLoad="this.media='all'"
           />
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="/vendor/owl-carousel/owl.carousel.min.css"
-          />
+          
+          {/* jQuery removed - using Swiper instead of owl-carousel which doesn't need jQuery */}
         </Head>
         <body>
           <noscript>

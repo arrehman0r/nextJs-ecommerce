@@ -311,18 +311,18 @@
 .submenu {
     > a {
         &::after {
+            content: '';
             display: inline-block;
             position: absolute;
-            margin-top: 2px;
             right: .5rem;
             top: 50%;
-            line-height: 0;
-            vertical-align: middle;
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: inherit;
-            content: '\f054';
+            margin-top: -6px;
+            width: 10px;
+            height: 12px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512'%3E%3Cpath fill='currentColor' d='M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
         }
     }
 }
@@ -426,12 +426,14 @@
     }
 
     &:not(.parse-content)::before {
-        content: "\f054";
+        content: '';
         display: block;
-        font-size: 1rem;
-        font-weight: 600;
-        font-family: 'Font Awesome 5 Free';
-        line-height: 1;
+        width: 10px;
+        height: 10px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512'%3E%3Cpath fill='%23666' d='M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
         transition: transform .5s;
     }
 

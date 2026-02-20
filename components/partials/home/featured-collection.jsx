@@ -1,9 +1,10 @@
 import React from 'react';
 import Reveal from 'react-awesome-reveal';
-
-import OwlCarousel from '~/components/features/owl-carousel';
+import dynamic from 'next/dynamic';
 
 import ProductTwo from '~/components/features/product/product-two';
+
+const SwiperCarousel = dynamic(() => import('~/components/features/swiper-carousel'), { ssr: false });
 
 import { productSlider2 } from '~/utils/data/carousel';
 import { fadeIn } from '~/utils/data/keyframes';
@@ -18,15 +19,15 @@ function FeaturedCollection ( props ) {
 
                 {
                     loading ?
-                        <OwlCarousel adClass="owl-theme" options={ productSlider2 }>
+                        <SwiperCarousel adClass="swiper-theme" options={ productSlider2 }>
                             {
                                 [ 1, 2, 3, 4, 5 ].map( ( item ) =>
                                     <div className="product-loading-overlay" key={ 'featured-skel-' + item }></div>
                                 )
                             }
-                        </OwlCarousel>
+                        </SwiperCarousel>
                         :
-                        <OwlCarousel adClass="owl-theme" options={ productSlider2 }>
+                        <SwiperCarousel adClass="swiper-theme" options={ productSlider2 }>
                             {
                                 products && products.map( ( item, index ) =>
                                     <ProductTwo
@@ -34,7 +35,7 @@ function FeaturedCollection ( props ) {
                                         key={ `featured-product-${ index }` } />
                                 )
                             }
-                        </OwlCarousel>
+                        </SwiperCarousel>
                 }
             </section>
         </Reveal>

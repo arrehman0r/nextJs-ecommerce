@@ -72,21 +72,28 @@ function DetailOne(props) {
   useEffect(() => {
     if (variations.length > 0) {
       const selectedCount = Object.keys(selectedAttributes).filter(
-        (key) => selectedAttributes[key] !== "null"
+        (key) => selectedAttributes[key] !== "null",
       ).length;
-      
+
       // Only activate cart when all attributes are selected
-      if (selectedCount === attributeNames.length && attributeNames.length > 0) {
+      if (
+        selectedCount === attributeNames.length &&
+        attributeNames.length > 0
+      ) {
         // Find the variation that matches all selected attributes
         const matchIndex = variations.findIndex((variation) => {
           return variation.attributes.every((attr) => {
             return selectedAttributes[attr.name] === attr.option;
           });
         });
-        
+
         if (matchIndex > -1) {
           setCurIndex(matchIndex);
-          setCartActive(variations[matchIndex].purchasable !== false && (variations[matchIndex].stock_status === 'instock' || variations[matchIndex].stock_quantity > 0));
+          setCartActive(
+            variations[matchIndex].purchasable !== false &&
+              (variations[matchIndex].stock_status === "instock" ||
+                variations[matchIndex].stock_quantity > 0),
+          );
         } else {
           setCurIndex(-1);
           setCartActive(false);
@@ -132,19 +139,22 @@ function DetailOne(props) {
         const attrString = selectedVariation.attributes
           .map((attr) => attr.option)
           .join(" - ");
-        
+
         addToCart({
           ...product,
           name: `${product.name} - ${attrString}`,
           qty: quantity,
           price: selectedVariation.price,
           sale_price: selectedVariation.sale_price || selectedVariation.price,
-          regular_price: selectedVariation.regular_price || selectedVariation.price,
+          regular_price:
+            selectedVariation.regular_price || selectedVariation.price,
           variation_id: selectedVariation.id,
           variation: selectedVariation,
           selected_attributes: selectedAttributes,
           // Use variation image if available
-          images: selectedVariation.image ? [selectedVariation.image] : product.images,
+          images: selectedVariation.image
+            ? [selectedVariation.image]
+            : product.images,
         });
       } else {
         // Simple product
@@ -167,15 +177,15 @@ function DetailOne(props) {
     // Find variations that have this option
     return variations.some((variation) => {
       const hasOption = variation.attributes.some(
-        (attr) => attr.name === attrName && attr.option === optionValue
+        (attr) => attr.name === attrName && attr.option === optionValue,
       );
       if (!hasOption) return false;
-      
+
       // Check if other selected attributes match
       for (const [key, value] of Object.entries(selectedAttributes)) {
         if (key === attrName || value === "null") continue;
         const matches = variation.attributes.some(
-          (attr) => attr.name === key && attr.option === value
+          (attr) => attr.name === key && attr.option === value,
         );
         if (!matches) return false;
       }
@@ -202,7 +212,7 @@ function DetailOne(props) {
                 Products
               </ALink>
             </li>
-            <li>Detail</li>
+            <li> Detail</li>
           </ul>
 
           <ProductNav product={product} />
@@ -232,17 +242,29 @@ function DetailOne(props) {
           // Show selected variation price
           variations[curIndex].on_sale ? (
             <>
-              <ins className="new-price">Rs.{toDecimal(variations[curIndex].sale_price)}</ins>
-              <del className="old-price">Rs.{toDecimal(variations[curIndex].regular_price)}</del>
+              <ins className="new-price">
+                Rs.{toDecimal(variations[curIndex].sale_price)}
+              </ins>
+              <del className="old-price">
+                Rs.{toDecimal(variations[curIndex].regular_price)}
+              </del>
             </>
           ) : (
-            <ins className="new-price">Rs.{toDecimal(variations[curIndex].price)}</ins>
+            <ins className="new-price">
+              Rs.{toDecimal(variations[curIndex].price)}
+            </ins>
           )
         ) : variations.length > 0 ? (
           // Show price range for variable product
           <span className="new-price">
-            Rs.{toDecimal(Math.min(...variations.map(v => parseFloat(v.price) || 0)))} – Rs.
-            {toDecimal(Math.max(...variations.map(v => parseFloat(v.price) || 0)))}
+            Rs.
+            {toDecimal(
+              Math.min(...variations.map((v) => parseFloat(v.price) || 0)),
+            )}{" "}
+            – Rs.
+            {toDecimal(
+              Math.max(...variations.map((v) => parseFloat(v.price) || 0)),
+            )}
           </span>
         ) : product.sale_price !== product.regular_price ? (
           // Simple product with sale
@@ -290,51 +312,66 @@ function DetailOne(props) {
         <>
           {/* Dynamic attribute selectors for WooCommerce variations */}
           {attributeNames.map((attrName, index) => (
-            <div 
-              key={attrName} 
-              className={`product-form product-variations ${index === attributeNames.length - 1 ? 'mb-0 pb-2' : ''}`}
+            <div
+              key={attrName}
+              className={`product-form product-variations ${index === attributeNames.length - 1 ? "mb-0 pb-2" : ""}`}
             >
               <label>{attrName}:</label>
-              <div className={index === attributeNames.length - 1 ? "product-form-group" : ""}>
+              <div
+                className={
+                  index === attributeNames.length - 1
+                    ? "product-form-group"
+                    : ""
+                }
+              >
                 <div className="variation-buttons d-flex flex-wrap gap-2">
                   {attributeOptions[attrName].map((option) => {
                     const isAvailable = isOptionAvailable(attrName, option);
                     const isSelected = selectedAttributes[attrName] === option;
                     // Find the variation that matches this option to get its image
-                    const matchingVariation = variations.find((v) => 
-                      v.attributes.some((attr) => attr.name === attrName && attr.option === option)
+                    const matchingVariation = variations.find((v) =>
+                      v.attributes.some(
+                        (attr) =>
+                          attr.name === attrName && attr.option === option,
+                      ),
                     );
                     const variationImage = matchingVariation?.image?.src;
-                    
+
                     return (
                       <button
                         type="button"
                         key={`${attrName}-${option}`}
-                        className={`variation btn btn-variation ${isSelected ? 'selected-variation-btn' : 'btn-outline-primary'} ${!isAvailable ? 'disabled btn-outline-secondary' : ''}`}
-                        onClick={() => isAvailable && handleAttributeChange(attrName, isSelected ? "null" : option)}
+                        className={`variation btn btn-variation ${isSelected ? "selected-variation-btn" : "btn-outline-primary"} ${!isAvailable ? "disabled btn-outline-secondary" : ""}`}
+                        onClick={() =>
+                          isAvailable &&
+                          handleAttributeChange(
+                            attrName,
+                            isSelected ? "null" : option,
+                          )
+                        }
                         disabled={!isAvailable}
                         style={{
-                          minWidth: variationImage ? '80px' : '60px',
-                          padding: variationImage ? '6px 10px' : '8px 16px',
-                          marginRight: '8px',
-                          marginBottom: '8px',
-                          cursor: isAvailable ? 'pointer' : 'not-allowed',
+                          minWidth: variationImage ? "80px" : "60px",
+                          padding: variationImage ? "6px 10px" : "8px 16px",
+                          marginRight: "8px",
+                          marginBottom: "8px",
+                          cursor: isAvailable ? "pointer" : "not-allowed",
                           opacity: isAvailable ? 1 : 0.5,
-                          display: 'flex',
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                          gap: '4px',
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          gap: "4px",
                         }}
                       >
                         {variationImage && (
-                          <img 
-                            src={variationImage} 
+                          <img
+                            src={variationImage}
                             alt={option}
                             style={{
-                              width: '40px',
-                              height: '40px',
-                              objectFit: 'cover',
-                              borderRadius: '4px',
+                              width: "40px",
+                              height: "40px",
+                              objectFit: "cover",
+                              borderRadius: "4px",
                             }}
                           />
                         )}
@@ -345,7 +382,11 @@ function DetailOne(props) {
                 </div>
 
                 {index === attributeNames.length - 1 && (
-                  <Collapse in={Object.values(selectedAttributes).some(v => v !== "null" && v !== undefined)}>
+                  <Collapse
+                    in={Object.values(selectedAttributes).some(
+                      (v) => v !== "null" && v !== undefined,
+                    )}
+                  >
                     <div className="card-wrapper overflow-hidden reset-value-button w-100 mb-0">
                       <ALink
                         href="#"
@@ -383,7 +424,7 @@ function DetailOne(props) {
                         </ins>
                       </div>
                     ) : null}
-                    {variations[curIndex].stock_status === 'outofstock' && (
+                    {variations[curIndex].stock_status === "outofstock" && (
                       <p className="stock-status text-danger">Out of Stock</p>
                     )}
                   </div>
@@ -403,7 +444,11 @@ function DetailOne(props) {
               <figure className="product-image">
                 <ALink href={"/product/default/" + product.id}>
                   <img
-                    src={curIndex > -1 && variations[curIndex]?.image?.src ? variations[curIndex].image.src : product.images[0]?.src}
+                    src={
+                      curIndex > -1 && variations[curIndex]?.image?.src
+                        ? variations[curIndex].image.src
+                        : product.images[0]?.src
+                    }
                     width="90"
                     height="90"
                     alt="Product"
@@ -435,8 +480,18 @@ function DetailOne(props) {
                       )
                     ) : variations.length > 0 ? (
                       <span className="new-price">
-                        Rs.{toDecimal(Math.min(...variations.map(v => parseFloat(v.price) || 0)))} – Rs.
-                        {toDecimal(Math.max(...variations.map(v => parseFloat(v.price) || 0)))}
+                        Rs.
+                        {toDecimal(
+                          Math.min(
+                            ...variations.map((v) => parseFloat(v.price) || 0),
+                          ),
+                        )}{" "}
+                        – Rs.
+                        {toDecimal(
+                          Math.max(
+                            ...variations.map((v) => parseFloat(v.price) || 0),
+                          ),
+                        )}
                       </span>
                     ) : product.sale_price !== product.regular_price ? (
                       <>
@@ -476,7 +531,11 @@ function DetailOne(props) {
               <label className="d-none">QTY:</label>
               <div className="product-form-group">
                 <Quantity
-                  max={curIndex > -1 && variations[curIndex] ? variations[curIndex].stock_quantity : product.stock_quantity}
+                  max={
+                    curIndex > -1 && variations[curIndex]
+                      ? variations[curIndex].stock_quantity
+                      : product.stock_quantity
+                  }
                   product={product}
                   onChangeQty={changeQty}
                 />
@@ -497,7 +556,11 @@ function DetailOne(props) {
           <label className="d-none">QTY:</label>
           <div className="product-form-group">
             <Quantity
-              max={curIndex > -1 && variations[curIndex] ? variations[curIndex].stock_quantity : product.stock_quantity}
+              max={
+                curIndex > -1 && variations[curIndex]
+                  ? variations[curIndex].stock_quantity
+                  : product.stock_quantity
+              }
               product={product}
               onChangeQty={changeQty}
             />
@@ -518,21 +581,20 @@ function DetailOne(props) {
       <div className="product-footer">
         <div className="social-links mr-4">
           <ALink
-            href="#"
-            className="social-link social-facebook fab fa-facebook-f"
-          ></ALink>
+            href="https://www.facebook.com/onlinepartyshope"
+            className="social-link social-facebook"
+          >
+           
+          </ALink>
           <ALink
-            href="#"
-            className="social-link social-twitter fab fa-twitter"
-          ></ALink>
-          <ALink
-            href="#"
-            className="social-link social-pinterest fab fa-pinterest-p"
-          ></ALink>
+            href="https://www.instagram.com/partyshope_/"
+            className="social-link social-instagram"
+          >
+        
+          </ALink>
         </div>{" "}
         <span className="divider d-lg-show"></span>{" "}
         <a
-          href="#"
           className={`btn-product btn-wishlist`}
           title={isWishlisted ? "Browse wishlist" : "Add to wishlist"}
           onClick={wishlistHandler}
